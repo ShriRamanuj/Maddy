@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Self-Discipline — Study Notes for Madhav | BITS Pilani Goa, CS B.Tech</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Georgia', serif; background: #f0ece2; padding: 20px 12px; }
+
+  .guru-line { text-align:center; font-size:12px; color:#5d4037; font-style:italic; margin-bottom:10px; letter-spacing:.3px; }
+
+  .page-header {
+    text-align: center; background: #1a3a5c; color: #fff;
+    padding: 18px 20px; border-radius: 10px; margin-bottom: 10px;
+  }
+  .page-header h1 { font-size: 20px; letter-spacing: 1px; text-transform: uppercase; }
+  .page-header p  { font-size: 11px; margin-top: 5px; opacity: .8; font-style: italic; }
+
+  .sc {
+    background: #fff; border: 2px solid #1a3a5c; border-radius: 10px;
+    padding: 16px 14px; max-width: 1100px; margin: 0 auto 26px auto;
+    page-break-inside: avoid; break-inside: avoid;
+  }
+  .sc-header { border-bottom: 1px solid #d0d8e4; padding-bottom: 8px; margin-bottom: 6px; }
+  .sc-title {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  }
+  .sc-title-text {
+    flex: 1; text-align: center; font-weight: bold; color: #1a3a5c;
+    font-size: 13px; text-transform: uppercase; letter-spacing: .5px;
+  }
+  .sc-page { text-align:center; font-size:10px; color:#888; font-style:italic; margin-bottom:10px; }
+  .back-btn {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: #1a3a5c; color: #fff; text-decoration: none;
+    font-size: 10px; font-weight: bold; padding: 4px 10px;
+    border-radius: 20px; white-space: nowrap; flex-shrink: 0;
+  }
+  .back-btn:hover { background: #2e6da4; }
+
+  .tree  { display: flex; flex-direction: column; align-items: center; page-break-inside: avoid; break-inside: avoid; }
+  .vl    { width: 2px; background: #1a3a5c; margin: 0 auto; }
+  .vl-r  { width: 2px; background: #c0392b; margin: 0 auto; }
+  .vl-g  { width: 2px; background: #27ae60; margin: 0 auto; }
+  .vl-b  { width: 2px; background: #2e6da4; margin: 0 auto; }
+  .vl-p  { width: 2px; background: #8e44ad; margin: 0 auto; }
+  .vl-y  { width: 2px; background: #f39c12; margin: 0 auto; }
+  .hl    { height: 2px; background: #1a3a5c; }
+  .hl-r  { height: 2px; background: #c0392b; }
+  .hl-g  { height: 2px; background: #27ae60; }
+  .hl-b  { height: 2px; background: #2e6da4; }
+  .hl-y  { height: 2px; background: #f39c12; }
+  .hl-p  { height: 2px; background: #8e44ad; }
+
+  .n     { border-radius: 7px; padding: 7px 10px; text-align: center; font-size: 11.5px; line-height: 1.4; box-shadow: 0 2px 5px rgba(0,0,0,.1); }
+  .root  { background: #1a3a5c; color: #fff; font-size: 14px; font-weight: bold; padding: 11px 26px; }
+  .l1    { background: #2e6da4; color: #fff; font-weight: bold; font-size: 11.5px; }
+  .red   { background: #fdecea; border: 1.5px solid #c0392b; color: #7b241c; }
+  .grn   { background: #eafaf1; border: 1.5px solid #27ae60; color: #1e8449; }
+  .ylw   { background: #fef9e7; border: 1.5px solid #f39c12; color: #7d6608; }
+  .pur   { background: #f5eef8; border: 1.5px solid #8e44ad; color: #6c3483; }
+  .blu   { background: #e8f4fd; border: 1.5px solid #2e6da4; color: #1a3a5c; }
+
+  .tag   { display: inline-block; border-radius: 3px; padding: 1px 5px; font-size: 9px; font-weight: bold; color: #fff; margin-bottom: 3px; }
+  .t-r   { background: #c0392b; }
+  .t-g   { background: #27ae60; }
+  .t-y   { background: #e67e22; }
+  .t-p   { background: #8e44ad; }
+  .t-b   { background: #2e6da4; }
+
+  .brow  { display: flex; justify-content: space-around; width: 100%; flex-wrap: wrap; page-break-inside: avoid; break-inside: avoid; }
+  .br    { display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 130px; page-break-inside: avoid; break-inside: avoid; }
+  .mn    { border-radius: 5px; padding: 5px 7px; font-size: 10px; text-align: center; line-height: 1.3; }
+
+  .pe    { background: #fffde7; border: 1.5px dashed #f9a825; border-radius: 6px; padding: 4px 8px; font-size: 10px; color: #5d4037; font-style: italic; margin-top: 2px; text-align: center; max-width: 240px; }
+  .eg    { background: #e8f5e9; border: 1.5px dashed #43a047; border-radius: 6px; padding: 4px 8px; font-size: 10px; color: #1b5e20; margin-top: 2px; text-align: center; max-width: 250px; }
+
+  .toc { background:#e8f4fd; border:1.5px solid #2e6da4; border-radius:8px; padding:14px 18px; max-width:1100px; margin:0 auto 26px auto; }
+  .toc-title { font-weight:bold; color:#1a3a5c; font-size:13px; margin-bottom:10px; }
+  .toc a { color:#2e6da4; text-decoration:none; font-size:12px; }
+  .toc a:hover { text-decoration:underline; }
+  .toc-grid { display:flex; flex-wrap:wrap; gap:6px; }
+  .toc-item { background:#fff; border:1px solid #2e6da4; border-radius:5px; padding:4px 10px; font-size:11px; }
+  .toc-item-arsenal { background:#4a0e0e; border:1px solid #f5c518; border-radius:5px; padding:4px 10px; font-size:11px; }
+  .toc-item-arsenal a { color:#f5c518 !important; }
+
+  .arsenal {
+    background: #4a0e0e; border-radius: 10px;
+    padding: 20px 18px; max-width: 1100px; margin: 0 auto 26px auto;
+    page-break-inside: avoid; break-inside: avoid;
+  }
+  .arsenal-header { border-bottom: 1.5px solid #f5c518; padding-bottom: 10px; margin-bottom: 16px; }
+  .arsenal-title-row { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+  .arsenal-title { flex:1; text-align:center; color:#f5c518; font-size:15px; font-weight:bold; text-transform:uppercase; letter-spacing:1.5px; }
+  .arsenal-back-btn {
+    display:inline-flex; align-items:center; gap:4px;
+    background:#f5c518; color:#4a0e0e; text-decoration:none;
+    font-size:10px; font-weight:bold; padding:4px 10px;
+    border-radius:20px; white-space:nowrap; flex-shrink:0;
+  }
+  .arsenal-purpose { font-size:11px; color:#e8c87a; font-style:italic; text-align:center; margin-top:8px; }
+  .arsenal-card {
+    background:#fff; border-left:4px solid #f5c518; border-radius:6px;
+    padding:12px 14px; margin-bottom:14px;
+    page-break-inside:avoid; break-inside:avoid;
+  }
+  .ac-name  { font-size:12.5px; font-weight:bold; color:#4a0e0e; text-decoration:underline; margin-bottom:2px; }
+  .ac-court { font-size:10px; color:#666; margin-bottom:8px; }
+  .ac-label { font-size:9.5px; font-weight:bold; color:#2e6da4; text-transform:uppercase; letter-spacing:.5px; margin-bottom:3px; }
+  .ac-ratio { font-size:12px; font-style:italic; color:#1a1a1a; font-family:'Georgia',serif; line-height:1.6; padding-left:10px; border-left:2px solid #f5c518; margin-bottom:8px; }
+  .ac-when  { display:inline-block; background:#f5c518; color:#4a0e0e; font-size:10px; font-weight:bold; padding:3px 10px; border-radius:4px; }
+
+  .footer { text-align: center; font-size: 10px; color: #888; margin-top: 28px; font-style: italic; }
+
+  .legend { display:flex; flex-wrap:wrap; gap:8px; max-width:1100px; margin:0 auto 20px auto; font-size:10px; justify-content:center; }
+  .leg-item { display:flex; align-items:center; gap:5px; }
+  .leg-swatch { width:14px; height:14px; border-radius:3px; border:1px solid #aaa; }
+</style>
+</head>
+<body>
+
+<!-- ══ GURU INVOCATION ══ -->
+<div class="guru-line">🙏 Asmad GuruBhuya Namaha &nbsp;|&nbsp; Shrimate Ramanuja Namaha &nbsp;— without Guru Krupa, nothing can be done 🙏</div>
+
+<!-- ══ HEADER ══ -->
+<div class="page-header">
+  <h1>🧠 Self-Discipline — The Silent Power Behind Lasting Success</h1>
+  <p>Study Notes for Madhav Soni | B.Tech Computer Science, BITS Pilani Goa Campus</p>
+  <p>Source: Raj Jaggi, "Self-Management Skills – Part II: Self-Discipline" (TaxTMI, 06 Jul 2026) — adapted with CS/B.Tech examples</p>
+</div>
+
+<!-- ══ LEGEND ══ -->
+<div class="legend">
+  <div class="leg-item"><div class="leg-swatch" style="background:#eafaf1;border-color:#27ae60;"></div> Positive Trait / Outcome</div>
+  <div class="leg-item"><div class="leg-swatch" style="background:#fdecea;border-color:#c0392b;"></div> Pitfall / What to Avoid</div>
+  <div class="leg-item"><div class="leg-swatch" style="background:#fef9e7;border-color:#f39c12;"></div> Condition / Requires</div>
+  <div class="leg-item"><div class="leg-swatch" style="background:#f5eef8;border-color:#8e44ad;"></div> Role Model Illustration</div>
+  <div class="leg-item"><div class="leg-swatch" style="background:#e8f4fd;border-color:#2e6da4;"></div> Neutral Reference</div>
+  <div class="leg-item"><div class="leg-swatch" style="background:#fffde7;border-color:#f9a825;"></div> 📝 Plain English</div>
+  <div class="leg-item"><div class="leg-swatch" style="background:#e8f5e9;border-color:#43a047;"></div> 💻 CS / BITS Example</div>
+</div>
+
+<!-- ══ TOC ══ -->
+<div class="toc" id="toc">
+  <div class="toc-title">📋 Index of Sections (Source pages 1–6 of 6)</div>
+  <div class="toc-grid">
+    <div class="toc-item"><a href="#s1">1. External vs Self-Discipline</a></div>
+    <div class="toc-item"><a href="#s2">2. Desire vs Achievement</a></div>
+    <div class="toc-item"><a href="#s3">3. Discipline of Time</a></div>
+    <div class="toc-item"><a href="#s4">4. Discipline of Habit</a></div>
+    <div class="toc-item"><a href="#s5">5. Discipline of Mind (Focus)</a></div>
+    <div class="toc-item"><a href="#s6">6. Discipline of Speech</a></div>
+    <div class="toc-item"><a href="#s7">7. Discipline of Listening</a></div>
+    <div class="toc-item"><a href="#s8">8. Discipline of Emotion</a></div>
+    <div class="toc-item"><a href="#s9">9. Discipline of Learning</a></div>
+    <div class="toc-item"><a href="#s10">10. Discipline of Simplicity</a></div>
+    <div class="toc-item"><a href="#s11">11. Discipline of Perseverance</a></div>
+    <div class="toc-item"><a href="#s12">12. Conclusion — Master Key</a></div>
+    <div class="toc-item toc-item-arsenal"><a href="#arsenal">🎯 Action Arsenal for Madhav</a></div>
+  </div>
+</div>
+
+<!-- ══ 1. EXTERNAL VS SELF DISCIPLINE ══ -->
+<div class="sc" id="s1">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">1 — External Discipline vs Self-Discipline</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div></div>
+  <div class="sc-page">📄 Source Page 1 of 6</div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:440px;">🧭 Discipline — Two Kinds</div>
+    <div class="vl" style="height:16px;"></div>
+    <div style="width:70%;"><div class="hl"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:10px;">
+      <div class="br">
+        <div class="vl-r" style="height:10px;"></div>
+        <div class="n red mn" style="width:95%;"><span class="tag t-r">EXTERNAL</span><br>Imposed by rules, supervision, fear of penalty, authority</div>
+        <div class="pe" style="max-width:220px;">📝 You attend an 8 AM lecture because attendance is marked, not because you love the subject. Works only while someone is watching.</div>
+        <div class="eg">💻 You submit an assignment only because Moodle shows a red "overdue" tag — not because you value learning the concept.</div>
+      </div>
+      <div class="br">
+        <div class="vl-g" style="height:10px;"></div>
+        <div class="n grn mn" style="width:95%;"><span class="tag t-g">SELF-DISCIPLINE</span><br>Inner command — do what is right/necessary/meaningful even when unwatched</div>
+        <div class="pe" style="max-width:220px;">📝 You revise DSA or finish a lab even when the TA isn't checking, because you know it matters for you — not for marks.</div>
+        <div class="eg">💻 You keep solving one LeetCode problem daily during vacation — no professor is grading it, no deadline exists.</div>
+      </div>
+    </div>
+    <div class="vl" style="height:14px;"></div>
+    <div class="n blu" style="max-width:520px;"><span class="tag t-b">KEY POINT</span><br>External discipline has limits — it collapses once monitoring stops (e.g. once semester ends, hostel curfew relaxed). Self-discipline has none — it is carried within, wherever you go, including internships, hackathons, and life after BITS.</div>
+  </div>
+</div>
+
+<!-- ══ 2. DESIRE VS ACHIEVEMENT ══ -->
+<div class="sc" id="s2">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">2 — Desire vs Achievement (Dr. A.P.J. Abdul Kalam)</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div></div>
+  <div class="sc-page">📄 Source Pages 1–2 of 6</div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:460px;">🚀 Desire Alone ≠ Achievement</div>
+    <div class="vl" style="height:14px;"></div>
+    <div class="n l1" style="max-width:420px;">Self-discipline is the <strong>bridge</strong> between aspiration and reality</div>
+    <div class="vl" style="height:12px;"></div>
+    <div class="n pur" style="max-width:460px;"><span class="tag t-p">ROLE MODEL</span><br>Dr. A.P.J. Abdul Kalam — humble Rameswaram background, no privilege, but disciplined effort → top scientist, President of India</div>
+    <div class="pe" style="max-width:460px;">📝 "Wanting" a good CGPA, a great internship, or a dream job at Google/Amazon is easy. Only consistent disciplined action converts that want into reality.</div>
+    <div class="eg" style="max-width:460px;">💻 Every B.Tech CS student "wants" to crack SDE interviews. Only the ones who disciplined themselves to solve 300+ DSA problems, build 2–3 real projects, and revise CS fundamentals actually get placed.</div>
+  </div>
+</div>
+
+<!-- ══ 3. DISCIPLINE OF TIME ══ -->
+<div class="sc" id="s3">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">3 — The Discipline of Time (Benjamin Franklin)</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div></div>
+  <div class="sc-page">📄 Source Page 2 of 6</div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:460px;">⏳ Time — The Resource That Never Returns</div>
+    <div class="pe" style="max-width:460px;">📝 Unlike money, lost time can never be recovered. A small delay today (skipping one lecture, postponing one assignment) quietly snowballs into pressure before mid-sems/end-sems.</div>
+    <div class="vl" style="height:14px;"></div>
+    <div class="n pur" style="max-width:460px;"><span class="tag t-p">ROLE MODEL</span><br>Benjamin Franklin — statesman, scientist, inventor — famous for waking early, planning ahead, purposeful living</div>
+    <div class="vl" style="height:12px;"></div>
+    <div style="width:70%;"><div class="hl"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:10px;">
+      <div class="br">
+        <div class="vl-r" style="height:10px;"></div>
+        <div class="n red mn" style="width:95%;">Scattered time use → scattered, low-quality results</div>
+        <div class="eg">💻 Cramming an entire semester's Operating Systems syllabus the night before the exam — output is shallow, forgotten in a week.</div>
+      </div>
+      <div class="br">
+        <div class="vl-g" style="height:10px;"></div>
+        <div class="n grn mn" style="width:95%;">Disciplined time use → meaningful, lasting achievement</div>
+        <div class="eg">💻 Blocking 1 hour daily for DSA practice across the semester compounds into strong problem-solving skill by placement season — no last-minute panic.</div>
+      </div>
+    </div>
+    <div class="vl" style="height:12px;"></div>
+    <div class="n blu" style="max-width:480px;"><span class="tag t-b">TEAM ANGLE</span><br>Respecting time also respects others — a late submission in a group project (e.g. course mini-project) delays the whole team's grade, not just yours.</div>
+  </div>
+</div>
+
+<!-- ══ 4. DISCIPLINE OF HABIT ══ -->
+<div class="sc" id="s4">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">4 — The Discipline of Habit (P.V. Sindhu)</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div></div>
+  <div class="sc-page">📄 Source Pages 2–3 of 6</div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:460px;">🔁 Small Daily Actions Shape Destiny</div>
+    <div class="vl" style="height:12px;"></div>
+    <div class="n pur" style="max-width:460px;"><span class="tag t-p">ROLE MODEL</span><br>P.V. Sindhu — Olympic medals are the visible result of years of unseen daily training, early mornings, disciplined routine</div>
+    <div class="pe" style="max-width:460px;">📝 Excellence is built in private, long before it's seen in public — the placement offer or the good grade is just the visible tip of many invisible disciplined days.</div>
+    <div class="vl" style="height:12px;"></div>
+    <div style="width:80%;"><div class="hl-g"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:6px;">
+      <div class="br"><div class="vl-g" style="height:8px;"></div><div class="n grn mn">Wake up on time, attend labs</div></div>
+      <div class="br"><div class="vl-g" style="height:8px;"></div><div class="n grn mn">Read/revise regularly, not only before exams</div></div>
+      <div class="br"><div class="vl-g" style="height:8px;"></div><div class="n grn mn">Commit code daily, even small progress</div></div>
+      <div class="br"><div class="vl-g" style="height:8px;"></div><div class="n grn mn">Complete tasks without reminders from parents/mentors</div></div>
+    </div>
+    <div class="eg" style="max-width:460px; margin-top:10px;">💻 Solving even 1 problem/day on LeetCode or Codeforces, consistently for a year, builds far stronger CP/DSA skill than solving 50 problems in one panic week before an interview.</div>
+  </div>
+</div>
+
+<!-- ══ 5. DISCIPLINE OF MIND / FOCUS ══ -->
+<div class="sc" id="s5">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">5 — The Discipline of Mind: Focus Over Distraction (Viswanathan Anand)</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div></div>
+  <div class="sc-page">📄 Source Page 3 of 6</div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:460px;">🎯 Focus — The Rare Skill in a Distracted World</div>
+    <div class="pe" style="max-width:460px;">📝 Being "busy" all day on the phone/social media is not the same as being productive. A distracted mind, even with long hours, delivers little real output.</div>
+    <div class="vl" style="height:12px;"></div>
+    <div class="n pur" style="max-width:460px;"><span class="tag t-p">ROLE MODEL</span><br>Viswanathan Anand — chess demands intense concentration; one mistake changes the whole game; trained mind to calculate precisely, act deliberately</div>
+    <div class="vl" style="height:12px;"></div>
+    <div style="width:70%;"><div class="hl"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:10px;">
+      <div class="br">
+        <div class="vl-r" style="height:10px;"></div>
+        <div class="n red mn" style="width:95%;">Phone notifications, Instagram/WhatsApp mid-coding, background noise in hostel</div>
+      </div>
+      <div class="br">
+        <div class="vl-g" style="height:10px;"></div>
+        <div class="n grn mn" style="width:95%;">Deep, undivided attention on the task at hand</div>
+      </div>
+    </div>
+    <div class="eg" style="max-width:460px; margin-top:10px;">💻 During a coding assignment or a Codeforces contest, put the phone in another room / use Do Not Disturb for a fixed block (e.g. Pomodoro 25–50 min) — a single distracted context-switch can cost 10+ minutes to regain the "flow state" needed to debug.</div>
+  </div>
+</div>
+
+<!-- ══ 6. DISCIPLINE OF SPEECH ══ -->
+<div class="sc" id="s6">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">6 — The Discipline of Speech (Atal Bihari Vajpayee)</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div></div>
+  <div class="sc-page">📄 Source Pages 3–4 of 6</div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:460px;">🗣️ Words — Power With Responsibility</div>
+    <div class="pe" style="max-width:460px;">📝 Most regrets come not from what you thought, but from what you said in anger. A disciplined person pauses before speaking.</div>
+    <div class="vl" style="height:12px;"></div>
+    <div class="n pur" style="max-width:460px;"><span class="tag t-p">ROLE MODEL</span><br>Atal Bihari Vajpayee — compelling orator, yet always restrained, dignified; disagreement without harshness</div>
+    <div class="vl" style="height:12px;"></div>
+    <div class="n blu" style="max-width:480px;"><span class="tag t-b">KEY POINT</span><br>Self-discipline in speech ≠ silence. It means speaking at the right moment, right tone, right reason.</div>
+    <div class="eg" style="max-width:460px; margin-top:8px;">💻 In a group project or GitHub PR review, giving feedback like "this function can be optimized — here's why" builds trust; a sarcastic "this code is a mess" damages the team and your own reputation for future collaborations.</div>
+  </div>
+</div>
+
+<!-- ══ 7. DISCIPLINE OF LISTENING ══ -->
+<div class="sc" id="s7">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">7 — The Discipline of Listening</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div></div>
+  <div class="sc-page">📄 Source Page 4 of 6</div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:460px;">👂 Learning Before Responding</div>
+    <div class="pe" style="max-width:460px;">📝 Old saying: two ears, one mouth — listen twice as much as you speak. Rushing to speak often causes exaggeration, incomplete understanding, or hurt feelings.</div>
+    <div class="vl" style="height:12px;"></div>
+    <div style="width:70%;"><div class="hl"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:10px;">
+      <div class="br">
+        <div class="vl-r" style="height:10px;"></div>
+        <div class="n red mn" style="width:95%;">Speak too fast, interrupt, assume you already know the requirement</div>
+      </div>
+      <div class="br">
+        <div class="vl-g" style="height:10px;"></div>
+        <div class="n grn mn" style="width:95%;">Listen fully → understand real needs, avoid rework</div>
+      </div>
+    </div>
+    <div class="eg" style="max-width:460px; margin-top:10px;">💻 Before coding a project module, listen fully to the professor's/team lead's actual requirement instead of assuming — half of all "bugs" in student projects are really requirement-misunderstandings, not code errors.</div>
+  </div>
+</div>
+
+<!-- ══ 8. DISCIPLINE OF EMOTION ══ -->
+<div class="sc" id="s8">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">8 — The Discipline of Emotion (Nelson Mandela)</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div></div>
+  <div class="sc-page">📄 Source Pages 4–5 of 6</div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:460px;">😤➡️😌 Remaining Steady Under Pressure</div>
+    <div class="pe" style="max-width:460px;">📝 Anger, fear, disappointment are natural — the disciplined person feels them but does not let them dictate action.</div>
+    <div class="vl" style="height:12px;"></div>
+    <div class="n pur" style="max-width:460px;"><span class="tag t-p">ROLE MODEL</span><br>Nelson Mandela — 27 years in prison, chose reconciliation over bitterness; controlling one's own reaction is the real strength</div>
+    <div class="vl" style="height:12px;"></div>
+    <div class="n blu" style="max-width:480px;"><span class="tag t-b">EVERYDAY FORM</span><br>Staying calm under criticism, not giving up after failure</div>
+    <div class="eg" style="max-width:460px; margin-top:8px;">💻 Your code fails silently for 3 hours, or you get a low grade despite effort, or a hackathon submission crashes on stage — the disciplined response is to debug calmly / analyse what went wrong, not to smash the keyboard or spiral into self-doubt. Frustration is normal; letting it stop you is the choice you control.</div>
+  </div>
+</div>
+
+<!-- ══ 9. DISCIPLINE OF LEARNING ══ -->
+<div class="sc" id="s9">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">9 — The Discipline of Learning (Indra Nooyi)</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div></div>
+  <div class="sc-page">📄 Source Page 5 of 6</div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:460px;">📚 Remaining a Student for Life</div>
+    <div class="pe" style="max-width:460px;">📝 Knowledge becomes outdated fast. Those who stop learning risk becoming irrelevant — this is doubly true in tech.</div>
+    <div class="vl" style="height:12px;"></div>
+    <div class="n pur" style="max-width:460px;"><span class="tag t-p">ROLE MODEL</span><br>Indra Nooyi — global leadership required continuous learning, openness to change, not relying only on past knowledge</div>
+    <div class="vl" style="height:12px;"></div>
+    <div class="n red" style="max-width:460px;"><span class="tag t-r">RISK IN CS</span><br>"I learned Python in Year 1, that's enough" — mindset leads to falling behind as frameworks, tools, and best practices evolve every year</div>
+    <div class="eg" style="max-width:460px; margin-top:8px;">💻 A CS student who only studies the fixed BITS syllabus, without ever exploring a new framework, contributing to open source, or reading tech blogs/documentation on the side, enters placements with a narrower skill set than peers who stayed curious throughout their 4 years.</div>
+  </div>
+</div>
+
+<!-- ══ 10. DISCIPLINE OF SIMPLICITY ══ -->
+<div class="sc" id="s10">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">10 — The Discipline of Simplicity (Ratan Tata)</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div></div>
+  <div class="sc-page">📄 Source Pages 5–6 of 6</div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:460px;">🧘 Controlling Wants Before They Control You</div>
+    <div class="pe" style="max-width:460px;">📝 Simplicity is not poverty of ambition — it means enjoying what's necessary, avoiding excess, and not chasing image or comparison.</div>
+    <div class="vl" style="height:12px;"></div>
+    <div class="n pur" style="max-width:460px;"><span class="tag t-p">ROLE MODEL</span><br>Ratan Tata — high stature, yet rooted in restraint and humility; substance over show</div>
+    <div class="vl" style="height:12px;"></div>
+    <div class="n ylw" style="max-width:480px;"><span class="tag t-y">ASK YOURSELF</span><br>"Is this necessary? Is this meaningful? Does this align with my goals?"</div>
+    <div class="eg" style="max-width:460px; margin-top:8px;">💻 Constantly switching laptops/gadgets, chasing the "trendiest" tech stack for LinkedIn posts rather than depth, or comparing CGPA/package with every classmate — creates restlessness. A simpler focus on genuinely mastering fundamentals (DSA, CS core subjects, one solid project) is calmer and more effective.</div>
+  </div>
+</div>
+
+<!-- ══ 11. DISCIPLINE OF PERSEVERANCE ══ -->
+<div class="sc" id="s11">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">11 — The Discipline of Perseverance (J.K. Rowling &amp; Anand Bakshi)</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div></div>
+  <div class="sc-page">📄 Source Page 6 of 6</div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:460px;">💪 Continuing When Results Are Delayed</div>
+    <div class="pe" style="max-width:460px;">📝 The beginning of any effort is exciting; the middle — with no visible reward — is where most people quit. Self-discipline is what keeps you going through that middle stretch.</div>
+    <div class="vl" style="height:12px;"></div>
+    <div style="width:70%;"><div class="hl-p"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:10px;">
+      <div class="br">
+        <div class="vl-p" style="height:10px;"></div>
+        <div class="n pur mn" style="width:95%;">J.K. Rowling — repeated publisher rejections before Harry Potter's success</div>
+      </div>
+      <div class="br">
+        <div class="vl-p" style="height:10px;"></div>
+        <div class="n pur mn" style="width:95%;">Anand Bakshi — years of struggle before recognition in Hindi cinema (breakthrough only in mid-1960s)</div>
+      </div>
+    </div>
+    <div class="vl" style="height:12px;"></div>
+    <div class="n blu" style="max-width:480px;"><span class="tag t-b">KEY POINT</span><br>Rejection is not the end of the road — often it is only a test of conviction and patience.</div>
+    <div class="eg" style="max-width:460px; margin-top:8px;">💻 Getting rejected in early internship/placement applications, or failing to crack the first 10 coding contests, or a project not working for weeks — none of this means you lack ability. Consistent, honest effort (fixing one bug at a time, applying again, practising again) is what eventually turns into an offer, a working project, or a good rating.</div>
+  </div>
+</div>
+
+<!-- ══ 12. CONCLUSION ══ -->
+<div class="sc" id="s12">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">12 — Conclusion: Self-Discipline as the Master Key</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div></div>
+  <div class="sc-page">📄 Source Page 6 of 6</div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:480px;">🔑 Self-Discipline — The Master Key of Self-Management</div>
+    <div class="vl" style="height:12px;"></div>
+    <div class="n l1" style="max-width:440px;">Strengthens time management, emotional control, learning, health, communication, professional reliability, personal dignity</div>
+    <div class="vl" style="height:12px;"></div>
+    <div class="n grn" style="max-width:520px;"><span class="tag t-g">DIFFERENCE</span><br>External discipline compels action temporarily; self-discipline transforms character for life — the difference between being controlled by circumstances and being guided by inner strength.</div>
+    <div class="vl" style="height:12px;"></div>
+    <div class="n blu" style="max-width:520px;">Talent, IQ, or a BITS Pilani seat can open a door — self-discipline is what keeps you worthy of the opportunity inside it.</div>
+    <div class="pe" style="max-width:480px;">📝 You don't need to change everything at once. Start with: one promise kept, one hour used well, one distraction controlled, one good habit repeated, one responsibility completed sincerely — today.</div>
+  </div>
+</div>
+
+<!-- ══ ACTION ARSENAL ══ -->
+<div class="arsenal" id="arsenal">
+  <div class="arsenal-header">
+    <div class="arsenal-title-row">
+      <span class="arsenal-title">🎯 Action Arsenal — Habits for Madhav to Build This Semester</span>
+      <a class="arsenal-back-btn" href="#toc">&#8679; Index</a>
+    </div>
+    <div class="arsenal-purpose">Practical, CS-B.Tech-specific translations of each discipline discussed above — pick 2–3 to start with, not all at once.</div>
+  </div>
+
+  <div class="arsenal-card">
+    <div class="ac-name">1. Time — Fixed Daily DSA/Coding Block</div>
+    <div class="ac-court">Applies to: Placement prep, competitive programming, semester coursework</div>
+    <div class="ac-ratio">Block a fixed 45–60 minute slot daily (same time, e.g. right after dinner) purely for DSA/coding practice — treat it like a class you cannot skip, regardless of mood or motivation that day.</div>
+    <div><span class="ac-when">Why it works</span> — Consistency beats intensity; a fixed slot removes the daily "should I study now?" decision fatigue.</div>
+  </div>
+
+  <div class="arsenal-card">
+    <div class="ac-name">2. Focus — Phone-Free Deep Work Windows</div>
+    <div class="ac-court">Applies to: Assignments, projects, contest rounds, exam revision</div>
+    <div class="ac-ratio">Use 25–50 minute focused blocks (Pomodoro-style) with phone in another room or on Do Not Disturb, especially while debugging or during a live contest.</div>
+    <div><span class="ac-when">Why it works</span> — One notification-triggered context switch can cost 10+ minutes to fully regain focus on complex code.</div>
+  </div>
+
+  <div class="arsenal-card">
+    <div class="ac-name">3. Habit — Small Non-Negotiables</div>
+    <div class="ac-court">Applies to: Long-term skill building, health, finances</div>
+    <div class="ac-ratio">Pick 2–3 tiny daily non-negotiables — e.g. 1 LeetCode problem, 20 minutes of reading (tech or otherwise), waking up at a fixed time — and protect them even on busy/lazy days.</div>
+    <div><span class="ac-when">Why it works</span> — Small repeated actions compound; skipping "just once" is how habits quietly die.</div>
+  </div>
+
+  <div class="arsenal-card">
+    <div class="ac-name">4. Emotion — The Debugging Mindset for Setbacks</div>
+    <div class="ac-court">Applies to: Failed tests, low grades, rejection from internships/contests</div>
+    <div class="ac-ratio">Treat every setback like a bug: don't panic or blame — ask "what exactly went wrong, and what is one fix I can try next?" Separate the outcome from your self-worth.</div>
+    <div><span class="ac-when">Why it works</span> — Calm analysis fixes bugs and careers faster than frustration ever does.</div>
+  </div>
+
+  <div class="arsenal-card">
+    <div class="ac-name">5. Learning — Stay a Curious Student, Not Just a Syllabus-Follower</div>
+    <div class="ac-court">Applies to: Staying relevant for internships/placements beyond BITS coursework</div>
+    <div class="ac-ratio">Beyond the fixed curriculum, spend some time each month exploring one new tool, reading documentation, or building a small side project — don't wait for a course to assign it.</div>
+    <div><span class="ac-when">Why it works</span> — Tech evolves fast; curiosity outside the syllabus is what differentiates strong candidates in interviews.</div>
+  </div>
+
+  <div class="arsenal-card">
+    <div class="ac-name">6. Perseverance — Expect the "Middle Slump," Push Through It</div>
+    <div class="ac-court">Applies to: Long projects, competitive programming rating growth, placement prep</div>
+    <div class="ac-ratio">When progress feels invisible (rating not rising, project not working, no interview calls), remind yourself this is the normal "middle stretch" — not a sign to quit. Rejection is a test of conviction, not a verdict on ability.</div>
+    <div><span class="ac-when">Why it works</span> — Most people quit exactly at the point right before results start showing.</div>
+  </div>
+
+</div>
+
+<!-- ══ FOOTER ══ -->
+<div class="footer">Personal study notes for Madhav Soni | B.Tech CS, BITS Pilani Goa | Prepared by Pawan Soni &amp; Associates, Ichalkaranji</div>
+
+</body>
+</html>

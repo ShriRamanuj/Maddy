@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="hi-en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Madhav — Flight to Excellence</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #FBF6EC;
+    font-family: 'Georgia', serif;
+    color: #2C1A0E;
+    min-height: 100vh;
+    padding: 30px 16px 50px;
+  }
+
+  /* ── HEADER ── */
+  .hero {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .hero .flight-icon {
+    font-size: 54px;
+    display: block;
+    margin-bottom: 8px;
+    animation: float 3s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+  }
+  .hero h1 {
+    font-size: clamp(22px, 5vw, 34px);
+    color: #8B2E00;
+    letter-spacing: 0.5px;
+    line-height: 1.25;
+  }
+  .hero p {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #6B4226;
+    font-style: italic;
+  }
+  .hero .divider {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, #D97A2A, #8B2E00);
+    margin: 14px auto 0;
+    border-radius: 2px;
+  }
+
+  /* ── CORE METAPHOR BOX ── */
+  .metaphor-box {
+    background: #FFF8EE;
+    border-left: 5px solid #D97A2A;
+    border-radius: 6px;
+    padding: 16px 20px;
+    max-width: 700px;
+    margin: 0 auto 40px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #3D2010;
+  }
+  .metaphor-box strong { color: #8B2E00; font-size: 15px; }
+
+  /* ── TREE LAYOUT ── */
+  .tree-root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  /* Root node */
+  .node-root {
+    background: linear-gradient(135deg, #8B2E00, #C04A10);
+    color: #FFF8EE;
+    border-radius: 50px;
+    padding: 14px 34px;
+    font-size: 17px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 16px rgba(139,46,0,0.3);
+    position: relative;
+    z-index: 2;
+  }
+  .node-root small {
+    display: block;
+    font-size: 11px;
+    font-weight: normal;
+    opacity: 0.85;
+    margin-top: 3px;
+  }
+
+  /* Vertical connector */
+  .v-line {
+    width: 2px;
+    height: 32px;
+    background: #C04A10;
+    margin: 0 auto;
+  }
+
+  /* Two-pillar row */
+  .pillar-row {
+    display: flex;
+    justify-content: center;
+    gap: clamp(20px, 5vw, 60px);
+    width: 100%;
+    max-width: 820px;
+    position: relative;
+  }
+  /* Horizontal bridge line */
+  .pillar-row::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: clamp(180px, 50%, 400px);
+    height: 2px;
+    background: #C04A10;
+  }
+
+  /* Each pillar */
+  .pillar {
+    flex: 1;
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .pillar-stem {
+    width: 2px;
+    height: 28px;
+    background: #C04A10;
+  }
+
+  /* Pillar heading node */
+  .node-pillar {
+    border-radius: 10px;
+    padding: 12px 18px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    width: 100%;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+  }
+  .pillar-A .node-pillar {
+    background: #D97A2A;
+    color: #FFF8EE;
+  }
+  .pillar-B .node-pillar {
+    background: #4A7C59;
+    color: #F0FAF3;
+  }
+  .node-pillar small {
+    display: block;
+    font-size: 11px;
+    font-weight: normal;
+    margin-top: 3px;
+    opacity: 0.9;
+  }
+
+  /* Branch lines from pillar */
+  .branches {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 0;
+    margin-top: 0;
+  }
+
+  /* Each leaf card */
+  .leaf-connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .leaf-stem {
+    width: 2px;
+    height: 18px;
+    background: #BBA897;
+  }
+  .leaf {
+    border-radius: 8px;
+    padding: 11px 15px;
+    width: 100%;
+    font-size: 13px;
+    line-height: 1.5;
+    border: 1px solid rgba(0,0,0,0.08);
+  }
+  .pillar-A .leaf { background: #FFF3E6; border-left: 3px solid #D97A2A; }
+  .pillar-B .leaf { background: #EDF7F0; border-left: 3px solid #4A7C59; }
+  .leaf strong {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+  .pillar-A .leaf strong { color: #8B2E00; }
+  .pillar-B .leaf strong { color: #2D5E3F; }
+  .leaf span {
+    font-size: 12px;
+    color: #5C4030;
+    font-style: italic;
+  }
+
+  /* Sub-leaves (step lists) */
+  .sub-steps {
+    width: 100%;
+    padding-left: 0;
+  }
+  .sub-steps .leaf-connector:not(:first-child) .leaf-stem {
+    height: 10px;
+  }
+
+  /* ── DAILY HABIT BOX ── */
+  .habit-section {
+    max-width: 700px;
+    margin: 44px auto 0;
+  }
+  .habit-title {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #8B2E00;
+    margin-bottom: 16px;
+    letter-spacing: 0.3px;
+  }
+  .habit-title span { font-size: 20px; margin-right: 6px; }
+  .habit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+  }
+  .habit-card {
+    background: #FFF8EE;
+    border-radius: 10px;
+    padding: 14px;
+    border-top: 4px solid #D97A2A;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.6;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .habit-card .hc-icon { font-size: 26px; margin-bottom: 6px; }
+  .habit-card strong { display: block; color: #8B2E00; margin-bottom: 4px; font-size: 13px; }
+
+  /* ── FOOTER MANTRA ── */
+  .mantra {
+    text-align: center;
+    margin-top: 44px;
+    font-size: 17px;
+    color: #4A7C59;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+  .mantra small {
+    display: block;
+    font-size: 12px;
+    color: #7A6050;
+    margin-top: 5px;
+    font-style: italic;
+    font-weight: normal;
+  }
+
+  @media (max-width: 560px) {
+    .pillar-row {
+      flex-direction: column;
+      align-items: center;
+    }
+    .pillar-row::before { display: none; }
+    .pillar { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <span class="flight-icon">✈️</span>
+  <h1>Madhav's Flight to Academic Excellence</h1>
+  <p>"A pilot doesn't avoid turbulence — he addresses it and lands safely."</p>
+  <div class="divider"></div>
+</div>
+
+<div class="metaphor-box">
+  <strong>The Flight Metaphor (Papa's Teaching) —</strong><br>
+  Just like an aircraft pilot prepares for turbulence ahead to ensure a safe landing,
+  a student must <em>identify weak topics early</em> and <em>address them before the exam</em>.
+  Ignoring turbulence doesn't make it disappear — it makes the crash worse.
+  Paired with this: <em>programme your own mind</em> through daily "इच्छा" — desire stated clearly,
+  repeatedly, in solitude. Both together = the complete success system.
+</div>
+
+<!-- ── TREE ── -->
+<div class="tree-root">
+
+  <!-- ROOT -->
+  <div class="node-root">
+    🎓 Madhav's Success System
+    <small>BITS Pilani — Computer Science</small>
+  </div>
+
+  <div class="v-line"></div>
+
+  <!-- TWO PILLARS -->
+  <div class="pillar-row">
+
+    <!-- PILLAR A: Turbulence Ahead -->
+    <div class="pillar pillar-A">
+      <div class="pillar-stem"></div>
+      <div class="node-pillar">
+        ⚡ Pillar 1 — Address Turbulence Ahead
+        <small>Academic Weak-Spot Strategy</small>
+      </div>
+      <div class="branches">
+
+        <div class="leaf-connector">
+          <div class="leaf-stem"></div>
+          <div class="leaf">
+            <strong>🔍 Identify Your Turbulence</strong>
+            <span>Which topics in your quiz / mid-sem / lab / finals feel unclear or risky?<br>
+            Write them down. Don't assume "that chapter won't come."</span>
+          </div>
+        </div>
+
+        <div class="leaf-connector">
+          <div class="leaf-stem"></div>
+          <div class="leaf">
+            <strong>📅 Address It — Don't Postpone</strong>
+            <span>Today? Address it today.<br>
+            Sunday? Address it Sunday.<br>
+            Ask 2 friends. Ask the prof. Use any channel.<br>
+            The goal: enough clarity to write something in the exam.</span>
+          </div>
+        </div>
+
+        <div class="leaf-connector">
+          <div class="leaf-stem"></div>
+          <div class="leaf">
+            <strong>📋 The Turbulence Tracker (Daily Check)</strong>
+            <span>Maintain a short list:<br>
+            ① Topic &nbsp; ② Status: Pending / In Progress / Cleared<br>
+            Review it every evening. Is my turbulence reducing?</span>
+          </div>
+        </div>
+
+        <div class="leaf-connector">
+          <div class="leaf-stem"></div>
+          <div class="leaf">
+            <strong>🏆 Goal of This Pillar</strong>
+            <span>No topic should be "unknown territory" on exam day.<br>
+            Even 60% clarity on a hard topic is infinitely better than 0%.</span>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /pillar-A -->
+
+    <!-- PILLAR B: He Man Iccha Kar -->
+    <div class="pillar pillar-B">
+      <div class="pillar-stem"></div>
+      <div class="node-pillar">
+        🙏 Pillar 2 — हे मन, तू ये इच्छा कर
+        <small>Mind Programming — Daily Practice</small>
+      </div>
+      <div class="branches">
+
+        <div class="leaf-connector">
+          <div class="leaf-stem"></div>
+          <div class="leaf">
+            <strong>✍️ Write Your Iccha Sentences</strong>
+            <span>10–15 sentences. Examples:<br>
+            "हे मन, तू ये इच्छा कर की कोई भी turbulent topic तू पूरी clarity से समझे।"<br>
+            "हे मन, तू ये इच्छा कर की तू किसी से compare मत कर।"<br>
+            Add your own — specific to YOUR weak areas.</span>
+          </div>
+        </div>
+
+        <div class="leaf-connector">
+          <div class="leaf-stem"></div>
+          <div class="leaf">
+            <strong>🕯️ The 3 Conditions for Practice</strong>
+            <span>① Ekant — Solitude (no one listening)<br>
+            ② Speak aloud — not just read silently<br>
+            ③ Eyes closed — feel it, don't perform it</span>
+          </div>
+        </div>
+
+        <div class="leaf-connector">
+          <div class="leaf-stem"></div>
+          <div class="leaf">
+            <strong>🔁 Repetition is the Medicine</strong>
+            <span>Say each sentence 2–3 times minimum, daily.<br>
+            Like a medicine course — 1 day's dose doesn't cure.<br>
+            Daily repetition → mind accepts → behaviour changes.</span>
+          </div>
+        </div>
+
+        <div class="leaf-connector">
+          <div class="leaf-stem"></div>
+          <div class="leaf">
+            <strong>🌿 What to Include in Your Iccha List</strong>
+            <span>① Academic: clear every weak topic before exam<br>
+            ② Character: never compare self with others<br>
+            ③ Gratitude: acknowledge Bhagwan's grace daily<br>
+            ④ Custom: whatever YOU want to improve</span>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /pillar-B -->
+
+  </div><!-- /pillar-row -->
+</div><!-- /tree-root -->
+
+<!-- ── DAILY RITUAL CARDS ── -->
+<div class="habit-section">
+  <div class="habit-title"><span>🌅</span>Madhav's Daily Routine — The Two-Pillar Day</div>
+  <div class="habit-grid">
+
+    <div class="habit-card">
+      <div class="hc-icon">🌄</div>
+      <strong>Morning (5 min)</strong>
+      Say your इच्छा sentences aloud in solitude.
+      Set the tone for the day's mind.
+    </div>
+
+    <div class="habit-card">
+      <div class="hc-icon">📓</div>
+      <strong>After Class (10 min)</strong>
+      Note which topic felt unclear today.
+      Add to your Turbulence Tracker.
+    </div>
+
+    <div class="habit-card">
+      <div class="hc-icon">🛠️</div>
+      <strong>Evening Study Block</strong>
+      Pick ONE turbulent topic.
+      Address it — textbook, friend, YouTube, prof.
+      Mark it: In Progress / Cleared.
+    </div>
+
+    <div class="habit-card">
+      <div class="hc-icon">🌙</div>
+      <strong>Night (5 min)</strong>
+      Review tracker: what turbulence reduced today?
+      Repeat इच्छा sentences once more before sleep.
+    </div>
+
+  </div>
+</div>
+
+<!-- ── MANTRA ── -->
+<div class="mantra">
+  🙏 हे मन, तू ये इच्छा कर — इच्छा कर — इच्छा कर 🙏
+  <small>जय श्रीमन्नारायण • Papa's Blessing, Always With You, Madhav</small>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sem 4 Self-Assessment — Madhav</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0f1117;
+  --surface: #171b24;
+  --surface2: #1e2330;
+  --ink: #e8eaf0;
+  --ink2: #9098b0;
+  --ink3: #535b75;
+  --rule: #252c3e;
+  --rule2: #1d2234;
+  --red: #e06c6c;
+  --red-soft: rgba(224,108,108,0.1);
+  --amber: #d4924a;
+  --amber-soft: rgba(212,146,74,0.1);
+  --green: #4dab7a;
+  --green-soft: rgba(77,171,122,0.1);
+  --blue: #5b8dd9;
+  --blue-soft: rgba(91,141,217,0.1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.75;
+  min-height: 100vh;
+}
+
+.page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 4rem 2rem 6rem;
+}
+
+/* ── COVER ── */
+.cover {
+  margin-bottom: 4rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.cover-meta {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.cover-meta span { display: flex; align-items: center; gap: 6px; }
+.cover-meta span::before { content: '—'; color: var(--rule); }
+.cover-meta span:first-child::before { display: none; }
+
+h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 38px;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.25rem;
+}
+
+h1 em {
+  font-style: italic;
+  color: var(--red);
+}
+
+.cover-note {
+  font-size: 13px;
+  color: var(--ink2);
+  line-height: 1.8;
+  max-width: 580px;
+  border-left: 2px solid var(--rule2); border-left-color: var(--ink3);
+  padding-left: 1.25rem;
+}
+
+/* ── SECTION ── */
+.section { margin-bottom: 3.5rem; }
+
+.section-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-eyebrow::after {
+  content: '';
+  flex: 1;
+  height: 0.5px;
+  background: var(--rule);
+}
+
+/* ── SUBJECT TABLE LAYOUT ── */
+.subjects { display: flex; flex-direction: column; gap: 0; margin-bottom: 3rem; }
+
+.subject-row {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  border-bottom: 0.5px solid var(--rule2);
+  padding: 1.4rem 0;
+  gap: 24px;
+  align-items: start;
+}
+
+.subject-row:first-child { border-top: 0.5px solid var(--rule2); }
+
+.subj-left { padding-top: 2px; }
+
+.subj-code {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.subj-full {
+  font-size: 10px;
+  color: var(--ink3);
+  margin-top: 3px;
+  line-height: 1.4;
+}
+
+.severity-dot {
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  margin-top: 8px;
+}
+.dot-r { background: var(--red); }
+.dot-a { background: var(--amber); }
+.dot-g { background: var(--green); }
+
+.subj-right {}
+
+.subj-narrative {
+  font-size: 13px;
+  color: var(--ink2);
+  line-height: 1.75;
+  margin-bottom: 10px;
+}
+
+.subj-narrative strong { color: var(--ink); font-weight: 500; }
+
+.tags { display: flex; gap: 5px; flex-wrap: wrap; }
+
+.tag {
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  padding: 2px 9px;
+  border-radius: 3px;
+  border: 0.5px solid;
+}
+.tag-lost { background: var(--red-soft); color: var(--red); border-color: rgba(224,108,108,0.2); }
+.tag-fine { background: var(--green-soft); color: var(--green); border-color: rgba(77,171,122,0.2); }
+.tag-warn { background: var(--amber-soft); color: var(--amber); border-color: rgba(212,146,74,0.2); }
+
+/* ── CAUSE CHART ── */
+.cause-chart { margin-bottom: 3rem; }
+
+.chart-row {
+  display: grid;
+  grid-template-columns: 110px 1fr 60px;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.chart-label { font-size: 12px; color: var(--ink2); text-align: right; }
+
+.track {
+  height: 6px;
+  background: var(--surface2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  border-radius: 3px;
+  animation: grow 1s ease forwards;
+}
+@keyframes grow { from { width: 0 !important; } }
+
+.fill-r { background: var(--red); }
+.fill-a { background: var(--amber); }
+.fill-g { background: var(--green); }
+.fill-gr { background: var(--ink3); }
+
+.chart-count { font-size: 11px; color: var(--ink3); }
+
+/* ── REFLECTION BLOCKS ── */
+.reflections { display: flex; flex-direction: column; gap: 12px; margin-bottom: 3rem; }
+
+.reflection {
+  background: var(--surface);
+  border: 0.5px solid var(--rule);
+  border-radius: 6px;
+  padding: 1.1rem 1.25rem;
+}
+
+.reflection-head {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ref-icon { color: var(--ink3); font-size: 13px; }
+
+.reflection p {
+  font-size: 13px;
+  color: var(--ink2);
+  line-height: 1.75;
+}
+
+.reflection p strong { color: var(--ink); font-weight: 500; }
+
+/* ── COMMITMENTS ── */
+.commitments { display: flex; flex-direction: column; gap: 0; }
+
+.commitment {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 16px;
+  padding: 1.25rem 0;
+  border-bottom: 0.5px solid var(--rule2);
+  align-items: start;
+}
+.commitment:first-child { border-top: 0.5px solid var(--rule2); }
+
+.commit-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--ink3);
+  line-height: 1;
+  padding-top: 3px;
+  text-align: right;
+}
+
+.commit-content {}
+.commit-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.commit-body {
+  font-size: 13px;
+  color: var(--ink2);
+  line-height: 1.7;
+}
+.commit-body strong { color: var(--ink); font-weight: 500; }
+
+/* ── SIGN-OFF ── */
+.signoff {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: gap;
+  gap: 16px;
+}
+
+.signoff-left { }
+
+.signoff-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  font-style: italic;
+  color: var(--ink);
+}
+
+.signoff-detail {
+  font-size: 11px;
+  color: var(--ink3);
+  margin-top: 4px;
+  letter-spacing: 0.06em;
+}
+
+.signoff-date {
+  font-size: 11px;
+  color: var(--ink3);
+  text-align: right;
+  letter-spacing: 0.06em;
+}
+
+/* ── TREE DIAGRAM ANALYSIS ── */
+.analysis-block {
+  background: var(--surface);
+  border: 0.5px solid var(--rule);
+  border-radius: 8px;
+  padding: 1.75rem;
+}
+
+.analysis-intro {
+  font-size: 13px;
+  color: var(--ink2);
+  line-height: 1.8;
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 0.5px solid var(--rule2);
+  font-style: italic;
+}
+
+.analysis-points { display: flex; flex-direction: column; gap: 0; }
+
+.analysis-point {
+  padding: 1.25rem 0;
+  border-bottom: 0.5px solid var(--rule2);
+}
+.analysis-point:last-child { border-bottom: none; padding-bottom: 0; }
+.analysis-point:first-child { padding-top: 0; }
+
+.apoint-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: 6px;
+}
+
+.analysis-point:last-child .apoint-label {
+  color: var(--ink);
+}
+
+.apoint-body {
+  font-size: 13px;
+  color: var(--ink2);
+  line-height: 1.8;
+}
+
+.apoint-body em {
+  font-style: italic;
+  color: var(--ink);
+}
+
+@media (max-width: 560px) {
+  h1 { font-size: 28px; }
+  .subject-row { grid-template-columns: 70px 1fr; gap: 14px; }
+  .chart-row { grid-template-columns: 90px 1fr 50px; }
+  .page { padding: 2.5rem 1.25rem 5rem; }
+}
+
+@media print {
+  body { background: white; }
+  .page { padding: 2rem; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-meta">
+      <span>Madhav</span>
+      <span>BITS Pilani, Goa</span>
+      <span>CSE · Semester 4</span>
+      <span>Self-Assessment</span>
+    </div>
+    <h1>Where I went wrong<br>in <em>Semester 4</em></h1>
+    <div class="cover-note">
+      This is my honest analysis of why my CGPA dropped this semester. I've broken it down subject by subject, identified the real reasons (not excuses), and committed to specific changes for Semester 5 and beyond. I'm sharing this because I want to be held accountable.
+    </div>
+  </div>
+
+  <!-- SUBJECT BREAKDOWN -->
+  <div class="section">
+    <div class="section-eyebrow">Subject-wise breakdown</div>
+
+    <div class="subjects">
+
+      <div class="subject-row">
+        <div class="subj-left">
+          <div class="subj-code">DSA</div>
+          <div class="subj-full">Data Structures &amp; Algorithms</div>
+          <div class="severity-dot dot-r" style="margin-top:10px;display:block;"></div>
+        </div>
+        <div class="subj-right">
+          <div class="subj-narrative">
+            This was my worst subject — and I can't dress it up. I lost marks across <strong>every single component</strong>: midsem, compre, and labs all failed. That tells me this wasn't exam-day nerves or one bad week. I had a genuine conceptual gap that I never addressed until it was too late. Labs especially — I didn't have the implementation comfort to write code under time pressure when it counted.
+          </div>
+          <div class="tags">
+            <span class="tag tag-lost">midsem lost</span>
+            <span class="tag tag-lost">compre lost</span>
+            <span class="tag tag-lost">labs lost</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subject-row">
+        <div class="subj-left">
+          <div class="subj-code">DBMS</div>
+          <div class="subj-full">Database Management Systems</div>
+          <div class="severity-dot dot-a" style="margin-top:10px;display:block;"></div>
+        </div>
+        <div class="subj-right">
+          <div class="subj-narrative">
+            My theory understanding was actually okay — midsem and compre went fine. The damage was entirely in <strong>labs</strong>. I could read SQL and understand relational algebra but I couldn't execute fast enough in a live lab environment. That's a practice gap, not a knowledge gap. I wasn't putting in the reps.
+          </div>
+          <div class="tags">
+            <span class="tag tag-lost">labs lost</span>
+            <span class="tag tag-fine">midsem fine</span>
+            <span class="tag tag-fine">compre fine</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subject-row">
+        <div class="subj-left">
+          <div class="subj-code">MUP</div>
+          <div class="subj-full">Microprocessors (8086)</div>
+          <div class="severity-dot dot-a" style="margin-top:10px;display:block;"></div>
+        </div>
+        <div class="subj-right">
+          <div class="subj-narrative">
+            I had a two-front problem here. <strong>Labs</strong> hurt due to implementation gaps, and I also lost <strong>compre</strong> marks because my concept clarity on peripheral interfacing and memory/I-O mapping was shallow. I thought I understood it well enough — I clearly didn't. Compre tests depth, not familiarity, and I only had the latter.
+          </div>
+          <div class="tags">
+            <span class="tag tag-lost">labs lost</span>
+            <span class="tag tag-lost">compre lost</span>
+            <span class="tag tag-fine">midsem fine</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subject-row">
+        <div class="subj-left">
+          <div class="subj-code">FDS</div>
+          <div class="subj-full">Foundations of Data Science</div>
+          <div class="severity-dot dot-a" style="margin-top:10px;display:block;"></div>
+        </div>
+        <div class="subj-right">
+          <div class="subj-narrative">
+            The midsem was the only loss — but it was entirely avoidable. At that point in the semester, my fundamentals were unclear and I hadn't built them properly. I recovered well by compre which shows the ability is there. But the midsem marks are gone permanently. <strong>I waited too long to understand the basics.</strong> Good recovery, bad start.
+          </div>
+          <div class="tags">
+            <span class="tag tag-lost">midsem lost</span>
+            <span class="tag tag-fine">compre fine</span>
+            <span class="tag tag-fine">labs fine</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subject-row">
+        <div class="subj-left">
+          <div class="subj-code">POE</div>
+          <div class="subj-full">Principles of Economics</div>
+          <div class="severity-dot dot-a" style="margin-top:10px;display:block;"></div>
+        </div>
+        <div class="subj-right">
+          <div class="subj-narrative">
+            Quizzes brought me down. Midsem and compre were both fine — so I understood the theory. But quizzes require you to solve problems quickly and accurately, and I wasn't practising numericals regularly. I also had some concept gaps that showed up specifically in quiz-type questions. This was pure habit failure — <strong>I wasn't solving problems between classes.</strong>
+          </div>
+          <div class="tags">
+            <span class="tag tag-lost">quizzes lost</span>
+            <span class="tag tag-fine">midsem fine</span>
+            <span class="tag tag-fine">compre fine</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subject-row">
+        <div class="subj-left">
+          <div class="subj-code">HEL</div>
+          <div class="subj-full">Humanities Elective</div>
+          <div class="severity-dot dot-g" style="margin-top:10px;display:block;"></div>
+        </div>
+        <div class="subj-right">
+          <div class="subj-narrative">
+            I'll be transparent: I did almost no preparation for this subject. I relied entirely on luck — and very nearly got an A–. But I lost it by a mark or two because I made an error in a final submission and didn't proofread before submitting. <strong>That mistake was completely avoidable.</strong> The fact that I nearly got away with zero prep is not something I'm proud of — it's a bad habit I need to stop before it costs me something I can't afford to lose.
+          </div>
+          <div class="tags">
+            <span class="tag tag-warn">no preparation</span>
+            <span class="tag tag-lost">lost A– by 1–2 marks</span>
+            <span class="tag tag-lost">avoidable mistake</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ROOT CAUSE ANALYSIS -->
+  <div class="section">
+    <div class="section-eyebrow">What actually caused the damage</div>
+
+    <div class="cause-chart">
+      <div class="chart-row">
+        <div class="chart-label">Concept gaps</div>
+        <div class="track"><div class="fill fill-r" style="width:72%"></div></div>
+        <div class="chart-count">4 of 6 subjects</div>
+      </div>
+      <div class="chart-row">
+        <div class="chart-label">Execution under pressure</div>
+        <div class="track"><div class="fill fill-g" style="width:67%"></div></div>
+        <div class="chart-count">4 of 6 subjects</div>
+      </div>
+      <div class="chart-row">
+        <div class="chart-label">Insufficient practice</div>
+        <div class="track"><div class="fill fill-a" style="width:55%"></div></div>
+        <div class="chart-count">3 of 6 subjects</div>
+      </div>
+      <div class="chart-row">
+        <div class="chart-label">Carelessness</div>
+        <div class="track"><div class="fill fill-gr" style="width:18%"></div></div>
+        <div class="chart-count">1 of 6 subjects</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HONEST REFLECTIONS -->
+  <div class="section">
+    <div class="section-eyebrow">What I've realized</div>
+
+    <div class="reflections">
+      <div class="reflection">
+        <div class="reflection-head"><span class="ref-icon">01</span> Labs exposed that I don't truly know the subject</div>
+        <p>Labs don't test what you've read — they test whether you can build something from scratch in a limited window. Across DBMS, MUP, and DSA, I consistently fell short. That's a signal I was confusing familiarity with understanding. I knew how things worked when I had the notes open. I didn't know them well enough to implement independently.</p>
+      </div>
+      <div class="reflection">
+        <div class="reflection-head"><span class="ref-icon">02</span> I build understanding too late in the semester</div>
+        <p>FDS was the clearest example — I recovered strongly by compre, but I started too late. Midsems happen at week 7–8, not week 14. Waiting to "properly study before midsem" instead of building the foundation in the first month is a pattern I repeated. The marks don't refund, and the stress compounds.</p>
+      </div>
+      <div class="reflection">
+        <div class="reflection-head"><span class="ref-icon">03</span> The DSA problem is connected to my placement goals</div>
+        <p>I want to sit for FAANG-adjacent placements. DSA is the primary filter in every technical interview at these companies. The fact that I failed every component of DSA this semester — while also targeting these companies — is not just an academic concern. <strong>If I walk into a placement interview with the same DSA knowledge I had this semester, I will not clear it.</strong> This is the thing I need to fix most urgently, and it needs to start now, not in Semester 5.</p>
+      </div>
+      <div class="reflection">
+        <div class="reflection-head"><span class="ref-icon">04</span> HEL was a warning, not a win</div>
+        <p>I nearly scored an A– in a subject I gave zero preparation for. Part of me wants to frame that positively — it isn't. It trained me to think I can wing things. One careless unedited mistake cost me that grade. If I carry the "I'll figure it out" mindset into subjects that actually matter, I won't be lucky.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TREE DIAGRAM ANALYSIS -->
+  <div class="section">
+    <div class="section-eyebrow">A note on my study method — the tree diagram problem</div>
+
+    <div class="analysis-block">
+      <div class="analysis-intro">
+        Across most subjects this semester, I used AI-assisted tree diagrams as my primary revision tool — structured visual maps of every topic, concept, and sub-concept in the syllabus. On the surface, this felt like rigorous preparation. In practice, it contributed to a significant gap between perceived and actual readiness. I want to examine why, because I think it's one of the more honest things I can say about how my study approach failed me.
+      </div>
+
+      <div class="analysis-points">
+
+        <div class="analysis-point">
+          <div class="apoint-label">Recognition vs. application</div>
+          <div class="apoint-body">Tree diagrams are effective at organizing information and supporting recognition-based recall. Reviewing a well-structured diagram activates familiarity — concepts feel known because they have been seen before in a clear, organized form. However, exam and lab performance in engineering depends on independent application: constructing a solution from first principles, often under time constraints, without the visual scaffold present. The diagrams optimized for the wrong cognitive task. They helped me recognize what I had studied; they did not help me use what I had studied.</div>
+        </div>
+
+        <div class="analysis-point">
+          <div class="apoint-label">The illusion of competence</div>
+          <div class="apoint-body">The act of building — or even reviewing — a comprehensive tree diagram produces a subjective feeling of mastery. Every branch is accounted for; every term has a place. This is a well-documented phenomenon in learning research: fluency with organized material is frequently misread as understanding. In my case, I could navigate a diagram of DSA topics fluently. That fluency did not transfer to writing code for those topics from scratch. The diagram created the illusion that familiarity was the same as competence. It was not.</div>
+        </div>
+
+        <div class="analysis-point">
+          <div class="apoint-label">Hierarchical structure does not map to problem-solving</div>
+          <div class="apoint-body">Engineering examinations — particularly compre papers and labs — are not hierarchical retrieval tasks. They require combining concepts across branches, reasoning about tradeoffs, and constructing novel solutions. A tree diagram represents knowledge as a taxonomy: concept A contains sub-concepts B and C. But solving a graph problem or designing a memory-mapped I/O circuit requires asking: which approach applies here, why, and under what constraints? The diagram answered none of those questions. It told me what existed; it did not tell me when or why to use it.</div>
+        </div>
+
+        <div class="analysis-point">
+          <div class="apoint-label">What vs. why vs. when</div>
+          <div class="apoint-body">Effective conceptual understanding operates at three levels: <em>what</em> a concept is, <em>why</em> it works the way it does, and <em>when</em> to deploy it. Tree diagrams address the first level almost exclusively. They are descriptive, not analytical. For subjects like DSA and MUP, where exam questions test the second and third levels — and labs test all three simultaneously — a study method anchored entirely at the descriptive level left me underprepared in the dimensions that actually determined my grade.</div>
+        </div>
+
+        <div class="analysis-point">
+          <div class="apoint-label">Conclusion</div>
+          <div class="apoint-body">Concept organization has genuine value. It reduces cognitive load during revision, surfaces gaps in coverage, and provides a useful reference structure. I am not discarding it. But this semester demonstrated clearly that organization is a precondition for learning, not a substitute for it. A well-structured diagram of a subject I cannot implement is a well-organized gap. Going forward, the diagram is the starting point — not the destination. It needs to be followed by derivation, implementation, problem-solving without reference, and deliberate retrieval practice. The work that actually builds competence begins after the diagram is complete.</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- COMMITMENTS -->
+  <div class="section">
+    <div class="section-eyebrow">What I am committing to change</div>
+
+    <div class="commitments">
+
+      <div class="commitment">
+        <div class="commit-num">1</div>
+        <div class="commit-content">
+          <div class="commit-title">Rebuild DSA from scratch — starting this month</div>
+          <div class="commit-body">
+            I'm following <strong>Striver's A2Z Sheet</strong> in sequence. I will write code for every problem before looking at any solution. No shortcuts, no passive watching of tutorials. My target is 2–3 problems a day consistently. By the time Semester 5 starts, I want a full Arrays + Strings + Recursion foundation. By placements, I want to be interview-ready across all major topics.
+          </div>
+        </div>
+      </div>
+
+      <div class="commitment">
+        <div class="commit-num">2</div>
+        <div class="commit-content">
+          <div class="commit-title">Practice labs before every lab session — not reading, doing</div>
+          <div class="commit-body">
+            Before every upcoming lab, I will redo the previous lab from memory — no notes, no copy-paste — within 30 minutes. If I can't do that, I'm not ready. This applies to every subject that has a lab component. I'm treating this as a non-negotiable habit, not something I do when I feel prepared.
+          </div>
+        </div>
+      </div>
+
+      <div class="commitment">
+        <div class="commit-num">3</div>
+        <div class="commit-content">
+          <div class="commit-title">First 4 weeks of every semester = foundation weeks</div>
+          <div class="commit-body">
+            I will not rely on "studying before midsem" as my primary strategy. For each new subject, I will understand the core framework in the first month — so that midsem is consolidation, not first-contact. FDS showed me this is possible. I need to make it the default, not the exception.
+          </div>
+        </div>
+      </div>
+
+      <div class="commitment">
+        <div class="commit-num">4</div>
+        <div class="commit-content">
+          <div class="commit-title">Solve 10 problems per topic before every quiz</div>
+          <div class="commit-body">
+            For theory subjects with quizzes (like POE), I will solve numericals throughout the topic — not the night before. This requires making a note of upcoming quiz topics at the start of each unit and building a small problem bank as I go.
+          </div>
+        </div>
+      </div>
+
+      <div class="commitment">
+        <div class="commit-num">5</div>
+        <div class="commit-content">
+          <div class="commit-title">Proofread every submission before submitting</div>
+          <div class="commit-body">
+            One avoidable mistake in HEL cost me a grade. From now on, every submission — assignment, quiz, answer sheet — gets a final read before I hand it in. This takes 2 minutes. There's no reason not to do it.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SIGN OFF -->
+  <div class="signoff">
+    <div class="signoff-left">
+      <div class="signoff-name">Madhav</div>
+      <div class="signoff-detail">B.E. Computer Science · BITS Pilani, Goa Campus · 2nd Year</div>
+    </div>
+    <div class="signoff-date">June 2026</div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Self-Management Part 1 — Mastering Stress | Tree Diagram Notes</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Georgia', serif; background: #f0ece2; padding: 20px 12px; }
+
+  /* devotional line */
+  .devotional {
+    text-align:center; font-size:12px; color:#6c3483; font-style:italic;
+    letter-spacing:.5px; margin-bottom:12px; font-family:'Georgia',serif;
+  }
+  .devotional span { color:#b9770e; }
+
+  .page-header {
+    text-align: center; background: #1a3a5c; color: #fff;
+    padding: 18px 20px; border-radius: 10px; margin-bottom: 10px;
+  }
+  .page-header h1 { font-size: 19px; letter-spacing: .5px; text-transform: uppercase; }
+  .page-header p  { font-size: 11px; margin-top: 5px; opacity: .85; font-style: italic; }
+
+  /* source / page marker at top of trees */
+  .top-page {
+    text-align:center; font-size:11px; color:#555; font-style:italic;
+    background:#efe7d3; border:1px dashed #b08d57; border-radius:6px;
+    padding:5px 10px; max-width:1100px; margin:0 auto 22px auto;
+  }
+
+  .sc {
+    background: #fff; border: 2px solid #1a3a5c; border-radius: 10px;
+    padding: 16px 14px; max-width: 1100px; margin: 0 auto 26px auto;
+    page-break-inside: avoid; break-inside: avoid;
+  }
+  .sc-header { border-bottom: 1px solid #d0d8e4; padding-bottom: 8px; margin-bottom: 6px; }
+  .sc-title { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .sc-title-text {
+    flex: 1; text-align: center; font-weight: bold; color: #1a3a5c;
+    font-size: 13px; text-transform: uppercase; letter-spacing: .5px;
+  }
+  .sc-page { text-align:center; font-size:10px; color:#8a7a5c; font-style:italic; margin-bottom:12px; }
+  .back-btn {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: #1a3a5c; color: #fff; text-decoration: none;
+    font-size: 10px; font-weight: bold; padding: 4px 10px;
+    border-radius: 20px; white-space: nowrap; flex-shrink: 0;
+  }
+  .back-btn:hover { background: #2e6da4; }
+
+  .tree  { display: flex; flex-direction: column; align-items: center; page-break-inside: avoid; break-inside: avoid; }
+  .vl    { width: 2px; background: #1a3a5c; margin: 0 auto; }
+  .vl-r  { width: 2px; background: #c0392b; margin: 0 auto; }
+  .vl-g  { width: 2px; background: #27ae60; margin: 0 auto; }
+  .vl-o  { width: 2px; background: #e67e22; margin: 0 auto; }
+  .vl-p  { width: 2px; background: #8e44ad; margin: 0 auto; }
+  .vl-y  { width: 2px; background: #f39c12; margin: 0 auto; }
+  .vl-b  { width: 2px; background: #2e6da4; margin: 0 auto; }
+  .hl    { height: 2px; background: #1a3a5c; }
+  .hl-r  { height: 2px; background: #c0392b; }
+  .hl-g  { height: 2px; background: #27ae60; }
+  .hl-b  { height: 2px; background: #2e6da4; }
+  .hl-y  { height: 2px; background: #f39c12; }
+  .hl-p  { height: 2px; background: #8e44ad; }
+
+  .n     { border-radius: 7px; padding: 7px 10px; text-align: center; font-size: 11.5px; line-height: 1.4; box-shadow: 0 2px 5px rgba(0,0,0,.1); }
+  .root  { background: #1a3a5c; color: #fff; font-size: 14px; font-weight: bold; padding: 11px 26px; }
+  .l1    { background: #2e6da4; color: #fff; font-weight: bold; font-size: 11.5px; }
+  .red   { background: #fdecea; border: 1.5px solid #c0392b; color: #7b241c; }
+  .grn   { background: #eafaf1; border: 1.5px solid #27ae60; color: #1e8449; }
+  .ylw   { background: #fef9e7; border: 1.5px solid #f39c12; color: #7d6608; }
+  .org   { background: #fef0e6; border: 1.5px solid #e67e22; color: #784212; }
+  .pur   { background: #f5eef8; border: 1.5px solid #8e44ad; color: #6c3483; }
+  .blu   { background: #e8f4fd; border: 1.5px solid #2e6da4; color: #1a3a5c; }
+
+  .tag   { display: inline-block; border-radius: 3px; padding: 1px 5px; font-size: 9px; font-weight: bold; color: #fff; margin-bottom: 3px; }
+  .t-r   { background: #c0392b; }
+  .t-g   { background: #27ae60; }
+  .t-y   { background: #e67e22; }
+  .t-p   { background: #8e44ad; }
+  .t-b   { background: #2e6da4; }
+
+  .brow  { display: flex; justify-content: space-around; width: 100%; page-break-inside: avoid; break-inside: avoid; }
+  .br    { display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 100px; page-break-inside: avoid; break-inside: avoid; }
+  .mn    { border-radius: 5px; padding: 5px 7px; font-size: 10px; text-align: center; line-height: 1.3; }
+
+  /* Plain English explanation node */
+  .pe    { background: #fffde7; border: 1.5px dashed #f9a825; border-radius: 6px; padding: 4px 8px; font-size: 10px; color: #5d4037; font-style: italic; margin-top: 2px; text-align: center; max-width: 240px; }
+
+  /* Example node (base) */
+  .eg    { background: #e8f5e9; border: 1.5px dashed #43a047; border-radius: 6px; padding: 4px 8px; font-size: 10px; color: #1b5e20; margin-top: 2px; text-align: center; max-width: 250px; }
+
+  /* NEW — dual audience example nodes */
+  .eg-mad { background:#e8eaf6; border:1.5px dashed #3f51b5; border-radius:6px; padding:4px 8px; font-size:10px; color:#1a237e; margin-top:3px; text-align:center; max-width:250px; }
+  .eg-ca  { background:#fdf3e7; border:1.5px dashed #b9770e; border-radius:6px; padding:4px 8px; font-size:10px; color:#7d4e00; margin-top:3px; text-align:center; max-width:250px; }
+
+  table  { width: 100%; border-collapse: collapse; font-size: 11px; page-break-inside: avoid; break-inside: avoid; }
+  th     { background: #2e6da4; color: #fff; padding: 7px 10px; text-align: left; }
+  td     { padding: 6px 10px; border: 1px solid #d0d8e4; vertical-align: top; }
+  tr:nth-child(even) td { background: #f5f8fc; }
+  .td-r  { background: #fdecea !important; color: #7b241c; }
+  .td-g  { background: #eafaf1 !important; color: #1e8449; }
+  .td-y  { background: #fef9e7 !important; color: #7d6608; }
+
+  .toc { background:#e8f4fd; border:1.5px solid #2e6da4; border-radius:8px; padding:14px 18px; max-width:1100px; margin:0 auto 26px auto; }
+  .toc-title { font-weight:bold; color:#1a3a5c; font-size:13px; margin-bottom:10px; }
+  .toc a { color:#2e6da4; text-decoration:none; font-size:12px; }
+  .toc a:hover { text-decoration:underline; }
+  .toc-grid { display:flex; flex-wrap:wrap; gap:6px; }
+  .toc-item { background:#fff; border:1px solid #2e6da4; border-radius:5px; padding:4px 10px; font-size:11px; }
+  .toc-item-arsenal { background:#4a0e0e; border:1px solid #f5c518; border-radius:5px; padding:4px 10px; font-size:11px; }
+  .toc-item-arsenal a { color:#f5c518 !important; }
+
+  /* ── STRENGTH ARSENAL ── */
+  .arsenal {
+    background: #4a0e0e; border-radius: 10px;
+    padding: 20px 18px; max-width: 1100px; margin: 0 auto 26px auto;
+    page-break-before: always; break-before: page;
+    page-break-inside: avoid; break-inside: avoid;
+  }
+  .arsenal-header { border-bottom: 1.5px solid #f5c518; padding-bottom: 10px; margin-bottom: 16px; }
+  .arsenal-title-row { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+  .arsenal-title { flex:1; text-align:center; color:#f5c518; font-size:15px; font-weight:bold; text-transform:uppercase; letter-spacing:1.5px; }
+  .arsenal-back-btn {
+    display:inline-flex; align-items:center; gap:4px;
+    background:#f5c518; color:#4a0e0e; text-decoration:none;
+    font-size:10px; font-weight:bold; padding:4px 10px;
+    border-radius:20px; white-space:nowrap; flex-shrink:0;
+  }
+  .arsenal-purpose { font-size:11px; color:#e8c87a; font-style:italic; text-align:center; margin-top:8px; }
+  .arsenal-card {
+    background:#fff; border-left:4px solid #f5c518; border-radius:6px;
+    padding:12px 14px; margin-bottom:14px;
+    page-break-inside:avoid; break-inside:avoid;
+  }
+  .ac-name  { font-size:12.5px; font-weight:bold; color:#4a0e0e; text-decoration:underline; margin-bottom:2px; }
+  .ac-court { font-size:10px; color:#666; margin-bottom:8px; }
+  .ac-label { font-size:9.5px; font-weight:bold; color:#2e6da4; text-transform:uppercase; letter-spacing:.5px; margin-bottom:3px; }
+  .ac-ratio { font-size:12px; font-style:italic; color:#1a1a1a; font-family:'Georgia',serif; line-height:1.6; padding-left:10px; border-left:2px solid #f5c518; margin-bottom:8px; }
+  .ac-when  { display:inline-block; background:#3f51b5; color:#fff; font-size:10px; font-weight:bold; padding:3px 10px; border-radius:4px; margin-right:6px; }
+  .ac-when2 { display:inline-block; background:#b9770e; color:#fff; font-size:10px; font-weight:bold; padding:3px 10px; border-radius:4px; }
+
+  .footer { text-align: center; font-size: 10px; color: #888; margin-top: 28px; font-style: italic; }
+
+  /* legend */
+  .legend { display:flex; flex-wrap:wrap; gap:8px; max-width:1100px; margin:0 auto 20px auto; font-size:10px; }
+  .leg-item { display:flex; align-items:center; gap:5px; }
+  .leg-swatch { width:14px; height:14px; border-radius:3px; border:1px solid #aaa; }
+</style>
+</head>
+<body>
+
+<!-- ══ DEVOTIONAL ══ -->
+<div class="devotional">Asmad GuruBhuya Namaha &nbsp;|&nbsp; <span>Shrimate Ramanuja Namaha</span></div>
+
+<!-- ══ HEADER ══ -->
+<div class="page-header">
+  <h1>🧠 Self-Management — Part 1: Mastering Stress &amp; Turning Pressure into Strength</h1>
+  <p>Source: Article by Raj Jaggi | Dual Study Edition — 🎓 Madhav (BITS Pilani, CS) &amp; ⚖️ CA Pawankumar Soni (GST Litigation)</p>
+</div>
+
+<!-- ══ TOP PAGE / SOURCE MARKER ══ -->
+<div class="top-page">📄 Web article — no page numbers in source | Dated <strong>25 Jun 2026</strong> | Covered: full article, first line to last</div>
+
+<!-- ══ LEGEND ══ -->
+<div class="legend">
+  <div class="leg-item"><div class="leg-swatch" style="background:#eafaf1;border-color:#27ae60;"></div> Healthy / Do this</div>
+  <div class="leg-item"><div class="leg-swatch" style="background:#fdecea;border-color:#c0392b;"></div> Harmful / Avoid</div>
+  <div class="leg-item"><div class="leg-swatch" style="background:#fef9e7;border-color:#f39c12;"></div> Condition / Signal / Test</div>
+  <div class="leg-item"><div class="leg-swatch" style="background:#f5eef8;border-color:#8e44ad;"></div> Optional / Alternative</div>
+  <div class="leg-item"><div class="leg-swatch" style="background:#e8f4fd;border-color:#2e6da4;"></div> Neutral Reference</div>
+  <div class="leg-item"><div class="leg-swatch" style="background:#fffde7;border-color:#f9a825;"></div> 📝 Plain English</div>
+  <div class="leg-item"><div class="leg-swatch" style="background:#e8eaf6;border-color:#3f51b5;"></div> 🎓 Madhav (Student / CS)</div>
+  <div class="leg-item"><div class="leg-swatch" style="background:#fdf3e7;border-color:#b9770e;"></div> ⚖️ CA / GST Litigation</div>
+</div>
+
+<!-- ══ TOC ══ -->
+<div class="toc" id="toc">
+  <div class="toc-title">📋 Index of Sections</div>
+  <div class="toc-grid">
+    <div class="toc-item"><a href="#s0">What is Self-Management?</a></div>
+    <div class="toc-item"><a href="#s1">Understanding Stress &amp; Its Universal Nature</a></div>
+    <div class="toc-item"><a href="#s2">Identifying the Cause &amp; Controlling the Controllable</a></div>
+    <div class="toc-item"><a href="#s3">Managing Stress Through Preparation, Time &amp; Action</a></div>
+    <div class="toc-item"><a href="#s4">Protecting the Body &amp; Restoring Emotional Balance</a></div>
+    <div class="toc-item"><a href="#s5">Building Resilience &amp; Responding to Failure</a></div>
+    <div class="toc-item"><a href="#s6">Seeking Support as Self-Management</a></div>
+    <div class="toc-item"><a href="#s7">From Stress to Strength — The Way Forward</a></div>
+    <div class="toc-item toc-item-arsenal"><a href="#arsenal">⚔️ Strength Arsenal</a></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════ WHAT IS SELF-MANAGEMENT ══════════════════════ -->
+<div class="sc" id="s0">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">What is Self-Management?</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div></div>
+  <div class="sc-page">📄 Raj Jaggi | 25 Jun 2026 — Introduction</div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:520px;">🧭 Self-Management<br><small>Regulating our thoughts, emotions &amp; behaviour to act sensibly and purposefully in different situations</small></div>
+    <div class="vl" style="height:16px;"></div>
+
+    <div class="n l1" style="max-width:440px;">Made of several interconnected abilities</div>
+    <div class="vl" style="height:12px;"></div>
+    <div style="width:88%;"><div class="hl-b"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:6px;">
+      <div class="br"><div class="vl-b" style="height:8px;"></div><div class="n blu mn">Self-awareness</div></div>
+      <div class="br"><div class="vl-b" style="height:8px;"></div><div class="n blu mn">Discipline</div></div>
+      <div class="br"><div class="vl-b" style="height:8px;"></div><div class="n blu mn">Emotional control</div></div>
+      <div class="br"><div class="vl-b" style="height:8px;"></div><div class="n blu mn">Adaptability</div></div>
+      <div class="br"><div class="vl-b" style="height:8px;"></div><div class="n blu mn">Time management</div></div>
+      <div class="br"><div class="vl-b" style="height:8px;"></div><div class="n blu mn">Goal-setting</div></div>
+      <div class="br"><div class="vl-b" style="height:8px;"></div><div class="n blu mn">Problem-solving</div></div>
+    </div>
+
+    <div class="vl" style="height:16px;"></div>
+    <div class="n ylw" style="max-width:480px;"><span class="tag t-y">WHY STRESS FIRST</span><br>Stress management is the <strong>most important</strong> component — excessive stress weakens all the others.</div>
+    <div class="pe" style="max-width:460px;">📝 A stressed person may <em>know</em> what ought to be done, yet still fail to think clearly, control emotions or decide well. Fix the stress first, and every other skill starts working.</div>
+    <div class="eg-mad" style="max-width:250px;">🎓 You know the whole DSA syllabus, but on exam morning your mind blanks — the knowledge is there, the stress is blocking access.</div>
+    <div class="eg-ca" style="max-width:250px;">⚖️ You know Section 16 &amp; the case law cold, but the night before a tough hearing anxiety scatters your argument. Same knowledge, blocked by pressure.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════ 1. UNDERSTANDING STRESS ══════════════════════ -->
+<div class="sc" id="s1">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">Understanding Stress &amp; Its Universal Nature</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div></div>
+  <div class="sc-page">📄 Raj Jaggi | 25 Jun 2026</div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:540px;">⚡ Stress<br><small>Mental, emotional &amp; physical pressure felt when the DEMANDS on us seem greater than our ABILITY / resources to meet them</small></div>
+    <div class="vl" style="height:16px;"></div>
+
+    <!-- 4 branches -->
+    <div style="width:92%;"><div class="hl"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:8px;">
+
+      <!-- Sources -->
+      <div class="br">
+        <div class="vl-b" style="height:10px;"></div>
+        <div class="n blu mn" style="width:95%;"><span class="tag t-b">SOURCES</span><br>Exam, deadline, money trouble, illness, family conflict, competition, criticism, uncertainty about the future</div>
+      </div>
+
+      <!-- Useful stress -->
+      <div class="br">
+        <div class="vl-g" style="height:10px;"></div>
+        <div class="n grn mn" style="width:95%;"><span class="tag t-g">✓ USEFUL (limited)</span><br>A little stress helps us prepare, stay alert &amp; respond to an urgent situation</div>
+        <div class="pe" style="max-width:200px;">📝 Not all stress is bad — a small dose sharpens you before something important.</div>
+      </div>
+
+      <!-- Harmful stress -->
+      <div class="br">
+        <div class="vl-r" style="height:10px;"></div>
+        <div class="n red mn" style="width:95%;"><span class="tag t-r">✗ HARMFUL when</span><br>Excessive &nbsp;•&nbsp; Prolonged &nbsp;•&nbsp; Creates a feeling of complete helplessness</div>
+      </div>
+
+      <!-- Universal -->
+      <div class="br">
+        <div class="vl-p" style="height:10px;"></div>
+        <div class="n pur mn" style="width:95%;"><span class="tag t-p">UNIVERSAL</span><br>Cuts across occupation, income, education &amp; status — attendant, sanitation worker, student, homemaker, sportsperson, business leader, PM</div>
+        <div class="pe" style="max-width:200px;">📝 The <em>sources</em> and intensity differ, but the human experience of stress is the same for everyone.</div>
+      </div>
+    </div>
+
+    <div class="vl" style="height:16px;"></div>
+    <!-- Not weakness -->
+    <div class="n grn" style="max-width:520px;"><span class="tag t-g">NOT A WEAKNESS</span><br>Even highly accomplished people face illness, defeat, criticism &amp; setbacks.<br><em>Amitabh Bachchan</em> — near-fatal injury during <em>Coolie</em> (early 1980s), a period of professional decline, later serious financial difficulty from a business venture — yet he accepted new opportunities (including television) and rebuilt.</div>
+    <div class="pe" style="max-width:500px;">📝 The lesson isn't that he felt nothing — it's that severe pressure can be faced without letting it become the final judgement on your life.</div>
+    <div class="vl" style="height:14px;"></div>
+
+    <!-- Warning signals -->
+    <div class="n ylw" style="max-width:560px;"><span class="tag t-y">⚠️ WARNING SIGNALS — pause &amp; check honestly</span><br>
+    Irritability &nbsp;•&nbsp; disturbed sleep &nbsp;•&nbsp; headaches &nbsp;•&nbsp; physical exhaustion &nbsp;•&nbsp; poor concentration &nbsp;•&nbsp; loss of appetite &nbsp;•&nbsp; constant worry &nbsp;•&nbsp; aggression &nbsp;•&nbsp; withdrawal from family &amp; friends</div>
+    <div class="eg-mad" style="max-width:250px;">🎓 If minor bugs make you furious, assignments cost you sleep, or you're ghosting friends during placement season — that's the body signalling.</div>
+    <div class="eg-ca" style="max-width:250px;">⚖️ If a single adverse order ruins your week, limitation dates rob your sleep, or you snap at staff — treat it as a signal to act, not push harder.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════ 2. IDENTIFY CAUSE & CONTROL ══════════════════════ -->
+<div class="sc" id="s2">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">Identifying the Cause &amp; Controlling the Controllable</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div></div>
+  <div class="sc-page">📄 Raj Jaggi | 25 Jun 2026</div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:500px;">🔍 Step 1 — Identify the EXACT cause<br><small>We cannot solve a problem that stays vague &amp; undefined</small></div>
+    <div class="pe" style="max-width:480px;">📝 "My whole life is in disorder" is real distress but points to nothing. Break it up: too many commitments + one postponed task + one unpaid bill — now each can be tackled.</div>
+    <div class="eg" style="max-width:250px;">💡 Write the worries down — a written problem looks specific &amp; manageable; a fear circling in the head feels endless.</div>
+    <div class="vl" style="height:16px;"></div>
+
+    <!-- Classify -->
+    <div class="n l1" style="max-width:420px;">Step 2 — Sort every cause into three buckets</div>
+    <div class="vl" style="height:12px;"></div>
+    <div style="width:80%;"><div class="hl"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:8px;">
+
+      <!-- Controllable -->
+      <div class="br">
+        <div class="vl-g" style="height:10px;"></div>
+        <div class="n grn mn" style="width:95%;"><span class="tag t-g">✓ CONTROLLABLE</span><br>Take positive action:<br>• Incomplete work → organise &amp; begin<br>• Overspending → revise budget<br>• Misunderstanding → respectful talk<br>• Skill gap → seek training</div>
+      </div>
+
+      <!-- Partly -->
+      <div class="br">
+        <div class="vl-y" style="height:10px;"></div>
+        <div class="n ylw mn" style="width:95%;"><span class="tag t-y">◐ PARTLY CONTROLLABLE</span><br>Outcome not in your hands, but <strong>preparation &amp; response</strong> are.<br>Cricketer can't control pitch, umpire or opposition — can control fitness, focus &amp; conduct</div>
+        <div class="pe" style="max-width:200px;">📝 <em>Rohit Sharma</em> couldn't choose when chances came; when asked to open in limited-overs cricket he adapted — and it became a defining stage of his career.</div>
+      </div>
+
+      <!-- Uncontrollable -->
+      <div class="br">
+        <div class="vl-r" style="height:10px;"></div>
+        <div class="n red mn" style="width:95%;"><span class="tag t-r">✗ UNCONTROLLABLE</span><br>Past events, natural occurrences, another person's decision, the weather, the final result of an exam / interview / match / business call</div>
+        <div class="pe" style="max-width:200px;">📝 Accept these calmly — spending energy here only feeds the stress.</div>
+      </div>
+    </div>
+
+    <div class="vl" style="height:16px;"></div>
+    <!-- Action over fate -->
+    <div class="n grn" style="max-width:520px;"><span class="tag t-g">ACT — DON'T JUST HOPE</span><br>Faith &amp; hope give emotional support but must <strong>complement</strong> responsible action, not replace it.<br><em>Dhirubhai Ambani</em> — modest beginnings couldn't be changed, but he treated them as a starting point, not a permanent barrier, and grew his enterprise on available opportunities.</div>
+    <div class="vl" style="height:12px;"></div>
+    <div class="n root" style="max-width:520px; background:#1e8449; font-size:12px;">🔑 Swap the question:<br>NOT "Why has this happened to me?" &nbsp;→&nbsp; ASK "What is the most practical action I can take now?"</div>
+    <div class="eg-mad" style="max-width:250px;">🎓 Rejected in one placement round? Uncontrollable = the panel's choice. Controllable = revising your CS fundamentals &amp; projects before the next drive.</div>
+    <div class="eg-ca" style="max-width:250px;">⚖️ Can't control how the officer rules. Can control a watertight reply, timely filing &amp; a well-built paper book. Prepare the controllable, release the verdict.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════ 3. PREPARATION, TIME & ACTION ══════════════════════ -->
+<div class="sc" id="s3">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">Managing Stress Through Preparation, Time &amp; Action</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div></div>
+  <div class="sc-page">📄 Raj Jaggi | 25 Jun 2026</div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:520px;">⏳ The real culprit<br><small>Much everyday stress comes not from the responsibility itself, but from delay, disorder &amp; insufficient preparation</small></div>
+    <div class="pe" style="max-width:500px;">📝 A task that could be done calmly over ten days turns terrifying when pushed to the final evening.</div>
+    <div class="vl" style="height:16px;"></div>
+
+    <div style="width:88%;"><div class="hl"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:8px;">
+
+      <!-- Priorities -->
+      <div class="br">
+        <div class="vl-y" style="height:10px;"></div>
+        <div class="n ylw mn" style="width:95%;"><span class="tag t-y">SET PRIORITIES</span><br>Not every activity deserves equal attention. "No time" is often <strong>no priorities</strong> — hours lost to unplanned chats, social media, TV</div>
+      </div>
+
+      <!-- Schedule -->
+      <div class="br">
+        <div class="vl-g" style="height:10px;"></div>
+        <div class="n grn mn" style="width:95%;"><span class="tag t-g">✓ REALISTIC SCHEDULE</span><br>Clarifies what to do, when to start, how much time exists. Leave room for meals, exercise, family, rest &amp; the unexpected</div>
+        <div class="pe" style="max-width:200px;">📝 A timetable that fills <em>every</em> minute becomes a stress of its own. <em>PM Modi's</em> demanding schedule works through planning, delegation &amp; discipline.</div>
+      </div>
+
+      <!-- Procrastination -->
+      <div class="br">
+        <div class="vl-r" style="height:10px;"></div>
+        <div class="n red mn" style="width:95%;"><span class="tag t-r">✗ PROCRASTINATION</span><br>Gives instant comfort but the relief is deceptive — the unfinished task keeps nagging &amp; pressure grows as the deadline nears</div>
+        <div class="vl-g" style="height:8px;"></div>
+        <div class="n grn mn" style="width:95%;"><span class="tag t-g">REMEDY = small beginning</span><br>Not endless thinking. Report → make the outline. Hard subject → study one chapter. Messy house → one room.</div>
+        <div class="pe" style="max-width:200px;">📝 A small completed action proves the situation isn't beyond control. Progress builds confidence; confidence makes the next step easier. <strong>Self-discipline &gt; waiting for motivation.</strong></div>
+      </div>
+
+      <!-- Preparation -->
+      <div class="br">
+        <div class="vl-b" style="height:10px;"></div>
+        <div class="n blu mn" style="width:95%;"><span class="tag t-b">PREPARATION</span><br><em>Virat Kohli</em> — fitness, practice &amp; routine show performance isn't talent alone. Prepare before the stressful contest</div>
+        <div class="pe" style="max-width:200px;">📝 Preparation can't guarantee victory, but it converts nervousness into <strong>alertness</strong>. Add contingency: safe documents, buffer travel time, a plan B.</div>
+      </div>
+    </div>
+
+    <div class="vl" style="height:16px;"></div>
+    <div class="eg-mad" style="max-width:300px;">🎓 Semester project due in 3 weeks? Don't marathon the last night. Commit the repo skeleton today (small beginning), timebox modules, keep buffer for the demo that always breaks.</div>
+    <div class="eg-ca" style="max-width:300px;">⚖️ 30-day SCN reply window: draft the index &amp; grounds on Day 1, not Day 29. Diarise every limitation date. A calm reply beats a panicked one filed at 11:59 pm.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════ 4. PROTECT BODY & BALANCE ══════════════════════ -->
+<div class="sc" id="s4">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">Protecting the Body &amp; Restoring Emotional Balance</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div></div>
+  <div class="sc-page">📄 Raj Jaggi | 25 Jun 2026</div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:520px;">🫀 Stress is physical too<br><small>It affects breathing, sleep, appetite, digestion, muscle tension &amp; energy — so managing it needs more than positive thinking</small></div>
+    <div class="vl" style="height:16px;"></div>
+
+    <div style="width:90%;"><div class="hl"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:8px;">
+
+      <!-- Physical activity -->
+      <div class="br">
+        <div class="vl-g" style="height:10px;"></div>
+        <div class="n grn mn" style="width:95%;"><span class="tag t-g">✓ MOVE THE BODY</span><br>Walk in fresh air, yoga, stretching, cycling, gardening, outdoor games — no gym or gear needed</div>
+        <div class="pe" style="max-width:200px;">📝 A short walk after a stressful session won't fix the problem, but it puts you in a calmer, more energised state to face it.</div>
+      </div>
+
+      <!-- Fitness + rest -->
+      <div class="br">
+        <div class="vl-b" style="height:10px;"></div>
+        <div class="n blu mn" style="width:95%;"><span class="tag t-b">FITNESS + RECOVERY</span><br><em>Virat Kohli</em> — fitness supports concentration, stamina, consistency; he also spoke of mental exhaustion &amp; stepping away to recover.<br><em>Leander Paes</em> — decades of tennis = effort balanced with recovery</div>
+        <div class="pe" style="max-width:200px;">📝 Strength isn't pretending to have unlimited energy — it's the maturity to know when rest &amp; recovery are needed.</div>
+      </div>
+
+      <!-- Diet & sleep -->
+      <div class="br">
+        <div class="vl-y" style="height:10px;"></div>
+        <div class="n ylw mn" style="width:95%;"><span class="tag t-y">DIET &amp; SLEEP</span><br>Regular meals, enough water, reasonable balance. Avoid skipping meals, excess tea/coffee, junk for comfort</div>
+        <div class="pe" style="max-width:200px;">📝 A tired mind exaggerates difficulties &amp; reacts impatiently. Rest is a <strong>requirement for sound judgement</strong>, not a reward earned after all work is done.</div>
+      </div>
+
+      <!-- Breaks & people -->
+      <div class="br">
+        <div class="vl-p" style="height:10px;"></div>
+        <div class="n pur mn" style="width:95%;"><span class="tag t-p">BREAKS &amp; PEOPLE</span><br>Continuous work ≠ sustained output; attention declines, mistakes rise. A short walk, quiet breathing or a supportive chat restores clarity</div>
+        <div class="pe" style="max-width:200px;">📝 But a planned 10-minute break shouldn't become 2 hours of aimless browsing. Time with family is real emotional recovery — sometimes you need advice, sometimes just someone to listen.</div>
+      </div>
+    </div>
+
+    <div class="vl" style="height:16px;"></div>
+    <div class="eg-mad" style="max-width:300px;">🎓 Hostel coding sprint at 3 am fuelled by instant noodles + energy drinks wrecks focus. A morning jog around campus + real sleep debugs your brain faster than caffeine.</div>
+    <div class="eg-ca" style="max-width:300px;">⚖️ Filing-season all-nighters with skipped meals lead to careless errors in figures. A disciplined walk, meals on time &amp; 7 hours' sleep protect the very judgement your clients pay for.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════ 5. RESILIENCE & FAILURE ══════════════════════ -->
+<div class="sc" id="s5">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">Building Resilience &amp; Responding to Failure</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div></div>
+  <div class="sc-page">📄 Raj Jaggi | 25 Jun 2026</div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:520px;">🌱 Resilience<br><small>Some problems — illness, financial loss, professional failure — can't be fixed at once. Resilience = acknowledge sadness, fear &amp; disappointment without letting them define your whole identity or future</small></div>
+    <div class="pe" style="max-width:500px;">📝 Resilience does not demand constant cheerfulness. It needs patience, adaptability &amp; the determination to keep moving forward.</div>
+    <div class="vl" style="height:16px;"></div>
+
+    <!-- Examples of adaptability -->
+    <div class="n l1" style="max-width:440px;">Adaptability in practice</div>
+    <div class="vl" style="height:12px;"></div>
+    <div style="width:82%;"><div class="hl-b"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:8px;">
+      <div class="br"><div class="vl-b" style="height:8px;"></div><div class="n blu mn" style="width:95%;"><em>Amitabh Bachchan</em> — rebuilt after accident, uncertainty &amp; financial pressure; success on TV = accepting a different path</div></div>
+      <div class="br"><div class="vl-b" style="height:8px;"></div><div class="n blu mn" style="width:95%;"><em>Rohit Sharma</em> — delayed success followed patience, changing responsibilities &amp; persistent effort</div></div>
+      <div class="br"><div class="vl-b" style="height:8px;"></div><div class="n blu mn" style="width:95%;"><em>Jeetendra</em> — long association across changing eras of cinema &amp; TV = treat change as a new reality, not just a threat</div></div>
+    </div>
+
+    <div class="vl" style="height:16px;"></div>
+    <!-- Interpreting failure -->
+    <div class="n l1" style="max-width:440px;">How you INTERPRET failure decides everything</div>
+    <div class="vl" style="height:12px;"></div>
+    <div style="width:70%;"><div class="hl"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:10px;">
+      <div class="br">
+        <div class="vl-r" style="height:10px;"></div>
+        <div class="n red mn" style="width:95%;"><span class="tag t-r">✗ SURRENDER</span><br>"I have failed; therefore I am a failure" → abandons the possibility of improvement</div>
+      </div>
+      <div class="br">
+        <div class="vl-g" style="height:10px;"></div>
+        <div class="n grn mn" style="width:95%;"><span class="tag t-g">✓ ACCEPTANCE</span><br>"My effort failed on this occasion; I must learn from it &amp; decide what to do next" → recognises reality, invites a wiser response</div>
+      </div>
+    </div>
+    <div class="eg-mad" style="max-width:300px;">🎓 A failed course or a rejected internship is one effort that fell short — not a verdict on you as an engineer. Debug the attempt, resubmit, reapply.</div>
+    <div class="eg-ca" style="max-width:300px;">⚖️ An order gone against you at the FAA is this round lost, not the war. Study the reasoning, sharpen the grounds &amp; carry it to GSTAT / High Court.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════ 6. SEEKING SUPPORT ══════════════════════ -->
+<div class="sc" id="s6">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">Seeking Support as a Form of Self-Management</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div></div>
+  <div class="sc-page">📄 Raj Jaggi | 25 Jun 2026</div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:520px;">🤝 True self-management includes knowing WHEN to ask for help</div>
+    <div class="vl" style="height:16px;"></div>
+
+    <div style="width:78%;"><div class="hl"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:10px;">
+
+      <!-- Everyday support -->
+      <div class="br">
+        <div class="vl-g" style="height:10px;"></div>
+        <div class="n grn mn" style="width:95%;"><span class="tag t-g">✓ EVERYDAY SUPPORT</span><br>Overwhelmed employee → supervisor. Struggling student → teacher. Family / money trouble → counsellor, trusted elder or competent professional</div>
+        <div class="pe" style="max-width:210px;">📝 Seeking timely support is NOT abandoning responsibility — it gives you the knowledge, perspective &amp; emotional strength to handle it better.</div>
+      </div>
+
+      <!-- Severe distress -->
+      <div class="br">
+        <div class="vl-y" style="height:10px;"></div>
+        <div class="n ylw mn" style="width:95%;"><span class="tag t-y">⚠️ WHEN IT'S SEVERE</span><br>If stress seriously disrupts sleep, work, relationships or daily life → consult a qualified doctor or mental-health professional</div>
+        <div class="vl-r" style="height:8px;"></div>
+        <div class="n red mn" style="width:95%;">Persistent hopelessness or panic → needs professional care without delay</div>
+        <div class="pe" style="max-width:210px;">📝 Reaching out is a responsible act, not an admission of weakness. Even accomplished people feel anxiety, exhaustion &amp; uncertainty.</div>
+      </div>
+    </div>
+
+    <div class="vl" style="height:16px;"></div>
+    <div class="n grn" style="max-width:520px;"><span class="tag t-g">THE MINDSET</span><br>Public journeys of accomplished people should <strong>inspire, not invite unfair comparison</strong>. They simply remind us that pressure &amp; setbacks don't remove our ability to seek support, recover and begin again.</div>
+    <div class="eg-mad" style="max-width:300px;">🎓 BITS has faculty mentors, seniors &amp; campus counselling — using them during a rough semester is smart engineering, not failure.</div>
+    <div class="eg-ca" style="max-width:300px;">⚖️ A second opinion from a senior counsel or a study-circle peer on a knotty matter isn't weakness — it's how good practitioners protect the client &amp; themselves.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════ 7. WAY FORWARD ══════════════════════ -->
+<div class="sc" id="s7">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">From Stress to Strength — The Way Forward</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div></div>
+  <div class="sc-page">📄 Raj Jaggi | 25 Jun 2026 — Conclusion</div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:540px;">🏔️ Stress is unavoidable — but it need not control our health, judgement, relationships or happiness</div>
+    <div class="vl" style="height:16px;"></div>
+
+    <!-- The 3-step formula -->
+    <div class="n l1" style="max-width:460px;">The balanced approach — three moves</div>
+    <div class="vl" style="height:12px;"></div>
+    <div style="width:80%;"><div class="hl"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:8px;">
+      <div class="br"><div class="vl-b" style="height:8px;"></div><div class="n blu mn" style="width:95%;">1️⃣ Honestly <strong>identify</strong> the cause</div></div>
+      <div class="br"><div class="vl-g" style="height:8px;"></div><div class="n grn mn" style="width:95%;">2️⃣ Take timely <strong>action</strong> on what can be changed</div></div>
+      <div class="br"><div class="vl-y" style="height:8px;"></div><div class="n ylw mn" style="width:95%;">3️⃣ Calmly <strong>accept</strong> what lies beyond control</div></div>
+    </div>
+
+    <div class="vl" style="height:16px;"></div>
+    <!-- Tools -->
+    <div class="n grn" style="max-width:540px;"><span class="tag t-g">THE TOOLKIT</span><br>Disciplined action &nbsp;•&nbsp; careful time management &nbsp;•&nbsp; sufficient rest &nbsp;•&nbsp; physical well-being &nbsp;•&nbsp; supportive relationships &nbsp;→&nbsp; face pressure with greater confidence.</div>
+    <div class="vl" style="height:12px;"></div>
+    <div class="n root" style="max-width:560px; background:#1e8449; font-size:12.5px;">🌟 We may not control every circumstance — but we can always strengthen our ability to respond with <strong>courage, wisdom and hope</strong>.</div>
+    <div class="eg-mad" style="max-width:300px;">🎓 Four years at BITS will throw exams, deadlines &amp; rejections at you. The engineer who plans, rests &amp; adapts graduates steadier than the one who only grinds.</div>
+    <div class="eg-ca" style="max-width:300px;">⚖️ A litigation career is a marathon of deadlines &amp; adverse orders. The practitioner who manages stress well argues clearer, lasts longer &amp; serves clients better.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════ STRENGTH ARSENAL ══════════════════════ -->
+<div class="arsenal" id="arsenal">
+  <div class="arsenal-header">
+    <div class="arsenal-title-row">
+      <span class="arsenal-title">⚔️ Strength Arsenal — Mantras for Pressure Moments</span>
+      <a class="arsenal-back-btn" href="#toc">&#8679; Index</a>
+    </div>
+    <div class="arsenal-purpose">Read one of these before a stressful moment. Say it, believe it, then act. 🎓 = for Madhav &nbsp; ⚖️ = for the practitioner.</div>
+  </div>
+
+  <!-- 1 -->
+  <div class="arsenal-card">
+    <div class="ac-name">The Better Question</div>
+    <div class="ac-court">From: Identifying the Cause &amp; Controlling the Controllable</div>
+    <div class="ac-label">Mantra</div>
+    <div class="ac-ratio">Not "Why has this happened to me?" — but "What is the most practical action I can take now?"</div>
+    <div><span class="ac-when">🎓 Before a re-exam / next placement drive</span><span class="ac-when2">⚖️ On receiving an adverse order</span></div>
+  </div>
+
+  <!-- 2 -->
+  <div class="arsenal-card">
+    <div class="ac-name">Control the Controllable</div>
+    <div class="ac-court">From: the cricketer &amp; the pitch — Rohit Sharma's adaptation</div>
+    <div class="ac-label">Mantra</div>
+    <div class="ac-ratio">I cannot control the pitch, the umpire or the opposition. I can control my preparation, my focus and my conduct. So I master those and release the outcome.</div>
+    <div><span class="ac-when">🎓 Before an interview panel you can't predict</span><span class="ac-when2">⚖️ Before a hearing where the bench is unknown</span></div>
+  </div>
+
+  <!-- 3 -->
+  <div class="arsenal-card">
+    <div class="ac-name">The Small Beginning</div>
+    <div class="ac-court">From: Preparation, Time &amp; Action (the cure for procrastination)</div>
+    <div class="ac-label">Mantra</div>
+    <div class="ac-ratio">The remedy for a frightening task is not more thinking — it is a small beginning. One outline, one chapter, one room. A single completed action proves the situation is not beyond my control.</div>
+    <div><span class="ac-when">🎓 Staring at a huge project repo</span><span class="ac-when2">⚖️ Staring at a 200-page SCN</span></div>
+  </div>
+
+  <!-- 4 -->
+  <div class="arsenal-card">
+    <div class="ac-name">Discipline Over Motivation</div>
+    <div class="ac-court">From: Preparation, Time &amp; Action</div>
+    <div class="ac-label">Mantra</div>
+    <div class="ac-ratio">Self-discipline is more dependable than motivation, because I will not always feel enthusiastic about doing what is necessary. I act on schedule, not on mood.</div>
+    <div><span class="ac-when">🎓 On a low-energy study night</span><span class="ac-when2">⚖️ On a dull drafting afternoon</span></div>
+  </div>
+
+  <!-- 5 -->
+  <div class="arsenal-card">
+    <div class="ac-name">Failure Is an Event, Not an Identity</div>
+    <div class="ac-court">From: Building Resilience &amp; Responding to Failure</div>
+    <div class="ac-label">Mantra</div>
+    <div class="ac-ratio">Not "I have failed, therefore I am a failure" — but "My effort failed on this occasion; I will learn from it and decide what to do next."</div>
+    <div><span class="ac-when">🎓 After a failed course or rejection</span><span class="ac-when2">⚖️ After an appeal lost at first stage</span></div>
+  </div>
+
+  <!-- 6 -->
+  <div class="arsenal-card">
+    <div class="ac-name">Rest Is a Requirement, Not a Reward</div>
+    <div class="ac-court">From: Protecting the Body &amp; Restoring Emotional Balance</div>
+    <div class="ac-label">Mantra</div>
+    <div class="ac-ratio">A tired mind exaggerates difficulties and reacts impatiently. Rest is a basic requirement for sound judgement — not a prize I earn only after every task is done.</div>
+    <div><span class="ac-when">🎓 Tempted by a 3 am all-nighter</span><span class="ac-when2">⚖️ Tempted to skip sleep in filing season</span></div>
+  </div>
+
+  <!-- 7 -->
+  <div class="arsenal-card">
+    <div class="ac-name">Asking for Help Is Strength</div>
+    <div class="ac-court">From: Seeking Support as a Form of Self-Management</div>
+    <div class="ac-label">Mantra</div>
+    <div class="ac-ratio">Seeking timely support is not abandoning responsibility — it gives me the knowledge, perspective and strength to handle it better. Reaching out is a responsible act, not a weakness.</div>
+    <div><span class="ac-when">🎓 Use mentors, seniors, counselling</span><span class="ac-when2">⚖️ Use senior counsel, study circles</span></div>
+  </div>
+
+  <!-- 8 -->
+  <div class="arsenal-card">
+    <div class="ac-name">Strengthen the Response</div>
+    <div class="ac-court">From: From Stress to Strength — The Way Forward</div>
+    <div class="ac-label">Mantra</div>
+    <div class="ac-ratio">I may not be able to control every circumstance, but I can always strengthen my ability to respond — with courage, wisdom and hope.</div>
+    <div><span class="ac-when">🎓 Any tough week at BITS</span><span class="ac-when2">⚖️ Any tough week in practice</span></div>
+  </div>
+
+</div>
+
+<!-- ══ FOOTER ══ -->
+<div class="footer">Dual Study Edition — 🎓 Madhav (BITS Pilani, CS) &amp; ⚖️ CA Practice | Pawan Soni &amp; Associates, Ichalkaranji</div>
+
+<!-- ══ SENSITIVE-TOPIC NOTE ══ -->
+<div style="max-width:1100px;margin:14px auto 0 auto;font-size:9.5px;color:#999;text-align:center;font-style:italic;line-height:1.5;">
+  Note: This material touches on stress &amp; mental well-being. If distress ever becomes severe — persistent hopelessness, panic, or thoughts of self-harm — please reach out to a qualified doctor or mental-health professional promptly. Seeking help is a sign of strength.
+</div>
+
+</body>
+</html>

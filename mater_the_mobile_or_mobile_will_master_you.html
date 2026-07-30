@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Master the Mobile Before It Masters You | Tree Diagram Notes</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Georgia', serif; background: #f0ece2; padding: 20px 12px; }
+
+  .devotional {
+    text-align: center; font-size: 13px; color: #7d3c98; font-style: italic;
+    letter-spacing: 1px; margin-bottom: 14px; font-weight: bold;
+  }
+
+  .page-header {
+    text-align: center; background: #1a3a5c; color: #fff;
+    padding: 18px 20px; border-radius: 10px; margin-bottom: 18px;
+  }
+  .page-header h1 { font-size: 20px; letter-spacing: 1px; text-transform: uppercase; }
+  .page-header p  { font-size: 11px; margin-top: 5px; opacity: .85; font-style: italic; }
+
+  .disclosure {
+    max-width: 1100px; margin: 0 auto 22px auto;
+    background: #fff4e5; border: 2px dashed #d35400; border-radius: 8px;
+    padding: 12px 16px; font-size: 11px; color: #7e3907; line-height: 1.6;
+  }
+  .disclosure strong { color: #a04000; }
+
+  .audience {
+    max-width: 1100px; margin: 0 auto 20px auto; display: flex; flex-wrap: wrap; gap: 10px;
+  }
+  .aud-card { flex: 1; min-width: 260px; border-radius: 8px; padding: 10px 14px; font-size: 11px; line-height: 1.5; }
+  .aud-gst { background: #e8f5e9; border: 1.5px solid #43a047; color: #1b5e20; }
+  .aud-cs  { background: #e8eaf6; border: 1.5px solid #3949ab; color: #1a237e; }
+
+  .sc {
+    background: #fff; border: 2px solid #1a3a5c; border-radius: 10px;
+    padding: 16px 14px; max-width: 1100px; margin: 0 auto 26px auto;
+    page-break-inside: avoid; break-inside: avoid;
+  }
+  .sc-header { border-bottom: 1px solid #d0d8e4; padding-bottom: 8px; margin-bottom: 14px; }
+  .sc-title { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .sc-title-text {
+    flex: 1; text-align: center; font-weight: bold; color: #1a3a5c;
+    font-size: 13px; text-transform: uppercase; letter-spacing: .5px;
+  }
+  .sc-page { text-align: center; font-size: 10px; color: #888; font-style: italic; margin-top: 6px; }
+  .back-btn {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: #1a3a5c; color: #fff; text-decoration: none;
+    font-size: 10px; font-weight: bold; padding: 4px 10px;
+    border-radius: 20px; white-space: nowrap; flex-shrink: 0;
+  }
+  .back-btn:hover { background: #2e6da4; }
+
+  .tree  { display: flex; flex-direction: column; align-items: center; page-break-inside: avoid; break-inside: avoid; }
+  .vl    { width: 2px; background: #1a3a5c; margin: 0 auto; }
+  .vl-r  { width: 2px; background: #c0392b; margin: 0 auto; }
+  .vl-g  { width: 2px; background: #27ae60; margin: 0 auto; }
+  .vl-o  { width: 2px; background: #e67e22; margin: 0 auto; }
+  .vl-p  { width: 2px; background: #8e44ad; margin: 0 auto; }
+  .vl-b  { width: 2px; background: #2e6da4; margin: 0 auto; }
+  .vl-y  { width: 2px; background: #f39c12; margin: 0 auto; }
+  .hl    { height: 2px; background: #1a3a5c; }
+  .hl-r  { height: 2px; background: #c0392b; }
+  .hl-g  { height: 2px; background: #27ae60; }
+  .hl-b  { height: 2px; background: #2e6da4; }
+  .hl-y  { height: 2px; background: #f39c12; }
+  .hl-p  { height: 2px; background: #8e44ad; }
+
+  .n     { border-radius: 7px; padding: 7px 10px; text-align: center; font-size: 11.5px; line-height: 1.4; box-shadow: 0 2px 5px rgba(0,0,0,.1); }
+  .root  { background: #1a3a5c; color: #fff; font-size: 14px; font-weight: bold; padding: 11px 26px; }
+  .l1    { background: #2e6da4; color: #fff; font-weight: bold; font-size: 11.5px; }
+  .red   { background: #fdecea; border: 1.5px solid #c0392b; color: #7b241c; }
+  .grn   { background: #eafaf1; border: 1.5px solid #27ae60; color: #1e8449; }
+  .ylw   { background: #fef9e7; border: 1.5px solid #f39c12; color: #7d6608; }
+  .org   { background: #fef0e6; border: 1.5px solid #e67e22; color: #784212; }
+  .pur   { background: #f5eef8; border: 1.5px solid #8e44ad; color: #6c3483; }
+  .blu   { background: #e8f4fd; border: 1.5px solid #2e6da4; color: #1a3a5c; }
+
+  .tag   { display: inline-block; border-radius: 3px; padding: 1px 5px; font-size: 9px; font-weight: bold; color: #fff; margin-bottom: 3px; }
+  .t-r   { background: #c0392b; }
+  .t-g   { background: #27ae60; }
+  .t-y   { background: #e67e22; }
+  .t-p   { background: #8e44ad; }
+  .t-b   { background: #2e6da4; }
+
+  .brow  { display: flex; justify-content: space-around; width: 100%; page-break-inside: avoid; break-inside: avoid; }
+  .br    { display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 100px; page-break-inside: avoid; break-inside: avoid; }
+  .mn    { border-radius: 5px; padding: 5px 7px; font-size: 10px; text-align: center; line-height: 1.3; }
+
+  /* Plain English explanation node */
+  .pe    { background: #fffde7; border: 1.5px dashed #f9a825; border-radius: 6px; padding: 4px 8px; font-size: 10px; color: #5d4037; font-style: italic; margin-top: 2px; text-align: center; max-width: 230px; }
+
+  /* Example node — GST / Litigation practice (CA Pawankumar Soni) */
+  .eg    { background: #e8f5e9; border: 1.5px dashed #43a047; border-radius: 6px; padding: 4px 8px; font-size: 10px; color: #1b5e20; margin-top: 2px; text-align: center; max-width: 240px; }
+
+  /* Example node — Computer Science / Student (Madhav Soni, BITS Pilani) */
+  .egc   { background: #e8eaf6; border: 1.5px dashed #3949ab; border-radius: 6px; padding: 4px 8px; font-size: 10px; color: #1a237e; margin-top: 2px; text-align: center; max-width: 240px; }
+
+  table  { width: 100%; border-collapse: collapse; font-size: 11px; page-break-inside: avoid; break-inside: avoid; }
+  th     { background: #2e6da4; color: #fff; padding: 7px 10px; text-align: left; }
+  td     { padding: 6px 10px; border: 1px solid #d0d8e4; vertical-align: top; }
+  tr:nth-child(even) td { background: #f5f8fc; }
+  .td-r  { background: #fdecea !important; color: #7b241c; }
+  .td-g  { background: #eafaf1 !important; color: #1e8449; }
+  .td-y  { background: #fef9e7 !important; color: #7d6608; }
+  .td-c  { background: #e8eaf6 !important; color: #1a237e; }
+
+  .toc { background:#e8f4fd; border:1.5px solid #2e6da4; border-radius:8px; padding:14px 18px; max-width:1100px; margin:0 auto 26px auto; }
+  .toc-title { font-weight:bold; color:#1a3a5c; font-size:13px; margin-bottom:10px; }
+  .toc a { color:#2e6da4; text-decoration:none; font-size:12px; }
+  .toc a:hover { text-decoration:underline; }
+  .toc-grid { display:flex; flex-wrap:wrap; gap:6px; }
+  .toc-item { background:#fff; border:1px solid #2e6da4; border-radius:5px; padding:4px 10px; font-size:11px; }
+  .toc-item-arsenal { background:#4a0e0e; border:1px solid #f5c518; border-radius:5px; padding:4px 10px; font-size:11px; }
+  .toc-item-arsenal a { color:#f5c518 !important; }
+
+  /* ── ARSENAL ── */
+  .arsenal {
+    background: #4a0e0e; border-radius: 10px;
+    padding: 20px 18px; max-width: 1100px; margin: 0 auto 26px auto;
+    page-break-before: always; break-before: page;
+    page-break-inside: avoid; break-inside: avoid;
+  }
+  .arsenal-header { border-bottom: 1.5px solid #f5c518; padding-bottom: 10px; margin-bottom: 16px; }
+  .arsenal-title-row { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+  .arsenal-title { flex:1; text-align:center; color:#f5c518; font-size:15px; font-weight:bold; text-transform:uppercase; letter-spacing:1.5px; }
+  .arsenal-back-btn {
+    display:inline-flex; align-items:center; gap:4px;
+    background:#f5c518; color:#4a0e0e; text-decoration:none;
+    font-size:10px; font-weight:bold; padding:4px 10px;
+    border-radius:20px; white-space:nowrap; flex-shrink:0;
+  }
+  .arsenal-purpose { font-size:11px; color:#e8c87a; font-style:italic; text-align:center; margin-top:8px; }
+  .arsenal-card {
+    background:#fff; border-left:4px solid #f5c518; border-radius:6px;
+    padding:12px 14px; margin-bottom:14px;
+    page-break-inside:avoid; break-inside:avoid;
+  }
+  .ac-name  { font-size:12.5px; font-weight:bold; color:#4a0e0e; text-decoration:underline; margin-bottom:2px; }
+  .ac-court { font-size:10px; color:#666; margin-bottom:8px; }
+  .ac-label { font-size:9.5px; font-weight:bold; color:#2e6da4; text-transform:uppercase; letter-spacing:.5px; margin-bottom:3px; }
+  .ac-ratio { font-size:12px; font-style:italic; color:#1a1a1a; font-family:'Georgia',serif; line-height:1.6; padding-left:10px; border-left:2px solid #f5c518; margin-bottom:8px; }
+  .ac-when  { display:inline-block; background:#f5c518; color:#4a0e0e; font-size:10px; font-weight:bold; padding:3px 10px; border-radius:4px; }
+
+  .couplet {
+    max-width:1100px; margin:0 auto 26px auto; background:#1a3a5c; color:#f5c518;
+    border-radius:10px; padding:18px 20px; text-align:center; font-size:14px;
+    font-style:italic; line-height:1.9; letter-spacing:.5px;
+  }
+
+  .footer { text-align: center; font-size: 10px; color: #888; margin-top: 28px; font-style: italic; }
+
+  /* legend */
+  .legend { display:flex; flex-wrap:wrap; gap:8px; max-width:1100px; margin:0 auto 20px auto; font-size:10px; }
+  .leg-item { display:flex; align-items:center; gap:5px; }
+  .leg-swatch { width:14px; height:14px; border-radius:3px; border:1px solid #aaa; }
+</style>
+</head>
+<body>
+
+<!-- ══ DEVOTIONAL HEADER ══ -->
+<div class="devotional">
+  ॐ &nbsp; Asmad GuruBhuya Namaha &nbsp;|&nbsp; Shrimate Ramanuja Namaha &nbsp; ॐ<br>
+  <span style="font-size:10px;font-weight:normal;">Without Guru Krupa, nothing can be done.</span>
+</div>
+
+<!-- ══ HEADER ══ -->
+<div class="page-header">
+  <h1>📱 Master the Mobile Before It Masters You</h1>
+  <p>Source Article: "A Thought for Our Times" — 100th Article on the TMI Portal | Digital Connectivity, Digital Discipline &amp; Digital Detox</p>
+  <p>Adapted for TWO readers — CA Pawankumar Soni (GST Litigation Practice, Ichalkaranji) &amp; Madhav Soni (B.Tech Computer Science, BITS Pilani – Goa, 5th Semester)</p>
+</div>
+
+<!-- ══ PAGINATION DISCLOSURE ══ -->
+<div class="disclosure">
+  <strong>⚠️ PAGE NUMBER DISCLOSURE — PLEASE READ:</strong> The source for these notes is a <strong>web / portal article in continuous text form. It carries NO printed page numbers and NO numbered paragraphs.</strong>
+  In accordance with the standing rule of this practice, <strong>no page numbers and no section numbers have been invented or assigned.</strong>
+  Every section card below is therefore labelled using <strong>the article's own thematic heading, exactly as it appears in the source</strong>, and the "Source Reference" line on each card discloses this position honestly.
+  For tracking purposes the <strong>date of conversion (30 July 2026)</strong> has been used in the file name in place of a page range.
+  Sections appear in the <strong>same sequence as in the source article, first heading to last heading — complete, with nothing omitted.</strong>
+</div>
+
+<!-- ══ DUAL AUDIENCE KEY ══ -->
+<div class="audience">
+  <div class="aud-card aud-gst">
+    <strong>💡 GREEN EXAMPLE NODES — for CA Pawankumar Soni</strong><br>
+    Every green dashed node translates the thought into the reality of a GST litigation practice — SCN replies, appeal drafting, hearing preparation, reading judgments, limitation dates, client calls.
+  </div>
+  <div class="aud-card aud-cs">
+    <strong>🎓 BLUE EXAMPLE NODES — for Madhav Soni</strong><br>
+    Every blue dashed node translates the same thought into the reality of a 5th-semester Computer Science student at BITS Pilani — DSA, coding, labs, comps, projects, placements, hostel life.
+  </div>
+</div>
+
+<!-- ══ LEGEND ══ -->
+<div class="legend">
+  <div class="leg-item"><div class="leg-swatch" style="background:#eafaf1;border-color:#27ae60;"></div> Benefit / Healthy Practice</div>
+  <div class="leg-item"><div class="leg-swatch" style="background:#fdecea;border-color:#c0392b;"></div> Harm / Danger / Loss</div>
+  <div class="leg-item"><div class="leg-swatch" style="background:#fef9e7;border-color:#f39c12;"></div> Condition / If / Unless</div>
+  <div class="leg-item"><div class="leg-swatch" style="background:#f5eef8;border-color:#8e44ad;"></div> Choice / Alternative Path</div>
+  <div class="leg-item"><div class="leg-swatch" style="background:#e8f4fd;border-color:#2e6da4;"></div> Neutral Reference / Fact</div>
+  <div class="leg-item"><div class="leg-swatch" style="background:#fffde7;border-color:#f9a825;"></div> 📝 Plain English</div>
+  <div class="leg-item"><div class="leg-swatch" style="background:#e8f5e9;border-color:#43a047;"></div> 💡 Example — Litigation Practice</div>
+  <div class="leg-item"><div class="leg-swatch" style="background:#e8eaf6;border-color:#3949ab;"></div> 🎓 Example — CS Student, BITS</div>
+</div>
+
+<!-- ══ TOC ══ -->
+<div class="toc" id="toc">
+  <div class="toc-title">📋 Index of Sections <span style="font-weight:normal;font-size:10px;font-style:italic;">(thematic headings from source — no numbering invented)</span></div>
+  <div class="toc-grid">
+    <div class="toc-item"><a href="#s1">A Thought for Our Times</a></div>
+    <div class="toc-item"><a href="#s2">Digital Connectivity: A Great Blessing of Modern Life</a></div>
+    <div class="toc-item"><a href="#s3">Real-Time Knowledge: A Boon for Professionals</a></div>
+    <div class="toc-item"><a href="#s4">Saving Time, Energy and Resources</a></div>
+    <div class="toc-item"><a href="#s5">Digital Platforms and Wider Reach</a></div>
+    <div class="toc-item"><a href="#s6">The Other Side of the Picture</a></div>
+    <div class="toc-item"><a href="#s7">When the Day Begins with the Screen</a></div>
+    <div class="toc-item"><a href="#s8">Mental Restlessness and Loss of Concentration</a></div>
+    <div class="toc-item"><a href="#s9">Sleep: The Silent Casualty</a></div>
+    <div class="toc-item"><a href="#s10">Impact on Physical Health</a></div>
+    <div class="toc-item"><a href="#s11">Family Time Under Pressure</a></div>
+    <div class="toc-item"><a href="#s12">The Trap of Comparison and Emotional Disturbance</a></div>
+    <div class="toc-item"><a href="#s13">Always Available, Always Tired</a></div>
+    <div class="toc-item"><a href="#s14">The Real Meaning of Digital Detox</a></div>
+    <div class="toc-item"><a href="#s15">Small Habits for a Better Digital Life</a></div>
+    <div class="toc-item"><a href="#s16">Technology with Wisdom: The Balanced Path</a></div>
+    <div class="toc-item"><a href="#s17">Let Technology Serve Life, Not Rule It</a></div>
+    <div class="toc-item toc-item-arsenal"><a href="#arsenal">⚔️ Daily Discipline Arsenal</a></div>
+  </div>
+</div>
+
+
+<!-- ══════════════ 1. A THOUGHT FOR OUR TIMES ══════════════ -->
+<div class="sc" id="s1">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">A Thought for Our Times</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div>
+  <div class="sc-page">📄 Source Reference: opening section of the article — no page number in source (web article, continuous text)</div>
+  </div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:480px;">📱 The Age We Live In<br><small>Mobile phone = extension of the human hand | Internet = second memory of the human mind</small></div>
+    <div class="pe" style="max-width:460px;">📝 The author is saying that the phone is no longer a separate object we pick up — it has become part of the body. And the internet has quietly taken over the job our memory used to do. That is how deep the change is.</div>
+    <div class="vl" style="height:16px;"></div>
+
+    <div class="n l1" style="max-width:460px;">Occasion — 100th article on the well-known and time-tested Tax TMI portal<br>Subject chosen: one that concerns almost everyone, irrespective of age, profession or status</div>
+    <div class="vl" style="height:12px;"></div>
+    <div class="n blu" style="max-width:460px;"><span class="tag t-b">PURPOSE</span><br>After writing mainly on direct and indirect taxes, particularly GST — this milestone article carries a <strong>motivational message</strong> for<br>① healthy living &nbsp;② balanced thinking &nbsp;③ disciplined use of digital technology</div>
+    <div class="vl" style="height:16px;"></div>
+
+    <div class="n l1" style="max-width:440px;">🌐 Reach of Digital Technology — It Has Entered Every Corner</div>
+    <div class="vl-b" style="height:12px;"></div>
+    <div style="width:85%;"><div class="hl-b"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:6px;">
+      <div class="br"><div class="vl-b" style="height:10px;"></div><div class="n blu mn" style="width:92%;">Morning → Night</div></div>
+      <div class="br"><div class="vl-b" style="height:10px;"></div><div class="n blu mn" style="width:92%;">Home → Office</div></div>
+      <div class="br"><div class="vl-b" style="height:10px;"></div><div class="n blu mn" style="width:92%;">Study → Shopping</div></div>
+      <div class="br"><div class="vl-b" style="height:10px;"></div><div class="n blu mn" style="width:92%;">Banking → Entertainment</div></div>
+      <div class="br"><div class="vl-b" style="height:10px;"></div><div class="n blu mn" style="width:92%;">Personal communication → Professional research</div></div>
+    </div>
+    <div class="vl-g" style="height:14px;"></div>
+    <div class="n grn" style="max-width:470px;"><span class="tag t-g">WHAT IT HAS GIVEN</span><br>Made the <strong>impossible possible</strong>, the <strong>distant near</strong>, the <strong>slow fast</strong><br>Blessed human life with <strong>speed, convenience and knowledge</strong></div>
+
+    <div class="vl" style="height:16px;"></div>
+    <div class="n l1" style="max-width:440px;">⚖️ THE CENTRAL PRINCIPLE — Every Blessing Needs Discipline</div>
+    <div class="vl-y" style="height:12px;"></div>
+    <div style="width:70%;"><div class="hl-y"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:8px;">
+      <div class="br">
+        <div class="vl-y" style="height:10px;"></div>
+        <div class="n ylw mn" style="width:94%;"><span class="tag t-y">ANALOGY 1</span><br><strong>Fire</strong> cooks our food<br>→ but uncontrolled fire <strong>burns the house</strong></div>
+      </div>
+      <div class="br">
+        <div class="vl-y" style="height:10px;"></div>
+        <div class="n ylw mn" style="width:94%;"><span class="tag t-y">ANALOGY 2</span><br><strong>Water</strong> sustains life<br>→ but uncontrolled water <strong>causes destruction</strong></div>
+      </div>
+      <div class="br">
+        <div class="vl-r" style="height:10px;"></div>
+        <div class="n red mn" style="width:94%;"><span class="tag t-r">THEREFORE</span><br>Digital technology is a <strong>great servant</strong> but a <strong>dangerous master</strong></div>
+        <div class="pe" style="max-width:210px;">📝 The device is not the villain. Whether it helps or harms depends entirely on who is holding the controls — you, or it.</div>
+      </div>
+    </div>
+
+    <div class="vl" style="height:16px;"></div>
+    <div class="n grn" style="max-width:520px;"><span class="tag t-g">AIM OF THE ARTICLE</span><br>
+      <strong>NOT</strong> to condemn technology.<br>
+      The purpose is to ① understand its <strong>proper place</strong> in our lives ② appreciate its <strong>benefits</strong> ③ recognise its <strong>dangers</strong> ④ adopt a <strong>balanced approach</strong><br>
+      — so that technology <strong>improves</strong> our lives rather than <strong>controlling</strong> them.</div>
+    <div class="eg" style="max-width:480px;">💡 <strong>Litigation practice:</strong> The same phone that delivers a fresh High Court judgment on Section 16(2)(c) within an hour of pronouncement also delivers 300 forwarded messages that eat the two quiet hours needed to draft the grounds of appeal. Same device, opposite results.</div>
+    <div class="egc" style="max-width:480px;">🎓 <strong>BITS, 5th sem:</strong> The same laptop that runs your DSA practice on LeetCode and your OS lab assignment also runs the tab that quietly consumes the night before comps. The tool is neutral; the discipline is not.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════ 2. DIGITAL CONNECTIVITY: A GREAT BLESSING ══════════════ -->
+<div class="sc" id="s2">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">Digital Connectivity: A Great Blessing of Modern Life</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div>
+  <div class="sc-page">📄 Source Reference: second thematic heading of the article — no page number in source</div>
+  </div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:520px;">🌟 Digital Connectivity — One of the Greatest Blessings of Modern Life<br><small><em>PROVIDED it is used with wisdom and restraint</em></small></div>
+    <div class="pe" style="max-width:500px;">📝 Note the condition attached to the praise. The author does not call connectivity a blessing unconditionally — the blessing is conditional on wisdom and restraint. Remove the condition and the blessing changes character.</div>
+    <div class="vl" style="height:16px;"></div>
+
+    <div class="n l1" style="max-width:460px;">What It Has Brought to the Common Person</div>
+    <div class="vl-g" style="height:12px;"></div>
+    <div style="width:75%;"><div class="hl-g"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:8px;">
+      <div class="br"><div class="vl-g" style="height:10px;"></div><div class="n grn mn" style="width:92%;"><span class="tag t-g">✓</span> Speed</div></div>
+      <div class="br"><div class="vl-g" style="height:10px;"></div><div class="n grn mn" style="width:92%;"><span class="tag t-g">✓</span> Convenience</div></div>
+      <div class="br"><div class="vl-g" style="height:10px;"></div><div class="n grn mn" style="width:92%;"><span class="tag t-g">✓</span> Accessibility</div></div>
+    </div>
+
+    <div class="vl" style="height:14px;"></div>
+    <div class="n grn" style="max-width:520px;"><span class="tag t-g">TRANSFORMATION</span><br>
+      Tasks that earlier required <strong>travel, waiting, physical presence and repeated follow-up</strong><br>→ can now be completed in <strong>seconds or minutes</strong></div>
+    <div class="vl-g" style="height:12px;"></div>
+    <div class="n grn" style="max-width:520px;">A person sitting in a <strong>small town</strong> can access knowledge, services and opportunities which were once available <strong>only in big cities</strong></div>
+    <div class="eg" style="max-width:500px;">💡 <strong>Litigation practice:</strong> Practising from Ichalkaranji, one can access the full text of a Bombay High Court or GSTAT order, ICAI bare law, and a departmental circular within minutes — without travelling to Mumbai or Pune. The small-town disadvantage in access to authority has largely disappeared.</div>
+    <div class="egc" style="max-width:500px;">🎓 <strong>BITS, 5th sem:</strong> An MIT OpenCourseWare lecture, a Stanford CS paper, a Linux kernel source tree and an open-source contribution channel are all equally reachable from a hostel room in Goa as from Silicon Valley. Location no longer decides the ceiling; effort does.</div>
+
+    <div class="vl" style="height:16px;"></div>
+    <div class="n l1" style="max-width:520px;">📲 The Instruments — Mobile Phones, Internet, Online Portals, Digital Platforms</div>
+    <div class="vl-b" style="height:12px;"></div>
+    <div style="width:80%;"><div class="hl-b"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:6px;">
+      <div class="br"><div class="vl-b" style="height:10px;"></div><div class="n blu mn" style="width:92%;">Changed the way we <strong>learn</strong></div></div>
+      <div class="br"><div class="vl-b" style="height:10px;"></div><div class="n blu mn" style="width:92%;">Changed the way we <strong>work</strong></div></div>
+      <div class="br"><div class="vl-b" style="height:10px;"></div><div class="n blu mn" style="width:92%;">Changed the way we <strong>communicate</strong></div></div>
+      <div class="br"><div class="vl-b" style="height:10px;"></div><div class="n blu mn" style="width:92%;">Changed the way we manage <strong>daily responsibilities</strong></div></div>
+    </div>
+    <div class="vl-g" style="height:14px;"></div>
+    <div class="n grn" style="max-width:540px;"><span class="tag t-g">NET GAIN — FIVE-FOLD</span><br>
+      ① Reduced <strong>distance</strong>, increased <strong>access</strong> &nbsp;② Saved <strong>time and resources</strong> &nbsp;③ Made many services <strong>transparent and traceable</strong><br>
+      ④ <strong>Empowered</strong> citizens, professionals, students, businessmen and senior citizens &nbsp;⑤ In a very <strong>meaningful</strong> way</div>
+    <div class="pe" style="max-width:520px;">📝 "Transparent and traceable" is worth pausing on — a digital record can be checked, dated and produced later. That is a benefit, not merely a convenience.</div>
+    <div class="eg" style="max-width:500px;">💡 <strong>Litigation practice:</strong> Traceability cuts both ways and must be respected. Portal filing acknowledgements, DRC-03 challans and e-mail time stamps become the strongest evidence on limitation, service of notice and opportunity of hearing — precisely because the digital trail is transparent.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════ 3. REAL-TIME KNOWLEDGE ══════════════ -->
+<div class="sc" id="s3">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">Real-Time Knowledge: A Boon for Professionals</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div>
+  <div class="sc-page">📄 Source Reference: third thematic heading of the article — no page number in source</div>
+  </div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:500px;">📚 Real-Time Access to Knowledge<br><small>Taxation | Law | Accounts | Finance | Business</small></div>
+    <div class="vl" style="height:16px;"></div>
+
+    <div class="n l1" style="max-width:480px;">Why these fields specially benefit — developments occur <strong>almost every day</strong></div>
+    <div class="vl-b" style="height:12px;"></div>
+    <div style="width:85%;"><div class="hl-b"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:6px;">
+      <div class="br"><div class="vl-b" style="height:10px;"></div><div class="n blu mn" style="width:92%;">Judgments are <strong>delivered</strong></div></div>
+      <div class="br"><div class="vl-b" style="height:10px;"></div><div class="n blu mn" style="width:92%;">Notifications are <strong>issued</strong></div></div>
+      <div class="br"><div class="vl-b" style="height:10px;"></div><div class="n blu mn" style="width:92%;">Circulars are <strong>released</strong></div></div>
+      <div class="br"><div class="vl-b" style="height:10px;"></div><div class="n blu mn" style="width:92%;">Clarifications are <strong>published</strong></div></div>
+      <div class="br"><div class="vl-b" style="height:10px;"></div><div class="n blu mn" style="width:92%;">Amendments are <strong>made</strong></div></div>
+    </div>
+
+    <div class="vl" style="height:16px;"></div>
+    <div class="n l1" style="max-width:440px;">⏳ THEN vs ⚡ NOW</div>
+    <div class="vl" style="height:12px;"></div>
+    <div style="width:65%;"><div class="hl"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:10px;">
+      <div class="br">
+        <div class="vl-y" style="height:10px;"></div>
+        <div class="n ylw mn" style="width:94%;"><span class="tag t-y">EARLIER</span><br>Had to <strong>wait</strong> for printed journals, books, seminars or personal discussions to learn of important developments</div>
+      </div>
+      <div class="br">
+        <div class="vl-g" style="height:10px;"></div>
+        <div class="n grn mn" style="width:94%;"><span class="tag t-g">TODAY</span><br>The latest pronouncement of the <strong>Supreme Court, a High Court, a Tribunal or an Authority</strong> can be accessed <strong>almost immediately</strong></div>
+      </div>
+    </div>
+
+    <div class="vl-g" style="height:16px;"></div>
+    <div class="n grn" style="max-width:520px;"><span class="tag t-g">FOUR-FOLD ADVANTAGE</span><br>
+      ① Stay <strong>up to date</strong> &nbsp;② Provide <strong>timely advice</strong> &nbsp;③ Write <strong>informed articles</strong> &nbsp;④ <strong>Serve society</strong> better</div>
+    <div class="eg" style="max-width:500px;">💡 <strong>Litigation practice:</strong> A judgment pronounced on Monday can be cited in a Wednesday personal hearing. That is a real advantage — but only for the practitioner who uses the phone to <em>read</em> the judgment, not merely to receive the forward announcing it.</div>
+    <div class="egc" style="max-width:500px;">🎓 <strong>BITS, 5th sem:</strong> A framework release, a new paper on arXiv, or a change in a language spec reaches you the day it drops. In CS the syllabus ages faster than in almost any other field — real-time access is not a luxury, it is how you stay employable.</div>
+
+    <div class="vl" style="height:16px;"></div>
+    <div class="n l1" style="max-width:480px;">✍️ The Author's Own Experience — A Living Illustration</div>
+    <div class="vl-b" style="height:12px;"></div>
+    <div style="width:85%;"><div class="hl-b"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:6px;">
+      <div class="br">
+        <div class="vl-b" style="height:10px;"></div>
+        <div class="n blu mn" style="width:94%;"><strong>01.02.2026</strong> — Retirement from a leading, well-reputed C.A. office, on the very evening the Union Budget was presented</div>
+      </div>
+      <div class="br">
+        <div class="vl-b" style="height:10px;"></div>
+        <div class="n blu mn" style="width:94%;">Began submitting articles to the trustworthy Tax TMI portal — with the assistance and guidance of <strong>Madam Deepa Bakshi</strong> of the TMI Portal</div>
+      </div>
+      <div class="br">
+        <div class="vl-b" style="height:10px;"></div>
+        <div class="n blu mn" style="width:94%;">Publication began <strong>09.02.2026</strong></div>
+      </div>
+      <div class="br">
+        <div class="vl-g" style="height:10px;"></div>
+        <div class="n grn mn" style="width:94%;">Within a <strong>short period</strong> — a large number of articles published; mostly direct and indirect taxes, particularly GST; many based on the latest judicial pronouncements; many of considerable length</div>
+      </div>
+    </div>
+    <div class="vl-g" style="height:14px;"></div>
+    <div class="n grn" style="max-width:540px;"><span class="tag t-g">CONCLUSION DRAWN</span><br>Such <strong>speed, consistency and reach</strong> would not have been possible without digital access to legal materials, statutory provisions, professional platforms and readers.</div>
+    <div class="pe" style="max-width:520px;">📝 This is the strongest part of the article's credibility: the author is not preaching restraint from outside technology. He is a heavy, productive user of it — and that is exactly why his warning about misuse carries weight.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════ 4. SAVING TIME, ENERGY AND RESOURCES ══════════════ -->
+<div class="sc" id="s4">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">Saving Time, Energy and Resources</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div>
+  <div class="sc-page">📄 Source Reference: fourth thematic heading of the article — no page number in source</div>
+  </div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:480px;">⏱️ Optimum Utilisation of Time and Resources</div>
+    <div class="vl" style="height:16px;"></div>
+
+    <div class="n l1" style="max-width:440px;">The Banking Illustration — Then and Now</div>
+    <div class="vl" style="height:12px;"></div>
+    <div style="width:65%;"><div class="hl"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:10px;">
+      <div class="br">
+        <div class="vl-y" style="height:10px;"></div>
+        <div class="n ylw mn" style="width:94%;"><span class="tag t-y">EARLIER</span><br>Physically visit the branch → travel → stand in a queue → fill forms → wait for service</div>
+      </div>
+      <div class="br">
+        <div class="vl-g" style="height:10px;"></div>
+        <div class="n grn mn" style="width:94%;"><span class="tag t-g">NOW</span><br>Banking transactions, fund transfers, account statements and many financial activities — completed from home or office</div>
+        <div class="vl-g" style="height:8px;"></div>
+        <div class="n grn mn" style="width:94%;">Likewise utility bills, insurance premiums, taxes and other payments — <strong>no physical movement</strong></div>
+      </div>
+    </div>
+
+    <div class="vl" style="height:16px;"></div>
+    <div class="n blu" style="max-width:500px;"><span class="tag t-b">IMPORTANT</span><br>This is <strong>not merely convenience</strong> — it is a real saving of resources</div>
+    <div class="vl-g" style="height:12px;"></div>
+    <div style="width:88%;"><div class="hl-g"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:5px;">
+      <div class="br"><div class="vl-g" style="height:10px;"></div><div class="n grn mn" style="width:92%;">Fuel</div></div>
+      <div class="br"><div class="vl-g" style="height:10px;"></div><div class="n grn mn" style="width:92%;">Paper</div></div>
+      <div class="br"><div class="vl-g" style="height:10px;"></div><div class="n grn mn" style="width:92%;">Manpower</div></div>
+      <div class="br"><div class="vl-g" style="height:10px;"></div><div class="n grn mn" style="width:92%;">Travel time</div></div>
+      <div class="br"><div class="vl-g" style="height:10px;"></div><div class="n grn mn" style="width:92%;">Physical effort</div></div>
+    </div>
+
+    <div class="vl" style="height:16px;"></div>
+    <div class="n l1" style="max-width:440px;">👥 Particularly Useful For —</div>
+    <div class="vl-b" style="height:12px;"></div>
+    <div style="width:80%;"><div class="hl-b"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:6px;">
+      <div class="br"><div class="vl-b" style="height:10px;"></div><div class="n blu mn" style="width:92%;">Senior citizens</div></div>
+      <div class="br"><div class="vl-b" style="height:10px;"></div><div class="n blu mn" style="width:92%;">Busy professionals</div></div>
+      <div class="br"><div class="vl-b" style="height:10px;"></div><div class="n blu mn" style="width:92%;">Persons with health limitations</div></div>
+      <div class="br"><div class="vl-b" style="height:10px;"></div><div class="n blu mn" style="width:92%;">Those living in remote areas</div></div>
+    </div>
+
+    <div class="vl-y" style="height:16px;"></div>
+    <div class="n ylw" style="max-width:540px;"><span class="tag t-y">THE CONDITION — "WHEN USED PROPERLY"</span><br>
+      Digital technology helps us devote the <strong>saved time</strong> to better purposes:<br>
+      study &nbsp;•&nbsp; writing &nbsp;•&nbsp; family &nbsp;•&nbsp; health &nbsp;•&nbsp; self-improvement &nbsp;•&nbsp; social contribution</div>
+    <div class="pe" style="max-width:520px;">📝 This is the hinge of the whole article. Technology <em>creates</em> free time. The only question that matters is where that freed-up time goes. If it goes back into the screen, nothing has been saved at all.</div>
+    <div class="eg" style="max-width:500px;">💡 <strong>Litigation practice:</strong> Portal filing and digital payment save perhaps two hours a week that once went in departmental visits and bank queues. Those two hours are either invested in reading one full judgment properly — or they are lost to scrolling. The saving is real; the benefit is optional.</div>
+    <div class="egc" style="max-width:500px;">🎓 <strong>BITS, 5th sem:</strong> Lecture recordings, online notes and Google Drive PDFs save hours of copying and library hunting. That saved time either becomes a personal project on GitHub or becomes an extra episode. The syllabus does not notice the difference — your placement interview does.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════ 5. DIGITAL PLATFORMS AND WIDER REACH ══════════════ -->
+<div class="sc" id="s5">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">Digital Platforms and Wider Reach</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div>
+  <div class="sc-page">📄 Source Reference: fifth thematic heading of the article — no page number in source</div>
+  </div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:500px;">📢 A Wider Voice for Writers, Professionals and Thinkers</div>
+    <div class="vl" style="height:16px;"></div>
+
+    <div style="width:65%;"><div class="hl"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:10px;">
+      <div class="br">
+        <div class="vl-y" style="height:10px;"></div>
+        <div class="n ylw mn" style="width:94%;"><span class="tag t-y">EARLIER</span><br>Reach of a written article limited by <strong>print circulation</strong> and <strong>physical distribution</strong></div>
+      </div>
+      <div class="br">
+        <div class="vl-g" style="height:10px;"></div>
+        <div class="n grn mn" style="width:94%;"><span class="tag t-g">TODAY</span><br>A well-written article reaches readers across <strong>cities, states and even countries</strong> in a very short time</div>
+        <div class="vl-g" style="height:8px;"></div>
+        <div class="n grn mn" style="width:94%;">A professional thought, a legal analysis, a motivational message or a public-interest concern — shared with a <strong>large audience</strong> through online portals</div>
+      </div>
+    </div>
+
+    <div class="vl" style="height:16px;"></div>
+    <div class="n l1" style="max-width:440px;">Why This Is a Powerful Development</div>
+    <div class="vl-g" style="height:12px;"></div>
+    <div style="width:85%;"><div class="hl-g"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:6px;">
+      <div class="br"><div class="vl-g" style="height:10px;"></div><div class="n grn mn" style="width:92%;">Knowledge travels <strong>faster</strong></div></div>
+      <div class="br"><div class="vl-g" style="height:10px;"></div><div class="n grn mn" style="width:92%;">Enables <strong>interaction</strong> between writers and readers</div></div>
+      <div class="br"><div class="vl-g" style="height:10px;"></div><div class="n grn mn" style="width:92%;">Encourages <strong>continuous learning</strong></div></div>
+      <div class="br"><div class="vl-g" style="height:10px;"></div><div class="n grn mn" style="width:92%;">Gives retired professionals, senior citizens and experienced persons an opportunity to keep <strong>contributing to society</strong></div></div>
+    </div>
+
+    <div class="vl-g" style="height:16px;"></div>
+    <div class="n grn" style="max-width:520px;"><span class="tag t-g">THE FINEST LINE IN THE SECTION</span><br>
+      In this sense, digital technology can <strong>convert experience into public service.</strong></div>
+    <div class="pe" style="max-width:500px;">📝 Experience by itself dies with the person holding it. A platform turns it into something others can use. That is the difference between having knowledge and leaving knowledge behind.</div>
+    <div class="eg" style="max-width:500px;">💡 <strong>Litigation practice:</strong> Years of hearing-room experience — what an adjudicating authority actually accepts, how a ground should be framed — is worth little sitting in one head. Written up as a note, an article or a tree-diagram reference, it serves the whole profession.</div>
+    <div class="egc" style="max-width:500px;">🎓 <strong>BITS, 5th sem:</strong> The same principle is open source. A debugging solution you found at 2 a.m. is worth ten times more as a documented GitHub repo, a Stack Overflow answer, or a blog post than as a private fix. Publishing is how a student becomes visible.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════ 6. THE OTHER SIDE OF THE PICTURE ══════════════ -->
+<div class="sc" id="s6">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">The Other Side of the Picture</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div>
+  <div class="sc-page">📄 Source Reference: sixth thematic heading — the turning point of the article; no page number in source</div>
+  </div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:500px; background:#7b241c;">⚠️ However — This Is Not the Complete Picture</div>
+    <div class="vl-r" style="height:16px;"></div>
+
+    <div class="n red" style="max-width:520px;"><span class="tag t-r">RULE</span><br>Every useful instrument becomes <strong>harmful</strong> when used <strong>without discipline</strong></div>
+    <div class="vl-r" style="height:12px;"></div>
+    <div class="n red" style="max-width:540px;">The <strong>same mobile phone</strong> — which helps us learn, bank, write, communicate and save time — can also become a source of:</div>
+    <div class="vl-r" style="height:12px;"></div>
+    <div style="width:88%;"><div class="hl-r"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:5px;">
+      <div class="br"><div class="vl-r" style="height:10px;"></div><div class="n red mn" style="width:92%;">Distraction</div></div>
+      <div class="br"><div class="vl-r" style="height:10px;"></div><div class="n red mn" style="width:92%;">Stress</div></div>
+      <div class="br"><div class="vl-r" style="height:10px;"></div><div class="n red mn" style="width:92%;">Laziness</div></div>
+      <div class="br"><div class="vl-r" style="height:10px;"></div><div class="n red mn" style="width:92%;">Anxiety</div></div>
+      <div class="br"><div class="vl-r" style="height:10px;"></div><div class="n red mn" style="width:92%;">Ill health</div></div>
+    </div>
+
+    <div class="vl-y" style="height:16px;"></div>
+    <div class="n ylw" style="max-width:520px;"><span class="tag t-y">DIAGNOSIS — LOCATE THE FAULT CORRECTLY</span><br>
+      The problem is <strong>NOT</strong> technology itself.<br>
+      The problem is the <strong>excessive, careless and uncontrolled use</strong> of technology.</div>
+    <div class="pe" style="max-width:500px;">📝 If the fault is misdiagnosed, the remedy will be wrong. Blaming the device leads to guilt and no change. Naming the real defect — excess, carelessness, absence of control — points to a remedy you can actually apply.</div>
+
+    <div class="vl-r" style="height:16px;"></div>
+    <div class="n l1" style="max-width:460px;">🔄 THE REVERSAL — Three Inversions</div>
+    <div class="vl-r" style="height:12px;"></div>
+    <div style="width:80%;"><div class="hl-r"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:8px;">
+      <div class="br">
+        <div class="vl-r" style="height:10px;"></div>
+        <div class="n red mn" style="width:94%;">Instead of people using phones sensibly — <strong>mobile phones have started using the users</strong></div>
+        <div class="pe" style="max-width:200px;">📝 The tool now decides when you pick it up. Ask honestly: did you reach for the phone, or did the phone call you?</div>
+      </div>
+      <div class="br">
+        <div class="vl-r" style="height:10px;"></div>
+        <div class="n red mn" style="width:94%;">Meant to be an instrument of <strong>convenience</strong> → became an instrument of <strong>compulsion</strong></div>
+      </div>
+      <div class="br">
+        <div class="vl-r" style="height:10px;"></div>
+        <div class="n red mn" style="width:94%;">Meant to <strong>save time</strong> → started <strong>consuming time</strong></div>
+      </div>
+      <div class="br">
+        <div class="vl-r" style="height:10px;"></div>
+        <div class="n red mn" style="width:94%;">Meant to <strong>connect people</strong> → sometimes began to <strong>disconnect</strong> them from real life</div>
+      </div>
+    </div>
+    <div class="eg" style="max-width:500px;">💡 <strong>Litigation practice:</strong> The test of compulsion is simple — during a personal hearing or while drafting grounds, does the hand move to the phone without any message having arrived? If yes, the instrument is in control, not the practitioner.</div>
+    <div class="egc" style="max-width:500px;">🎓 <strong>BITS, 5th sem:</strong> You open the laptop to start an assignment and find yourself twenty minutes into something else with no memory of deciding to go there. That gap between intention and action is exactly the reversal described here.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════ 7. WHEN THE DAY BEGINS WITH THE SCREEN ══════════════ -->
+<div class="sc" id="s7">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">When the Day Begins with the Screen</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div>
+  <div class="sc-page">📄 Source Reference: seventh thematic heading of the article — no page number in source</div>
+  </div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:520px;">🌅 One of the Unhealthiest Habits of Modern Life<br><small>Checking the mobile phone immediately after waking up</small></div>
+    <div class="vl-r" style="height:16px;"></div>
+
+    <div class="n red" style="max-width:500px;"><span class="tag t-r">WHAT THE DAY OPENS WITH</span><br>Messages &nbsp;•&nbsp; Missed calls &nbsp;•&nbsp; Social media updates &nbsp;•&nbsp; News alerts &nbsp;•&nbsp; Forwarded content</div>
+    <div class="vl-r" style="height:14px;"></div>
+
+    <div class="n l1" style="max-width:520px;">⛔ The Hand Moves to the Phone <em>Before</em> All of This —</div>
+    <div class="vl-r" style="height:12px;"></div>
+    <div style="width:88%;"><div class="hl-r"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:5px;">
+      <div class="br"><div class="vl-r" style="height:10px;"></div><div class="n red mn" style="width:92%;">Before <strong>prayer</strong></div></div>
+      <div class="br"><div class="vl-r" style="height:10px;"></div><div class="n red mn" style="width:92%;">Before <strong>silence</strong></div></div>
+      <div class="br"><div class="vl-r" style="height:10px;"></div><div class="n red mn" style="width:92%;">Before a <strong>glass of water</strong></div></div>
+      <div class="br"><div class="vl-r" style="height:10px;"></div><div class="n red mn" style="width:92%;">Before looking at the <strong>morning sky</strong></div></div>
+      <div class="br"><div class="vl-r" style="height:10px;"></div><div class="n red mn" style="width:92%;">Before <strong>greeting family members</strong></div></div>
+    </div>
+    <div class="pe" style="max-width:520px;">📝 Notice what has been displaced. Not entertainment — but prayer, water, sky and family. Five things that cost nothing and take five minutes, all pushed behind a screen.</div>
+
+    <div class="vl-y" style="height:16px;"></div>
+    <div class="n l1" style="max-width:460px;">⚖️ WHY THE FIRST HOUR MATTERS</div>
+    <div class="vl-y" style="height:12px;"></div>
+    <div style="width:70%;"><div class="hl-y"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:10px;">
+      <div class="br">
+        <div class="vl-r" style="height:10px;"></div>
+        <div class="n red mn" style="width:94%;"><span class="tag t-r">IF</span> the day begins with <strong>noise, hurry and scattered information</strong></div>
+        <div class="vl-r" style="height:8px;"></div>
+        <div class="n red mn" style="width:94%;">→ The mind becomes <strong>restless from the very beginning</strong></div>
+      </div>
+      <div class="br">
+        <div class="vl-g" style="height:10px;"></div>
+        <div class="n grn mn" style="width:94%;"><span class="tag t-g">IF</span> the morning is <strong>peaceful</strong></div>
+        <div class="vl-g" style="height:8px;"></div>
+        <div class="n grn mn" style="width:94%;">→ Provides <strong>clarity, energy and balance</strong> for the rest of the day</div>
+      </div>
+    </div>
+    <div class="vl" style="height:14px;"></div>
+    <div class="n blu" style="max-width:500px;"><span class="tag t-b">PRINCIPLE</span><br>The first hour of the morning has a <strong>deep influence on the mind</strong> — this is not a healthy beginning of the day.</div>
+    <div class="eg" style="max-width:500px;">💡 <strong>Litigation practice:</strong> A hearing-day morning opened with a client's anxious message about a demand order starts the day in defence. The same morning opened with prayer and a quiet reading of the grounds starts it in command. The file is identical; the mind is not.</div>
+    <div class="egc" style="max-width:500px;">🎓 <strong>BITS, 5th sem:</strong> Opening the phone on waking — group notifications, a friend's marks, an internship post — costs you the calmest and most alert mind you will have all day. That is precisely the mind a hard DSA problem or a proof deserves.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════ 8. MENTAL RESTLESSNESS ══════════════ -->
+<div class="sc" id="s8">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">Mental Restlessness and Loss of Concentration</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div>
+  <div class="sc-page">📄 Source Reference: eighth thematic heading of the article — no page number in source</div>
+  </div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:500px;">🧠 The Mind Needs Silence, Empty Space and Rest</div>
+    <div class="pe" style="max-width:480px;">📝 "Empty space" is the key phrase. The mind is not only a container to be filled — it needs unfilled room to arrange, connect and understand what has already gone in.</div>
+    <div class="vl-r" style="height:16px;"></div>
+
+    <div class="n red" style="max-width:540px;"><span class="tag t-r">WHAT IT CANNOT DO</span><br>
+      The mind cannot remain continuously exposed to —<br>
+      information &nbsp;•&nbsp; opinions &nbsp;•&nbsp; images &nbsp;•&nbsp; news &nbsp;•&nbsp; advertisements &nbsp;•&nbsp; arguments &nbsp;•&nbsp; entertainment</div>
+    <div class="vl-r" style="height:14px;"></div>
+
+    <div class="n l1" style="max-width:460px;">CONSEQUENCE — Two Distinct Harms</div>
+    <div class="vl-r" style="height:12px;"></div>
+    <div style="width:70%;"><div class="hl-r"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:10px;">
+
+      <!-- Harm 1 -->
+      <div class="br">
+        <div class="vl-r" style="height:10px;"></div>
+        <div class="n red mn" style="width:94%;"><span class="tag t-r">HARM 1 — RESTLESSNESS</span><br>Mind constantly loaded with digital content → becomes <strong>restless</strong></div>
+        <div class="vl-r" style="height:8px;"></div>
+        <div class="n red mn" style="width:94%;">Person may feel <strong>mentally tired even without doing serious physical work</strong></div>
+        <div class="pe" style="max-width:200px;">📝 This explains the strange exhaustion after a day in which nothing much was done. The tiredness is real — it came from consumption, not from work.</div>
+      </div>
+
+      <!-- Harm 2 -->
+      <div class="br">
+        <div class="vl-r" style="height:10px;"></div>
+        <div class="n red mn" style="width:94%;"><span class="tag t-r">HARM 2 — LOSS OF CONCENTRATION</span><br>Excessive mobile use <strong>weakens concentration</strong></div>
+        <div class="vl-r" style="height:8px;"></div>
+        <div class="n red mn" style="width:94%;">One who checks the phone again and again finds it difficult to<br>• <strong>read deeply</strong><br>• <strong>think clearly</strong><br>• <strong>work patiently</strong></div>
+        <div class="vl-y" style="height:8px;"></div>
+        <div class="n ylw mn" style="width:94%;"><span class="tag t-y">SPECIAL CONCERN</span><br>Serious for <strong>professionals and students</strong></div>
+      </div>
+    </div>
+
+    <div class="vl-y" style="height:16px;"></div>
+    <div class="n l1" style="max-width:520px;">📖 Tasks That Require <em>Steady</em> Attention — Named in the Article</div>
+    <div class="vl-y" style="height:12px;"></div>
+    <div style="width:88%;"><div class="hl-y"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:5px;">
+      <div class="br"><div class="vl-y" style="height:10px;"></div><div class="n ylw mn" style="width:92%;">Understanding a <strong>complex judgment</strong></div></div>
+      <div class="br"><div class="vl-y" style="height:10px;"></div><div class="n ylw mn" style="width:92%;">Writing a <strong>detailed article</strong></div></div>
+      <div class="br"><div class="vl-y" style="height:10px;"></div><div class="n ylw mn" style="width:92%;">Preparing a <strong>legal note</strong></div></div>
+      <div class="br"><div class="vl-y" style="height:10px;"></div><div class="n ylw mn" style="width:92%;">Studying a <strong>provision</strong></div></div>
+      <div class="br"><div class="vl-y" style="height:10px;"></div><div class="n ylw mn" style="width:92%;">Analysing a <strong>business issue</strong></div></div>
+    </div>
+    <div class="vl-r" style="height:14px;"></div>
+    <div class="n red" style="max-width:520px;"><span class="tag t-r">THE MECHANISM OF DAMAGE</span><br>Constant notifications <strong>break that attention into pieces.</strong></div>
+    <div class="eg" style="max-width:500px;">💡 <strong>Litigation practice:</strong> A 40-page order-in-original read across fifteen interrupted stretches yields a list of paragraphs. Read in two undisturbed sittings, it yields the contradiction between the SCN allegation and the finding — which is the ground that actually wins the appeal.</div>
+    <div class="egc" style="max-width:500px;">🎓 <strong>BITS, 5th sem:</strong> Every notification costs far more than the seconds spent reading it — it costs the rebuild of the whole mental stack. A recursion tree, a lock-ordering bug or a proof you were holding in your head has to be loaded from scratch. Notifications off is not an aesthetic preference; it is a performance requirement.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════ 9. SLEEP: THE SILENT CASUALTY ══════════════ -->
+<div class="sc" id="s9">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">Sleep: The Silent Casualty</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div>
+  <div class="sc-page">📄 Source Reference: ninth thematic heading of the article — no page number in source</div>
+  </div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:500px;">😴 Sleep — One of the Greatest Medicines for Body and Mind</div>
+    <div class="vl-r" style="height:16px;"></div>
+
+    <div class="n red" style="max-width:500px;"><span class="tag t-r">THE CASUALTY</span><br>Sleep has become a <strong>silent casualty</strong> of digital overuse</div>
+    <div class="pe" style="max-width:480px;">📝 "Silent" because nobody notices the loss on the day it happens. There is no pain, no complaint — only a slow decline that shows up as poor work weeks later.</div>
+    <div class="vl-r" style="height:14px;"></div>
+
+    <div class="n l1" style="max-width:480px;">HOW IT HAPPENS — Late-Night Use</div>
+    <div class="vl-r" style="height:12px;"></div>
+    <div style="width:80%;"><div class="hl-r"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:6px;">
+      <div class="br"><div class="vl-r" style="height:10px;"></div><div class="n red mn" style="width:92%;">Watching <strong>videos</strong></div></div>
+      <div class="br"><div class="vl-r" style="height:10px;"></div><div class="n red mn" style="width:92%;">Reading <strong>messages</strong></div></div>
+      <div class="br"><div class="vl-r" style="height:10px;"></div><div class="n red mn" style="width:92%;">Browsing <strong>social media</strong></div></div>
+      <div class="br"><div class="vl-r" style="height:10px;"></div><div class="n red mn" style="width:92%;">Checking the <strong>news</strong></div></div>
+    </div>
+    <div class="vl-r" style="height:12px;"></div>
+    <div class="n red" style="max-width:520px;">All of this <strong>when the body actually needs rest</strong></div>
+    <div class="vl-r" style="height:12px;"></div>
+
+    <div class="n l1" style="max-width:440px;">TWO DISRUPTING AGENTS</div>
+    <div class="vl-r" style="height:12px;"></div>
+    <div style="width:65%;"><div class="hl-r"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:10px;">
+      <div class="br"><div class="vl-r" style="height:10px;"></div><div class="n red mn" style="width:94%;">① The <strong>screen's light</strong></div></div>
+      <div class="br"><div class="vl-r" style="height:10px;"></div><div class="n red mn" style="width:94%;">② The <strong>mental stimulation</strong> from digital content</div></div>
+    </div>
+
+    <div class="vl-r" style="height:16px;"></div>
+    <div class="n l1" style="max-width:460px;">📉 NEXT-DAY EFFECTS OF POOR SLEEP</div>
+    <div class="vl-r" style="height:12px;"></div>
+    <div style="width:85%;"><div class="hl-r"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:5px;">
+      <div class="br"><div class="vl-r" style="height:10px;"></div><div class="n red mn" style="width:92%;">Reduces <strong>energy</strong></div></div>
+      <div class="br"><div class="vl-r" style="height:10px;"></div><div class="n red mn" style="width:92%;">Weakens <strong>memory</strong></div></div>
+      <div class="br"><div class="vl-r" style="height:10px;"></div><div class="n red mn" style="width:92%;">Increases <strong>irritation</strong></div></div>
+      <div class="br"><div class="vl-r" style="height:10px;"></div><div class="n red mn" style="width:92%;">Affects <strong>decision-making</strong></div></div>
+    </div>
+    <div class="vl-r" style="height:14px;"></div>
+    <div class="n red" style="max-width:520px;">One who does not sleep properly cannot remain <strong>healthy, peaceful and productive</strong> for long</div>
+    <div class="vl-g" style="height:14px;"></div>
+    <div class="n grn" style="max-width:500px;"><span class="tag t-g">THE RULE TO REMEMBER</span><br><strong>No digital entertainment is more valuable than sound sleep.</strong></div>
+    <div class="eg" style="max-width:500px;">💡 <strong>Litigation practice:</strong> Memory and decision-making are the two faculties a personal hearing draws on most — recalling the exact ratio, and deciding in the moment whether to press a ground or concede it. Both are precisely what a disturbed night takes away.</div>
+    <div class="egc" style="max-width:500px;">🎓 <strong>BITS, 5th sem:</strong> Consolidation of what you studied happens during sleep, not during the extra hour of scrolling that replaced it. A night cut short to finish a series does not merely make you tired — it quietly deletes part of the day's studying.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════ 10. IMPACT ON PHYSICAL HEALTH ══════════════ -->
+<div class="sc" id="s10">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">Impact on Physical Health</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div>
+  <div class="sc-page">📄 Source Reference: tenth thematic heading of the article — no page number in source</div>
+  </div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:500px;">🩺 The Body Also Pays the Price of Excessive Screen Use</div>
+    <div class="vl-r" style="height:16px;"></div>
+
+    <div class="n l1" style="max-width:460px;">TWO CHANNELS OF PHYSICAL HARM</div>
+    <div class="vl-r" style="height:12px;"></div>
+    <div style="width:70%;"><div class="hl-r"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:10px;">
+
+      <!-- Channel 1: direct strain -->
+      <div class="br">
+        <div class="vl-r" style="height:10px;"></div>
+        <div class="n red mn" style="width:94%;"><span class="tag t-r">CHANNEL 1 — DIRECT STRAIN</span></div>
+        <div class="vl-r" style="height:8px;"></div>
+        <div class="n red mn" style="width:94%;"><strong>Eyes</strong> — long hours on mobile phones<br>→ dryness, strain, headache, blurred vision (now common complaints)</div>
+        <div class="vl-r" style="height:8px;"></div>
+        <div class="n red mn" style="width:94%;"><strong>Posture</strong> — constant neck bending while looking at the screen<br>→ shoulders stiffen, back weakens, body becomes inactive</div>
+      </div>
+
+      <!-- Channel 2: loss of movement -->
+      <div class="br">
+        <div class="vl-r" style="height:10px;"></div>
+        <div class="n red mn" style="width:94%;"><span class="tag t-r">CHANNEL 2 — LOSS OF MOVEMENT</span></div>
+        <div class="vl-y" style="height:8px;"></div>
+        <div class="n ylw mn" style="width:94%;"><strong>Earlier:</strong> people had to walk, travel and move for many activities</div>
+        <div class="vl-r" style="height:8px;"></div>
+        <div class="n red mn" style="width:94%;"><strong>Now:</strong> many tasks done through the phone → the body remains <strong>seated for long periods</strong></div>
+        <div class="vl-r" style="height:8px;"></div>
+        <div class="n red mn" style="width:94%;"><span class="tag t-r">THE TRADE-OFF</span><br>Convenience has <strong>increased</strong> — movement has <strong>decreased</strong></div>
+        <div class="pe" style="max-width:200px;">📝 The very saving celebrated earlier in the article has a hidden cost: the walk to the bank was also the day's exercise. When the errand disappears, the movement must be deliberately replaced.</div>
+      </div>
+    </div>
+
+    <div class="vl-r" style="height:16px;"></div>
+    <div class="n red" style="max-width:520px;"><span class="tag t-r">WHY THIS IS DANGEROUS</span><br>The human body is <strong>made for movement</strong></div>
+    <div class="vl" style="height:12px;"></div>
+    <div class="n root" style="max-width:520px; background:#7b241c; font-size:13px;">
+      ⚖️ <em>"A healthy mind cannot live happily in a neglected body."</em></div>
+    <div class="eg" style="max-width:500px;">💡 <strong>Litigation practice:</strong> Drafting seasons — appeal limitation, reply deadlines — mean long unbroken hours seated over files and screen. A fixed walk, whether or not the draft is finished, is not time taken away from the work; it is what keeps the stamina to finish it.</div>
+    <div class="egc" style="max-width:500px;">🎓 <strong>BITS, 5th sem:</strong> Coding sessions and lab work are, physically, hours of neck-bent stillness. Set a stand-and-stretch break at fixed intervals and use the campus for a daily walk or sport. Debugging quality drops sharply in a stiff, inactive body.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════ 11. FAMILY TIME UNDER PRESSURE ══════════════ -->
+<div class="sc" id="s11">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">Family Time Under Pressure</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div>
+  <div class="sc-page">📄 Source Reference: eleventh thematic heading of the article — no page number in source</div>
+  </div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:500px;">🏠 Digital Overuse Also Affects Family Life</div>
+    <div class="vl-r" style="height:16px;"></div>
+
+    <div class="n red" style="max-width:520px;"><span class="tag t-r">THE CONDITION IN MANY HOMES</span><br>Family members sit together <strong>physically</strong> but remain <strong>mentally absent</strong></div>
+    <div class="pe" style="max-width:500px;">📝 Presence in the room is not presence in the conversation. A family can spend an entire evening together and share nothing at all.</div>
+    <div class="vl-r" style="height:14px;"></div>
+
+    <div class="n l1" style="max-width:480px;">TWO CONSEQUENCES</div>
+    <div class="vl-r" style="height:12px;"></div>
+    <div style="width:70%;"><div class="hl-r"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:10px;">
+
+      <div class="br">
+        <div class="vl-r" style="height:10px;"></div>
+        <div class="n red mn" style="width:94%;"><span class="tag t-r">① THE SILENT DINING TABLE</span><br>The dining table — which should be a place of <strong>conversation and affection</strong> — falls silent because everyone is busy with their screens</div>
+      </div>
+
+      <div class="br">
+        <div class="vl-r" style="height:10px;"></div>
+        <div class="n red mn" style="width:94%;"><span class="tag t-r">② CHILDREN COPY ELDERS</span><br>Children <strong>observe elders and copy their habits</strong></div>
+        <div class="vl-r" style="height:8px;"></div>
+        <div class="n red mn" style="width:94%;">If parents and elders constantly use their phones → it becomes <strong>difficult to advise children</strong> to reduce screen time</div>
+        <div class="pe" style="max-width:200px;">📝 Instruction without example carries no authority in a home. The habit is transmitted by what is seen, not by what is said.</div>
+      </div>
+    </div>
+
+    <div class="vl-y" style="height:16px;"></div>
+    <div class="n ylw" style="max-width:520px;"><span class="tag t-y">PRINCIPLE</span><br>Real relationships need <strong>attention</strong>.<br>
+      When a person sitting in front of us does not receive our attention because our eyes are on the mobile phone — the relationship <strong>slowly loses warmth</strong>.</div>
+    <div class="vl-g" style="height:14px;"></div>
+    <div class="n grn" style="max-width:540px;"><span class="tag t-g">THE RULE</span><br>
+      Digital connection with <strong>distant</strong> people should not come at the cost of <strong>emotional disconnection</strong> from those <strong>living with us</strong>.</div>
+    <div class="eg" style="max-width:500px;">💡 <strong>Litigation practice:</strong> Client calls and departmental follow-ups have no natural closing hour. Unless a family meal is treated as strictly as a hearing appointment, the practice will quietly occupy it — and the family will stop expecting otherwise.</div>
+    <div class="egc" style="max-width:500px;">🎓 <strong>BITS, 5th sem:</strong> The same principle applies in reverse for a hostel student. A weekly call home given full attention, phone down, is worth more than daily half-attended messages typed while gaming. Also worth noting — you are the "child observing elders" and, before long, the elder being observed.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════ 12. THE TRAP OF COMPARISON ══════════════ -->
+<div class="sc" id="s12">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">The Trap of Comparison and Emotional Disturbance</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div>
+  <div class="sc-page">📄 Source Reference: twelfth thematic heading of the article — no page number in source</div>
+  </div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:500px;">⚖️ Social Media Creates Unnecessary Comparisons</div>
+    <div class="vl-r" style="height:16px;"></div>
+
+    <div class="n red" style="max-width:520px;"><span class="tag t-r">THE MECHANISM</span><br>People see the <strong>achievements, celebrations, travel, possessions and success</strong> of others<br>→ and start to feel that <strong>their own lives are incomplete</strong></div>
+    <div class="vl-y" style="height:14px;"></div>
+
+    <div class="n ylw" style="max-width:540px;"><span class="tag t-y">THE HIDDEN DEFECT IN THE EVIDENCE</span><br>
+      What is displayed on digital platforms is usually a <strong>selected and polished part of life — not the full truth.</strong><br>
+      Every person has <strong>struggles, worries and limitations</strong> — but these are <strong>rarely shown</strong>.</div>
+    <div class="pe" style="max-width:520px;">📝 You are comparing your complete life, including its worst parts, against someone else's edited highlights. It is not an unfair comparison — it is not a comparison at all, because the two sets of facts are not of the same kind.</div>
+    <div class="eg" style="max-width:500px;">💡 <strong>Litigation practice:</strong> This is, in effect, a defect in the material relied upon. No practitioner would accept a conclusion drawn from a selectively disclosed record while adverse material is withheld. The same objection applies to conclusions about your own life drawn from another's curated feed.</div>
+    <div class="egc" style="max-width:500px;">🎓 <strong>BITS, 5th sem:</strong> Placement season makes this acute — announcements of offers, internships and CGPAs flood the feed while rejections, backlogs and hard weeks are never posted. You are seeing a filtered dataset and drawing a conclusion about yourself from it. Any CS student can name that error: selection bias.</div>
+
+    <div class="vl-r" style="height:16px;"></div>
+    <div class="n red" style="max-width:500px;"><span class="tag t-r">RESULT OF CONSTANT COMPARISON</span><br>
+      Creates <strong>dissatisfaction and emotional disturbance</strong><br>
+      A person may <strong>forget his own blessings</strong> while watching the <strong>edited happiness</strong> of others</div>
+    <div class="vl-g" style="height:14px;"></div>
+    <div class="n grn" style="max-width:520px;"><span class="tag t-g">THE REMEDY</span><br>
+      Use social media with <strong>maturity</strong> —<br>and do <strong>not let it determine our sense of self-worth</strong>.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════ 13. ALWAYS AVAILABLE, ALWAYS TIRED ══════════════ -->
+<div class="sc" id="s13">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">Always Available, Always Tired</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div>
+  <div class="sc-page">📄 Source Reference: thirteenth thematic heading of the article — no page number in source</div>
+  </div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:520px;">📞 A New Pressure in Professional Life</div>
+    <div class="vl" style="height:16px;"></div>
+
+    <div style="width:65%;"><div class="hl"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:10px;">
+      <div class="br">
+        <div class="vl-y" style="height:10px;"></div>
+        <div class="n ylw mn" style="width:94%;"><span class="tag t-y">EARLIER</span><br>Office work had some <strong>boundaries</strong></div>
+      </div>
+      <div class="br">
+        <div class="vl-r" style="height:10px;"></div>
+        <div class="n red mn" style="width:94%;"><span class="tag t-r">NOW</span><br>Messages and calls can come at <strong>any time</strong></div>
+        <div class="vl-r" style="height:8px;"></div>
+        <div class="n red mn" style="width:94%;">Clients, colleagues and others may expect <strong>immediate replies</strong></div>
+        <div class="vl-r" style="height:8px;"></div>
+        <div class="n red mn" style="width:94%;">→ Creates the feeling that one must <strong>always be available</strong></div>
+      </div>
+    </div>
+
+    <div class="vl-r" style="height:16px;"></div>
+    <div class="n red" style="max-width:500px;"><span class="tag t-r">FINDING</span><br>Such <strong>constant availability is not healthy</strong></div>
+    <div class="vl-y" style="height:14px;"></div>
+
+    <div class="n l1" style="max-width:520px;">⏳ What Human Beings Need Time For</div>
+    <div class="vl-y" style="height:12px;"></div>
+    <div style="width:90%;"><div class="hl-y"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:5px;">
+      <div class="br"><div class="vl-y" style="height:10px;"></div><div class="n ylw mn" style="width:92%;">Work</div></div>
+      <div class="br"><div class="vl-y" style="height:10px;"></div><div class="n ylw mn" style="width:92%;">Rest</div></div>
+      <div class="br"><div class="vl-y" style="height:10px;"></div><div class="n ylw mn" style="width:92%;">Family</div></div>
+      <div class="br"><div class="vl-y" style="height:10px;"></div><div class="n ylw mn" style="width:92%;">Reading</div></div>
+      <div class="br"><div class="vl-y" style="height:10px;"></div><div class="n ylw mn" style="width:92%;">Exercise</div></div>
+      <div class="br"><div class="vl-y" style="height:10px;"></div><div class="n ylw mn" style="width:92%;">Silence</div></div>
+    </div>
+    <div class="vl-r" style="height:14px;"></div>
+    <div class="n red" style="max-width:520px;"><span class="tag t-r">IF EVERY MOMENT IS CAPTURED BY DIGITAL DEMANDS</span><br>→ Life becomes <strong>mechanical</strong></div>
+
+    <div class="vl" style="height:16px;"></div>
+    <div class="n root" style="max-width:540px; background:#1a3a5c; font-size:13px;">
+      ⚖️ <em>"Availability should not become slavery. Responsiveness is good, but continuous disturbance is harmful."</em></div>
+    <div class="pe" style="max-width:520px;">📝 The distinction is precise. Being responsive means replying properly within a reasonable time. Being always available means surrendering the right to decide when you work. The first is professional; the second is bondage.</div>
+    <div class="eg" style="max-width:500px;">💡 <strong>Litigation practice:</strong> A client who receives a reply at 11 p.m. will send the next query at 11 p.m. Stated calling hours and a fixed reply window are not discourtesy — they protect the undisturbed hours in which the actual drafting quality is produced.</div>
+    <div class="egc" style="max-width:500px;">🎓 <strong>BITS, 5th sem:</strong> Project groups, class groups and society groups generate expectation of instant response at all hours. Answering in batches at fixed times, rather than continuously, is the same discipline — and it is also how healthy engineering teams operate.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════ 14. THE REAL MEANING OF DIGITAL DETOX ══════════════ -->
+<div class="sc" id="s14">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">The Real Meaning of Digital Detox</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div>
+  <div class="sc-page">📄 Source Reference: fourteenth thematic heading of the article — no page number in source</div>
+  </div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:500px;">🧘 Digital Detox — Correctly Understood</div>
+    <div class="pe" style="max-width:480px;">📝 "Detox" sounds like giving something up. Here it means the opposite of abstinence — it means using the same technology, but on your terms and by your decision.</div>
+    <div class="vl" style="height:16px;"></div>
+
+    <div class="n l1" style="max-width:460px;">WHAT IT IS AND IS NOT</div>
+    <div class="vl" style="height:12px;"></div>
+    <div style="width:70%;"><div class="hl"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:10px;">
+
+      <div class="br">
+        <div class="vl-r" style="height:10px;"></div>
+        <div class="n red mn" style="width:94%;"><span class="tag t-r">✗ IT DOES NOT MEAN</span><br>• Rejecting technology<br>• Going back to the old world<br>• Becoming anti-modern</div>
+      </div>
+
+      <div class="br">
+        <div class="vl-g" style="height:10px;"></div>
+        <div class="n grn mn" style="width:94%;"><span class="tag t-g">✓ IT SIMPLY MEANS</span><br>Using technology with <strong>discipline and wisdom</strong></div>
+        <div class="vl-g" style="height:8px;"></div>
+        <div class="n grn mn" style="width:94%;">Deciding —<br>① <strong>WHEN</strong> to use the phone<br>② <strong>WHY</strong> to use it<br>③ <strong>WHEN to keep it away</strong></div>
+        <div class="vl-g" style="height:8px;"></div>
+        <div class="n grn mn" style="width:94%;">Becoming the <strong>master of the device</strong> rather than its <strong>servant</strong></div>
+      </div>
+    </div>
+
+    <div class="vl-y" style="height:16px;"></div>
+    <div class="n ylw" style="max-width:520px;"><span class="tag t-y">REFRAMING THE QUESTION</span><br>
+      The question is <strong>NOT</strong> whether we should use digital technology — certainly, we should.<br>
+      The real question is <strong>whether we are using it purposefully.</strong></div>
+    <div class="vl" style="height:14px;"></div>
+
+    <div class="n l1" style="max-width:480px;">⚖️ THE TEST — Productive Time vs Harmful Time</div>
+    <div class="vl" style="height:12px;"></div>
+    <div style="width:70%;"><div class="hl"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:10px;">
+      <div class="br">
+        <div class="vl-g" style="height:10px;"></div>
+        <div class="n grn mn" style="width:94%;"><span class="tag t-g">✓ PRODUCTIVE</span><br>Time spent on —<br>• Learning<br>• Research<br>• Writing<br>• Banking<br>• Payments<br>• Meaningful communication</div>
+      </div>
+      <div class="br">
+        <div class="vl-r" style="height:10px;"></div>
+        <div class="n red mn" style="width:94%;"><span class="tag t-r">✗ HARMFUL</span><br>Time lost in —<br>• Mindless scrolling<br>• Unnecessary forwarding<br>• Repeated checking<br>• Purposeless entertainment</div>
+      </div>
+    </div>
+    <div class="eg" style="max-width:500px;">💡 <strong>Litigation practice:</strong> An honest audit of a day's phone use will usually show that reading judgments and filing occupied far less time than repeated checking and forwarding within professional groups. Both feel like professional work. Only one produces a ground of appeal.</div>
+    <div class="egc" style="max-width:500px;">🎓 <strong>BITS, 5th sem:</strong> Apply the same test to your screen time report each week. Documentation, coursework, building something — productive. Repeated refreshing of feeds — the same device, no output. Measure it as you would profile a program: find where the cycles actually go.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════ 15. SMALL HABITS ══════════════ -->
+<div class="sc" id="s15">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">Small Habits for a Better Digital Life</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div>
+  <div class="sc-page">📄 Source Reference: fifteenth thematic heading of the article — no page number in source</div>
+  </div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:500px;">✅ A Healthy Digital Life Begins with Small Habits</div>
+    <div class="vl-g" style="height:16px;"></div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:24%;">Habit Prescribed in the Article</th>
+        <th style="width:24%;">📝 Plain English — What It Actually Means</th>
+        <th style="width:26%;">💡 For the Litigation Practice</th>
+        <th style="width:26%;">🎓 For the CS Student, BITS Pilani</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="td-g"><strong>The first hour of the morning should not be surrendered to the phone</strong><br><em>Use it for prayer, silence, walking, breathing, reading, planning or peaceful conversation</em></td>
+        <td class="td-y">Do not let the outside world set your mood before you have set it yourself.</td>
+        <td class="td-g">Morning prayer, then the day's file list written on paper — before any message is opened.</td>
+        <td class="td-c">Wake, water, stretch, and the day's three targets written down — before the phone is unlocked.</td>
+      </tr>
+      <tr>
+        <td class="td-g"><strong>The phone should be kept away some time before sleep</strong></td>
+        <td class="td-y">Give the mind a landing strip. It cannot go from stimulation to sleep in one step.</td>
+        <td class="td-g">No client messages and no judgment reading after a fixed hour — the next day's hearing needs a rested memory.</td>
+        <td class="td-c">Laptop and phone off the bed. Coursework closes at a fixed time; consolidation happens in sleep.</td>
+      </tr>
+      <tr>
+        <td class="td-g"><strong>Meals should be taken without screen distraction</strong></td>
+        <td class="td-y">Eating is not a background activity to be performed while looking elsewhere.</td>
+        <td class="td-g">Lunch away from the desk and the file — the afternoon drafting improves for it.</td>
+        <td class="td-c">Mess meals without the phone — it is also where hostel friendships are actually built.</td>
+      </tr>
+      <tr>
+        <td class="td-g"><strong>Family conversations should receive full attention</strong></td>
+        <td class="td-y">Attention is the only currency a relationship accepts. Partial attention reads as absence.</td>
+        <td class="td-g">Phone face down and away during family time — the practice will survive one uninterrupted hour.</td>
+        <td class="td-c">The weekly call home with the phone in your hand and nothing else on the screen.</td>
+      </tr>
+      <tr>
+        <td class="td-g"><strong>Important work should be done in uninterrupted time</strong></td>
+        <td class="td-y">Deep work needs a continuous block. Fifteen scattered minutes do not add up to one good hour.</td>
+        <td class="td-g">Grounds of appeal and reply drafting in a protected block, notifications silenced — this is where cases are won.</td>
+        <td class="td-c">Fixed blocks for DSA, projects and comps preparation, phone in another room. Uninterrupted or not attempted.</td>
+      </tr>
+      <tr>
+        <td class="td-g"><strong>Physical exercise should be made a daily priority</strong></td>
+        <td class="td-y">Not a reward for finishing work — a fixed daily item, like brushing your teeth.</td>
+        <td class="td-g">A daily walk kept even in appeal season. A neglected body cannot carry a long hearing.</td>
+        <td class="td-c">Daily sport or a walk on campus, non-negotiable, whatever the submission deadline.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tree" style="margin-top:16px;">
+    <div class="n grn" style="max-width:540px;"><span class="tag t-g">WHY SMALL HABITS MATTER</span><br>
+      These habits may <strong>appear small</strong>, but their effect is <strong>large</strong>. They restore —<br>
+      <strong>peace</strong> to the mind &nbsp;•&nbsp; <strong>movement</strong> to the body &nbsp;•&nbsp; <strong>warmth</strong> to relationships &nbsp;•&nbsp; <strong>depth</strong> to work</div>
+    <div class="vl-g" style="height:14px;"></div>
+    <div class="n root" style="max-width:540px; font-size:13px;">
+      ⚖️ <em>"The time saved by technology should be invested in health, family, learning, service and inner growth."</em></div>
+    <div class="pe" style="max-width:520px;">📝 This single line closes the circle of the whole article. Technology's real gift is the time it frees. Where that time is invested decides whether technology was a blessing or a thief.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════ 16. TECHNOLOGY WITH WISDOM ══════════════ -->
+<div class="sc" id="s16">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">Technology with Wisdom: The Balanced Path</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div>
+  <div class="sc-page">📄 Source Reference: sixteenth thematic heading of the article — no page number in source</div>
+  </div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:520px;">🕊️ The Balanced Path — Neither Reject Technology Nor Surrender to It</div>
+    <div class="vl" style="height:16px;"></div>
+
+    <div class="n l1" style="max-width:460px;">WHAT A WISE PERSON DOES — Two Halves of One Discipline</div>
+    <div class="vl" style="height:12px;"></div>
+    <div style="width:70%;"><div class="hl"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:10px;">
+
+      <div class="br">
+        <div class="vl-g" style="height:10px;"></div>
+        <div class="n grn mn" style="width:94%;"><span class="tag t-g">HALF 1 — USE FULLY FOR</span><br>• Knowledge<br>• Convenience<br>• Communication<br>• Professional growth<br>• Public good</div>
+      </div>
+
+      <div class="br">
+        <div class="vl-p" style="height:10px;"></div>
+        <div class="n pur mn" style="width:94%;"><span class="tag t-p">HALF 2 — AT THE SAME TIME, PROTECT</span><br>• Sleep<br>• Health<br>• Family time<br>• Mental peace<br>• Inner freedom</div>
+        <div class="pe" style="max-width:200px;">📝 These five are the things nobody else will protect for you. No notification will ever remind you that your sleep or your peace is being spent.</div>
+      </div>
+    </div>
+
+    <div class="vl" style="height:16px;"></div>
+    <div class="n root" style="max-width:560px; font-size:13px;">
+      ⚖️ <em>"He will allow technology to sit in his pocket, but not on the throne of his mind."</em></div>
+    <div class="pe" style="max-width:540px;">📝 The finest image in the article. The pocket is where a tool belongs. The throne is where decisions are made — and that seat must stay occupied by you.</div>
+    <div class="vl" style="height:16px;"></div>
+
+    <div class="n l1" style="max-width:460px;">THE TWO FACES — Set Side by Side</div>
+    <div class="vl" style="height:12px;"></div>
+    <div style="width:70%;"><div class="hl"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:10px;">
+      <div class="br">
+        <div class="vl-g" style="height:10px;"></div>
+        <div class="n grn mn" style="width:94%;"><span class="tag t-g">WONDERFUL SERVANT</span><br>It can <strong>educate</strong> us, <strong>connect</strong> us, <strong>save</strong> our time and <strong>support</strong> our work</div>
+      </div>
+      <div class="br">
+        <div class="vl-r" style="height:10px;"></div>
+        <div class="n red mn" style="width:94%;"><span class="tag t-r">USED WITHOUT RESTRAINT</span><br>It can <strong>steal</strong> our time, <strong>disturb</strong> our mind, <strong>weaken</strong> our body and <strong>reduce the quality</strong> of our relationships</div>
+      </div>
+    </div>
+    <div class="vl-g" style="height:16px;"></div>
+    <div class="n grn" style="max-width:540px;"><span class="tag t-g">THE NEED OF THE HOUR</span><br>
+      <strong>NOT digital rejection — but DIGITAL DISCIPLINE.</strong></div>
+    <div class="eg" style="max-width:500px;">💡 <strong>Litigation practice:</strong> The same balance that governs a good practice — use every legitimate resource fully, but never let it displace your own reasoning. The portal, the database and the group are aids to judgment, never substitutes for it.</div>
+    <div class="egc" style="max-width:500px;">🎓 <strong>BITS, 5th sem:</strong> The identical discipline applies to tools that write code for you. Use them fully to move faster; never let them occupy the throne where your own understanding of the algorithm should sit. In an interview, only what you actually understand can be defended.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════ 17. LET TECHNOLOGY SERVE LIFE, NOT RULE IT ══════════════ -->
+<div class="sc" id="s17">
+  <div class="sc-header"><div class="sc-title">
+    <span class="sc-title-text">Let Technology Serve Life, Not Rule It — Conclusion</span>
+    <a class="back-btn" href="#toc">&#8679; Index</a>
+  </div>
+  <div class="sc-page">📄 Source Reference: final thematic heading and closing verse of the article — no page number in source</div>
+  </div>
+
+  <div class="tree">
+    <div class="n root" style="max-width:540px;">🎯 In Conclusion</div>
+    <div class="vl" style="height:16px;"></div>
+
+    <div class="n l1" style="max-width:520px;">The Two-Sided Finding, Stated Finally</div>
+    <div class="vl" style="height:12px;"></div>
+    <div style="width:70%;"><div class="hl"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:10px;">
+      <div class="br">
+        <div class="vl-g" style="height:10px;"></div>
+        <div class="n grn mn" style="width:94%;"><span class="tag t-g">WITH DISCIPLINE</span><br>Digital connectivity is a <strong>blessing</strong></div>
+      </div>
+      <div class="br">
+        <div class="vl-r" style="height:10px;"></div>
+        <div class="n red mn" style="width:94%;"><span class="tag t-r">WITHOUT SELF-CONTROL</span><br>It becomes a <strong>silent enemy</strong></div>
+      </div>
+    </div>
+
+    <div class="vl-g" style="height:16px;"></div>
+    <div class="n grn" style="max-width:540px;"><span class="tag t-g">THE AUTHOR'S FINAL POSITION</span><br>
+      There is <strong>nothing bad</strong> about the use of digital technology.<br>
+      On the contrary — it is <strong>one of the most useful gifts of modern civilisation.</strong><br>
+      The only requirement: use it <strong>appropriately, judiciously and purposefully</strong>, so that its advantages <strong>outweigh</strong> its disadvantages.</div>
+
+    <div class="vl" style="height:16px;"></div>
+    <div class="n l1" style="max-width:520px;">✅ USE IT FOR &nbsp;/&nbsp; ⛔ DO NOT LET IT DISTURB</div>
+    <div class="vl" style="height:12px;"></div>
+    <div style="width:70%;"><div class="hl"></div></div>
+    <div class="brow" style="align-items:flex-start; gap:10px;">
+      <div class="br">
+        <div class="vl-g" style="height:10px;"></div>
+        <div class="n grn mn" style="width:94%;"><span class="tag t-g">✓ USE FOR</span><br>Knowledge &nbsp;•&nbsp; Service &nbsp;•&nbsp; Convenience &nbsp;•&nbsp; Progress</div>
+      </div>
+      <div class="br">
+        <div class="vl-r" style="height:10px;"></div>
+        <div class="n red mn" style="width:94%;"><span class="tag t-r">✗ DO NOT ALLOW IT TO DISTURB</span><br>Sleep &nbsp;•&nbsp; Health &nbsp;•&nbsp; Family life &nbsp;•&nbsp; Mental peace &nbsp;•&nbsp; Inner freedom</div>
+      </div>
+    </div>
+
+    <div class="vl" style="height:18px;"></div>
+    <div class="n root" style="max-width:600px; font-size:12.5px; line-height:2;">
+      ⚖️ THREE CLOSING RESOLVES —<br><br>
+      <em>"Let the phone remain a helpful companion, not a demanding master."</em><br>
+      <em>"Let the screen open the window of knowledge, not close the door of life."</em><br>
+      <em>"Let us remain digitally connected — but also mentally peaceful, physically active, emotionally balanced and spiritually aware."</em>
+    </div>
+    <div class="pe" style="max-width:540px;">📝 Read these three lines as a daily checklist rather than as decoration. Companion or master? Window or closed door? Connected — and also peaceful, active, balanced, aware? Four honest answers each evening are enough to keep the whole discipline alive.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════ CLOSING COUPLET ══════════════ -->
+<div class="couplet">
+  📜 A Small Thought to Be Remembered —<br><br>
+  <em>"Use the screen with wisdom, let not your peace depart;<br>
+  Let technology serve your life, but never rule your heart."</em>
+</div>
+
+
+<!-- ══════════════ ARSENAL ══════════════ -->
+<div class="arsenal" id="arsenal">
+  <div class="arsenal-header">
+    <div class="arsenal-title-row">
+      <span class="arsenal-title">⚔️ Daily Discipline Arsenal — Master the Mobile Before It Masters You</span>
+      <a class="arsenal-back-btn" href="#toc">&#8679; Index</a>
+    </div>
+    <div class="arsenal-purpose">This article is a motivational piece and cites no judicial authority — therefore no case ratios exist to extract. In place of case ratios, these are the article's own governing sentences, to be recalled and applied daily. State them to yourself in the situations named.</div>
+  </div>
+
+  <!-- Card 1 -->
+  <div class="arsenal-card">
+    <div class="ac-name">The Servant–Master Principle</div>
+    <div class="ac-court">Source article, opening section | Foundational proposition of the whole piece</div>
+    <div class="ac-label">Governing Sentence</div>
+    <div class="ac-ratio">
+      "Digital technology is a great servant but a dangerous master." Fire cooks our food, but uncontrolled fire can burn the house. Water sustains life, but uncontrolled water can cause destruction. Every blessing needs discipline.
+    </div>
+    <div><span class="ac-when">When to Use</span> — Whenever you catch yourself defending screen time by pointing to its usefulness. Usefulness was never in dispute; control is. Recall this the moment you notice you did not decide to pick up the phone.</div>
+  </div>
+
+  <!-- Card 2 -->
+  <div class="arsenal-card">
+    <div class="ac-name">The Reversal Test</div>
+    <div class="ac-court">Source article, "The Other Side of the Picture" | The self-diagnostic of the article</div>
+    <div class="ac-label">Governing Sentence</div>
+    <div class="ac-ratio">
+      Mobile phones have started using the users. What was meant to be an instrument of convenience has become an instrument of compulsion. What was meant to save time has started consuming time. What was meant to connect people has sometimes begun to disconnect them from real life.
+    </div>
+    <div><span class="ac-when">When to Use</span> — As a weekly self-audit. Ask three questions: has convenience turned into compulsion; is time being saved or consumed; am I more connected to distant people than to those in the room. Any "yes" locates the exact repair needed.</div>
+  </div>
+
+  <!-- Card 3 -->
+  <div class="arsenal-card">
+    <div class="ac-name">The First Hour Rule</div>
+    <div class="ac-court">Source article, "When the Day Begins with the Screen" | The single highest-leverage habit</div>
+    <div class="ac-label">Governing Sentence</div>
+    <div class="ac-ratio">
+      The first hour of the morning has a deep influence on the mind. If the day begins with noise, hurry and scattered information, the mind becomes restless from the beginning. A peaceful morning, on the other hand, can provide clarity, energy and balance for the rest of the day.
+    </div>
+    <div><span class="ac-when">When to Use</span> — Every single morning, at the moment of waking. Prayer, silence, water and the sky come before the screen. Before a hearing day or an examination day, this rule is worth more than an extra hour of preparation.</div>
+  </div>
+
+  <!-- Card 4 -->
+  <div class="arsenal-card">
+    <div class="ac-name">The Broken Attention Principle</div>
+    <div class="ac-court">Source article, "Mental Restlessness and Loss of Concentration" | Direct application to professional and student work</div>
+    <div class="ac-label">Governing Sentence</div>
+    <div class="ac-ratio">
+      Understanding a complex judgment, writing a detailed article, preparing a legal note, studying a provision or analysing a business issue requires steady attention. Constant notifications break that attention into pieces.
+    </div>
+    <div><span class="ac-when">When to Use</span> — Before beginning any work that requires depth: drafting grounds of appeal, reading an order-in-original, solving a hard algorithmic problem, writing an examination answer. Silence the notifications first — this is the precondition, not an optional refinement.</div>
+  </div>
+
+  <!-- Card 5 -->
+  <div class="arsenal-card">
+    <div class="ac-name">The Sleep Priority Rule</div>
+    <div class="ac-court">Source article, "Sleep: The Silent Casualty" | Non-negotiable proposition</div>
+    <div class="ac-label">Governing Sentence</div>
+    <div class="ac-ratio">
+      Poor sleep reduces energy, weakens memory, increases irritation and affects decision-making. A person who does not sleep properly cannot remain healthy, peaceful and productive for long. No digital entertainment is more valuable than sound sleep.
+    </div>
+    <div><span class="ac-when">When to Use</span> — At the moment of the "one more episode" or "one more scroll" decision at night. Memory and decision-making are exactly the two faculties a hearing and an examination test hardest — and exactly the two that a shortened night removes.</div>
+  </div>
+
+  <!-- Card 6 -->
+  <div class="arsenal-card">
+    <div class="ac-name">The Comparison Trap Rule</div>
+    <div class="ac-court">Source article, "The Trap of Comparison and Emotional Disturbance" | Emotional discipline</div>
+    <div class="ac-label">Governing Sentence</div>
+    <div class="ac-ratio">
+      What is displayed on digital platforms is usually a selected and polished part of life, not the full truth. Every person has struggles, worries and limitations, but these are rarely shown. A person may forget his own blessings while watching the edited happiness of others.
+    </div>
+    <div><span class="ac-when">When to Use</span> — Whenever a feed leaves you feeling behind: others' results, offers, travel, success. The material relied upon is selectively disclosed. Do not let it determine your sense of self-worth.</div>
+  </div>
+
+  <!-- Card 7 -->
+  <div class="arsenal-card">
+    <div class="ac-name">Availability Is Not Slavery</div>
+    <div class="ac-court">Source article, "Always Available, Always Tired" | Professional boundary principle</div>
+    <div class="ac-label">Governing Sentence</div>
+    <div class="ac-ratio">
+      Availability should not become slavery. Responsiveness is good, but continuous disturbance is harmful. Human beings need time for work, rest, family, reading, exercise and silence. If every moment is captured by digital demands, life becomes mechanical.
+    </div>
+    <div><span class="ac-when">When to Use</span> — When a client, a colleague or a group expects an instant reply at an unreasonable hour, and guilt begins to build. Fixed reply windows are professional conduct, not neglect.</div>
+  </div>
+
+  <!-- Card 8 -->
+  <div class="arsenal-card">
+    <div class="ac-name">The Purpose Test — Real Meaning of Digital Detox</div>
+    <div class="ac-court">Source article, "The Real Meaning of Digital Detox" | The operative test of the article</div>
+    <div class="ac-label">Governing Sentence</div>
+    <div class="ac-ratio">
+      The question is not whether we should use digital technology. Certainly, we should. The real question is whether we are using it purposefully. Time spent on learning, research, writing, banking, payments and meaningful communication is productive. Time lost in mindless scrolling, unnecessary forwarding, repeated checking and purposeless entertainment is harmful.
+    </div>
+    <div><span class="ac-when">When to Use</span> — As the standing test before unlocking the phone: when, why, and when to keep it away. Also once a week, against the screen-time report — to see honestly where the hours actually went.</div>
+  </div>
+
+  <!-- Card 9 -->
+  <div class="arsenal-card">
+    <div class="ac-name">The Throne of the Mind</div>
+    <div class="ac-court">Source article, "Technology with Wisdom: The Balanced Path" | The governing image of the article</div>
+    <div class="ac-label">Governing Sentence</div>
+    <div class="ac-ratio">
+      A wise person will use digital tools for knowledge, convenience, communication, professional growth and public good. At the same time, he will protect his sleep, health, family time, mental peace and inner freedom. He will allow technology to sit in his pocket, but not on the throne of his mind.
+    </div>
+    <div><span class="ac-when">When to Use</span> — As the closing thought of each day, and whenever a decision must be made between what the device demands and what the work, the family or the body requires. The pocket is the place; the throne is not.</div>
+  </div>
+
+  <!-- Card 10 -->
+  <div class="arsenal-card">
+    <div class="ac-name">Digital Discipline, Not Digital Rejection</div>
+    <div class="ac-court">Source article, concluding section | Final statement of the need of the hour</div>
+    <div class="ac-label">Governing Sentence</div>
+    <div class="ac-ratio">
+      Digital connectivity is a blessing when used with discipline, but it becomes a silent enemy when used without self-control. Therefore, the need of the hour is not digital rejection, but digital discipline. Let the phone remain a helpful companion, not a demanding master. Let the screen open the window of knowledge, not close the door of life.
+    </div>
+    <div><span class="ac-when">When to Use</span> — Whenever the choice is wrongly framed as "give it up" versus "carry on". Neither is the answer. Recall this to return to the middle path: full use, full control.</div>
+  </div>
+
+</div>
+
+<!-- ══ FOOTER ══ -->
+<div class="footer">
+  Asmad GuruBhuya Namaha | Shrimate Ramanuja Namaha<br>
+  For professional and personal study use | Pawan Soni &amp; Associates, Ichalkaranji<br>
+  Prepared for CA Pawankumar Soni (GST Litigation Practice) and Madhav Soni (B.Tech CS, BITS Pilani – Goa, 5th Semester) | Converted 30 July 2026<br>
+  <strong>Coverage confirmation:</strong> Source article processed completely — from the opening heading "A Thought for Our Times" to the final closing couplet. Seventeen thematic sections plus the closing verse. Nothing omitted; no page numbers or section numbers invented.
+</div>
+
+</body>
+</html>
